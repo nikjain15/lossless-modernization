@@ -1,4 +1,4 @@
-# Pattern 01 — Parity
+# Pattern 01 - Parity
 
 *The core, signature pattern of [Lossless Modernization](../README.md). For the full methodology, see the [Parity Harness deep-dive](./parity-harness-deepdive.md).*
 
@@ -100,4 +100,4 @@ If any answer is "no" for a money-critical output, you are not at parity yet, re
 
 ---
 
-*Next: [Pattern 02 — Strangler-fig](./02-strangler-fig.md) · Deep-dive: [The Parity Harness](./parity-harness-deepdive.md) · [Glossary](../GLOSSARY.md)*
+*Next: [Pattern 02 - Strangler-fig](./02-strangler-fig.md) · Deep-dive: [The Parity Harness](./parity-harness-deepdive.md) · [Glossary](../GLOSSARY.md)*

@@ -48,8 +48,8 @@ Each pattern doc is written in two layers: a short **Exec summary** for CTOs and
 
 ### Signature deep-dives
 
-- **[The Parity Harness (deep-dive)](./patterns/parity-harness-deepdive.md)** — the rigorous methodology behind Pattern 01: side-by-side functional testing, the multi-week production parallel run, 5,000+ scenario business testing, intermediate and final parity, what counts as a match, the chasing-a-gap workflow, and the formal sign-off gates. Includes a data-flow diagram of the harness.
-- **[Claude agents for legacy-code archaeology](./patterns/claude-agents-for-legacy-archaeology.md)** — building AI agents to read and replicate undocumented legacy SQL, validated with the business.
+- **[The Parity Harness (deep-dive)](./patterns/parity-harness-deepdive.md)** - the rigorous methodology behind Pattern 01: side-by-side functional testing, the multi-week production parallel run, 5,000+ scenario business testing, intermediate and final parity, what counts as a match, the chasing-a-gap workflow, and the formal sign-off gates. Includes a data-flow diagram of the harness.
+- **[Claude agents for legacy-code archaeology](./patterns/claude-agents-for-legacy-archaeology.md)** - building AI agents to read and replicate undocumented legacy SQL, validated with the business.
 
 ---
 
@@ -80,7 +80,7 @@ Engineering and product leaders modernizing the systems their business actually 
 
 ## Author
 
-**Nik Jain** — I re-architect trillion-dollar financial systems into AI-native platforms, and build AI-first products from zero.
+**Nik Jain** - I re-architect trillion-dollar financial systems into AI-native platforms, and build AI-first products from zero.
 [LinkedIn](https://www.linkedin.com/in/niktechnologist/) · [X](https://x.com/NIkJain1510)
 
 ## License
