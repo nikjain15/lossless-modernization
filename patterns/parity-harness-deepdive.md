@@ -1,4 +1,4 @@
-# The Parity Harness — deep-dive
+# The Parity Harness - deep-dive
 
 *The signature methodology behind [Pattern 01: Parity](./01-parity.md). This is the machinery that turns "we think the new system is right" into "the business, architecture, and engineering have signed that it is."*
 
@@ -42,8 +42,8 @@ Reading the legacy logic (accelerated by [AI-assisted legacy archaeology](./clau
 
 The harness reconciles at two levels, and **both are required**:
 
-- **Final parity** — the terminal, business-consumed outputs (trades, positions, NAVs, report values) match.
-- **Intermediate parity** — the intermediate calculation stages along the way also match.
+- **Final parity** - the terminal, business-consumed outputs (trades, positions, NAVs, report values) match.
+- **Intermediate parity** - the intermediate calculation stages along the way also match.
 
 Requiring both is not redundant. Two systems can reach the same final number by different paths, and sometimes both paths are wrong in ways that cancel. Intermediate parity closes that door: it forces agreement on the *method*, not just the *answer*, so a match is a real match rather than a coincidence.
 
@@ -139,4 +139,4 @@ Each constituency sees different risk: business owns the meaning of the numbers,
 
 ---
 
-*Back to [Pattern 01 — Parity](./01-parity.md) · Related: [Cutover](./06-cutover.md) · [Legacy-code archaeology](./claude-agents-for-legacy-archaeology.md) · [Glossary](../GLOSSARY.md)*
+*Back to [Pattern 01 - Parity](./01-parity.md) · Related: [Cutover](./06-cutover.md) · [Legacy-code archaeology](./claude-agents-for-legacy-archaeology.md) · [Glossary](../GLOSSARY.md)*

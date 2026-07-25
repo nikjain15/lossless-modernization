@@ -1,4 +1,4 @@
-# Pattern 04 — Event-driven & saga re-architecture
+# Pattern 04 - Event-driven & saga re-architecture
 
 *Part of the [Lossless Modernization](../README.md) playbook.*
 
@@ -77,4 +77,4 @@ The book reflects the price change within the cycle, and the failure cost one ac
 
 ---
 
-*Previous: [Pattern 03 — Taming stored procedures](./03-taming-stored-procedures.md) · Next: [Pattern 05 — AI agents in workflows](./05-ai-in-workflows.md) · [Glossary](../GLOSSARY.md)*
+*Previous: [Pattern 03 - Taming stored procedures](./03-taming-stored-procedures.md) · Next: [Pattern 05 - AI agents in workflows](./05-ai-in-workflows.md) · [Glossary](../GLOSSARY.md)*

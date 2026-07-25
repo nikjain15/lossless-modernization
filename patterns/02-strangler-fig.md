@@ -1,4 +1,4 @@
-# Pattern 02 — Strangler-fig decomposition
+# Pattern 02 - Strangler-fig decomposition
 
 *Part of the [Lossless Modernization](../README.md) playbook.*
 
@@ -84,4 +84,4 @@ At every moment, some fund types are running on new and some on old, and the pla
 
 ---
 
-*Previous: [Pattern 01 — Parity](./01-parity.md) · Next: [Pattern 03 — Taming stored procedures](./03-taming-stored-procedures.md) · [Glossary](../GLOSSARY.md)*
+*Previous: [Pattern 01 - Parity](./01-parity.md) · Next: [Pattern 03 - Taming stored procedures](./03-taming-stored-procedures.md) · [Glossary](../GLOSSARY.md)*

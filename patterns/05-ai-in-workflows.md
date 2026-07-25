@@ -1,4 +1,4 @@
-# Pattern 05 — AI agents in mission-critical workflows
+# Pattern 05 - AI agents in mission-critical workflows
 
 *Part of the [Lossless Modernization](../README.md) playbook. See also [Pattern 07: Reliability under an LLM](./07-reliability-under-llm.md).*
 
@@ -97,4 +97,4 @@ For any candidate workflow, ask:
 
 ---
 
-*Previous: [Pattern 04 — Event-driven & saga](./04-event-driven-saga.md) · Next: [Pattern 06 — Cutover](./06-cutover.md) · Related: [Pattern 07 — Reliability under an LLM](./07-reliability-under-llm.md) · [Glossary](../GLOSSARY.md)*
+*Previous: [Pattern 04 - Event-driven & saga](./04-event-driven-saga.md) · Next: [Pattern 06 - Cutover](./06-cutover.md) · Related: [Pattern 07 - Reliability under an LLM](./07-reliability-under-llm.md) · [Glossary](../GLOSSARY.md)*
