@@ -1,4 +1,4 @@
-# Pattern 03 — Taming stored-procedure logic
+# Pattern 03 - Taming stored-procedure logic
 
 *Part of the [Lossless Modernization](../README.md) playbook. Features the signature innovation, see also [Claude agents for legacy-code archaeology](./claude-agents-for-legacy-archaeology.md).*
 
@@ -82,4 +82,4 @@ Using a Claude agent, the team extracts each responsibility into a structured de
 
 ---
 
-*Previous: [Pattern 02 — Strangler-fig](./02-strangler-fig.md) · Next: [Pattern 04 — Event-driven & saga](./04-event-driven-saga.md) · Deep-dive: [Legacy-code archaeology](./claude-agents-for-legacy-archaeology.md) · [Glossary](../GLOSSARY.md)*
+*Previous: [Pattern 02 - Strangler-fig](./02-strangler-fig.md) · Next: [Pattern 04 - Event-driven & saga](./04-event-driven-saga.md) · Deep-dive: [Legacy-code archaeology](./claude-agents-for-legacy-archaeology.md) · [Glossary](../GLOSSARY.md)*

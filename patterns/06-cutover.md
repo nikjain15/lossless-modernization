@@ -1,4 +1,4 @@
-# Pattern 06 — Cutover / go-live
+# Pattern 06 - Cutover / go-live
 
 *Part of the [Lossless Modernization](../README.md) playbook.*
 
@@ -82,4 +82,4 @@ The team cuts equity-fund valuation over on a low-volume day, watches the first 
 
 ---
 
-*Previous: [Pattern 05 — AI agents in workflows](./05-ai-in-workflows.md) · Next: [Pattern 07 — Reliability under an LLM](./07-reliability-under-llm.md) · [Glossary](../GLOSSARY.md)*
+*Previous: [Pattern 05 - AI agents in workflows](./05-ai-in-workflows.md) · Next: [Pattern 07 - Reliability under an LLM](./07-reliability-under-llm.md) · [Glossary](../GLOSSARY.md)*
