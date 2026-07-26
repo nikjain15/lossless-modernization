@@ -77,4 +77,4 @@ What would have been weeks of one engineer squinting at SQL became a reviewable 
 
 ---
 
-*Related: [Pattern 03 - Taming stored procedures](./03-taming-stored-procedures.md) · [Pattern 05 - AI agents in workflows](./05-ai-in-workflows.md) · [Pattern 07 - Reliability under an LLM](./07-reliability-under-llm.md) · [The Parity Harness](./parity-harness-deepdive.md) · [Glossary](../GLOSSARY.md)*
+*Related: [Pattern 03, Taming stored procedures](./03-taming-stored-procedures.md) · [Pattern 05, AI agents in workflows](./05-ai-in-workflows.md) · [Pattern 07, Reliability under an LLM](./07-reliability-under-llm.md) · [The Parity Harness](./parity-harness-deepdive.md) · [Glossary](../GLOSSARY.md)*
