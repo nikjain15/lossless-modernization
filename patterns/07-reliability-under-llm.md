@@ -1,4 +1,4 @@
-# Pattern 07 - Reliability with an LLM in the loop
+# Pattern 07, Reliability with an LLM in the loop
 
 *Part of the [Lossless Modernization](../README.md) playbook. Companion to [Pattern 05: AI agents in workflows](./05-ai-in-workflows.md).*
 
@@ -77,4 +77,4 @@ The agent accelerates detection and explanation. The guarantees come from the ch
 
 ---
 
-*Previous: [Pattern 06 - Cutover](./06-cutover.md) · Related: [Pattern 05 - AI agents in workflows](./05-ai-in-workflows.md) · Closing essay: [The Myth-Buster](../MYTH-BUSTER.md) · [Glossary](../GLOSSARY.md)*
+*Previous: [Pattern 06, Cutover](./06-cutover.md) · Related: [Pattern 05, AI agents in workflows](./05-ai-in-workflows.md) · Closing essay: [The Myth-Buster](../MYTH-BUSTER.md) · [Glossary](../GLOSSARY.md)*
