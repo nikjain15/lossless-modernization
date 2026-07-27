@@ -1,6 +1,23 @@
 # Lossless Modernization
 
-**A field playbook for modernizing money-critical legacy systems into AI-native, cloud platforms, without losing a byte of logic or a cent of accuracy.**
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
+
+**Modernize money-critical legacy systems without losing a byte of logic or a cent of accuracy.**
+
+*A field playbook for turning money-critical legacy systems into AI-native, cloud platforms, without losing a byte of logic or a cent of accuracy.*
+
+**Who this is for:** architects at banks and asset managers who have to move a mission-critical financial system, and the CTOs and engineering leaders who have to sign off on the go-live.
+
+The signature move here is **[AI-assisted legacy archaeology](./patterns/claude-agents-for-legacy-archaeology.md):** Claude agents that read and replicate 30-year-old stored-procedure logic no human fully understands, validated under business sign-off. It is the novel highlight of this playbook.
+
+### Contents
+
+- **Patterns:** [01 Parity](./patterns/01-parity.md) · [02 Strangler-fig](./patterns/02-strangler-fig.md) · [03 Taming stored procedures](./patterns/03-taming-stored-procedures.md) · [04 Event-driven & saga](./patterns/04-event-driven-saga.md) · [05 AI in workflows](./patterns/05-ai-in-workflows.md) · [06 Cutover / go-live](./patterns/06-cutover.md) · [07 Reliability under an LLM](./patterns/07-reliability-under-llm.md)
+- **Deep-dive:** [The Parity Harness](./patterns/parity-harness-deepdive.md)
+- **Innovation:** [Claude agents for legacy-code archaeology](./patterns/claude-agents-for-legacy-archaeology.md)
+- **Closing essay:** [The Myth-Buster](./MYTH-BUSTER.md) · **Reference:** [Glossary](./GLOSSARY.md)
+
+---
 
 Most "modernization" advice optimizes for speed, cost, or downtime. When the system moves real money, trades, positions, NAVs, payments, none of those is the binding constraint. **Parity is.** The new system has to produce *identical* outputs, preserve decades of business logic *exactly*, and keep every upstream and downstream consumer fed with correct data to the grain, from the first cutover to the last.
 
