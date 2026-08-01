@@ -28,7 +28,7 @@ Three problems, none of them about the new technology, defined the program.
 
 Thirty years of business logic lived inside stored procedures and overnight batch: rules written in SQL, executed in the data layer, patched over decades by people long since gone. There was no specification. The code *was* the specification, and the code was dense, undocumented, and full of branches whose original reasons had been forgotten, a regulatory treatment from fifteen years ago, a special case for one instrument type, a quiet fix for a bug nobody recorded.
 
-You cannot faithfully rebuild what you do not understand. So the first hard problem was *comprehension*, recovering intent from code that had nearly outlived its institutional memory. It was hard enough that we built [Claude agents to read and replicate the legacy logic](./patterns/claude-agents-for-legacy-archaeology.md) and validated every extracted rule with the business. The bottleneck was never writing new code. It was understanding old code.
+You cannot faithfully rebuild what you do not understand. So the first hard problem was *comprehension*, recovering intent from code that had nearly outlived its institutional memory. It was hard enough that we built [AI agents to read and replicate the legacy logic](./ai/legacy-archaeology.md) and validated every extracted rule with the business. The bottleneck was never writing new code. It was understanding old code.
 
 ### 2. Catching every edge case
 
@@ -60,4 +60,4 @@ That is the myth this playbook exists to bust. Modernize the technology, yes. Bu
 
 ---
 
-*Start here: [README](./README.md) · The core pattern: [Parity](./patterns/01-parity.md) · The methodology: [The Parity Harness](./patterns/parity-harness-deepdive.md) · The innovation: [Legacy-code archaeology](./patterns/claude-agents-for-legacy-archaeology.md) · [Glossary](./GLOSSARY.md)*
+*Start here: [README](./README.md) · The core pattern: [Parity](./patterns/01-parity.md) · The methodology: [The Parity Harness](./patterns/parity-harness-deepdive.md) · The method: [Legacy-code archaeology](./ai/legacy-archaeology.md) · [Glossary](./GLOSSARY.md)*

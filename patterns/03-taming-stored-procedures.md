@@ -1,6 +1,6 @@
 # Pattern 03, Taming stored-procedure logic
 
-*Part of the [Lossless Modernization](../README.md) playbook. Features the signature innovation, see also [Claude agents for legacy-code archaeology](../ai/legacy-archaeology.md). Capture who still understands each procedure in the [legacy knowledge map](../templates/legacy-knowledge-map.md).*
+*Part of the [Lossless Modernization](../README.md) playbook. Features the signature method, see also [legacy-code archaeology](../ai/legacy-archaeology.md). Capture who still understands each procedure in the [legacy knowledge map](../templates/legacy-knowledge-map.md).*
 
 ---
 
