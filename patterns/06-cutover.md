@@ -1,6 +1,6 @@
 # Pattern 06, Cutover / go-live
 
-*Part of the [Lossless Modernization](../README.md) playbook.*
+*Part of the [Lossless Modernization](../README.md) playbook. For choosing big-bang vs parallel-run vs phased in the first place, see [cutover strategy](../decide/cutover-strategy.md). Execution artifacts: the [cutover runbook](../templates/cutover-runbook.md) and [rollback plan](../templates/rollback-plan.md).*
 
 ---
 
@@ -26,18 +26,37 @@ At some point the new system must actually take over. Do it too early and you ri
 
 ## The approach
 
+The road from parallel run to go-live, with rollback as a first-class path:
+
+```mermaid
+flowchart LR
+    B[Slice built] --> S[Shadow run starts<br/>legacy source of truth]
+    S --> P[12+ week parallel run<br/>reconcile every trading cycle]
+    P --> G1{Gate 1<br/>parity proven,<br/>not a spot check}
+    G1 --> G2{Gate 2<br/>business + architecture<br/>+ engineering sign-off}
+    G2 --> G3{Gate 3<br/>rollback rehearsed,<br/>legacy kept warm}
+    G3 --> G4{Gate 4<br/>up/downstream tested<br/>and notified}
+    G4 --> C[Cut over<br/>calm, low-volume window]
+    C --> M[Monitor first cycles<br/>against warm legacy]
+    M -->|clean| L([Slice live<br/>retire legacy later])
+    M -->|rollback trigger hit| RB[Repoint source of truth<br/>back to legacy]
+    RB --> P
+```
+
 Cutover is gated. Verify **all** of the following before flipping any slice live:
 
-1. **Parity proven over the multi-week parallel run.** Not a spot check: sustained agreement across **12+ weeks** and many trading cycles, with only business-agreed differences remaining (see [Pattern 01](./01-parity.md) and the [Parity Harness](./parity-harness-deepdive.md)).
+1. **Parity proven over the multi-week parallel run.** Not a spot check: sustained agreement across **12+ weeks** and many trading cycles, with only business-agreed differences remaining (see [Pattern 01](./01-parity.md) and the [Parity Harness](./parity-harness-deepdive.md)), compiled in the [parity report](../templates/parity-report.md).
 2. **Business + architecture + engineering sign-off.** All three constituencies formally agree the slice is ready. This is the same three-way sign-off that defines "done" for a strangler-fig slice ([Pattern 02](./02-strangler-fig.md)).
-3. **Rollback plan ready.** A concrete, tested path back to the legacy system as source of truth if a problem emerges after cutover. A rollback plan that has never been tested is a hope, not a plan.
+3. **Rollback plan ready.** A concrete, tested path back to the legacy system as source of truth if a problem emerges after cutover, written down as a [rollback plan](../templates/rollback-plan.md) with pre-agreed trigger conditions. A rollback plan that has never been tested is a hope, not a plan.
 4. **Upstream and downstream systems tested and notified.** Every consumer that depends on the outputs has been tested against the new system's outputs and told when the change happens. No downstream system should be surprised.
 
-Only when all four hold do you cut the slice over, old to new. Then you watch it closely, ready to invoke rollback if needed.
+Only when all four hold do you cut the slice over, old to new. The event itself runs off a [cutover runbook](../templates/cutover-runbook.md): every step with an owner, a timestamp, a success criterion, and a rollback trigger. Then you watch it closely, ready to invoke rollback if needed.
 
 ### Staged, not big-bang
 
 Cutover follows the strangler-fig grain: one slice at a time, blast radius limited to that slice. Shadow traffic and the parallel run mean the new system has already processed real inputs before it becomes authoritative, so cutover is the promotion of an already-proven pipeline, not the first real test of an untested one.
+
+The slicing axis matters as much as the slicing. On the flagship program, waves were cut **by account and fund groups**, not by whole applications: a subset of the book moved, proved itself in production, and the migrated population expanded wave by wave. Population-based waves keep every wave's blast radius bounded and give every wave the same shaped evidence (the same reconciliation, on a smaller book), which makes each go/no-go call a repeat of a decision the program has already practiced.
 
 ## A generic worked example
 
@@ -49,6 +68,13 @@ An equity-fund valuation slice has run in parallel for 13 weeks. The harness sho
 4. **Gate 4, up/downstream:** the reconciliation feed, reporting, and two downstream risk systems are tested against the new outputs and told the cutover date and time. Notified.
 
 The team cuts equity-fund valuation over on a low-volume day, watches the first several cycles against the still-warm legacy system, and confirms clean operation. The next slice begins its own gated march.
+
+## Industry grounding
+
+- The cautionary anchor is **TSB Bank, 2018**: 1.3 billion records for 5.2 million customers migrated in a single weekend, with 4,424 defects still open at go-live out of 34,671 logged, and one of two data centres never load-tested. Cost: £366M direct, £48.6M in fines, roughly £1B total, and the CEO's resignation [Slaughter and May review, 2019](https://www.techmonitor.ai/leadership/digital-transformation/slaughter-and-may-tsb). Full analysis: [TSB post-mortem](../why-modernizations-fail/post-mortems/tsb-bank.md). Every gate in this pattern exists because TSB skipped it.
+- The **USDS Digital Services Playbook** made "never big-bang" official US government doctrine: route traffic to the new system gradually, run alpha and beta in parallel, and let users revert to legacy after launch [playbook.usds.gov](https://playbook.usds.gov/).
+- **AWS Prescriptive Guidance** ships a downloadable cutover runbook structure, activities, timeline, per-step owners and success criteria, and treats the rollback plan with pre-agreed triggers as a mandatory section, not an appendix [AWS cutover runbook guide](https://docs.aws.amazon.com/prescriptive-guidance/latest/cutover-runbook/welcome.html), [pre-cutover best practices](https://docs.aws.amazon.com/prescriptive-guidance/latest/best-practices-migration-cutover/pre-cutover-stage.html). This playbook's [cutover runbook template](../templates/cutover-runbook.md) follows the same step/owner/timestamp/success-criteria/rollback-trigger shape.
+- When a hard cutover is genuinely unavoidable, the Thoughtworks catalog names it **Stop the World Cutover** and treats it as the option of last resort [Patterns of Legacy Displacement](https://martinfowler.com/articles/patterns-legacy-displacement/).
 
 ## Pitfalls / anti-patterns
 
@@ -82,4 +108,4 @@ The team cuts equity-fund valuation over on a low-volume day, watches the first 
 
 ---
 
-*Previous: [Pattern 05, AI agents in workflows](./05-ai-in-workflows.md) · Next: [Pattern 07, Reliability under an LLM](./07-reliability-under-llm.md) · [Glossary](../GLOSSARY.md)*
+*Previous: [Pattern 05, AI agents in workflows](./05-ai-in-workflows.md) · Next: [Pattern 07, Reliability under an LLM](./07-reliability-under-llm.md) · Templates: [Cutover runbook](../templates/cutover-runbook.md), [Rollback plan](../templates/rollback-plan.md) · Cautionary tale: [TSB Bank](../why-modernizations-fail/post-mortems/tsb-bank.md)*

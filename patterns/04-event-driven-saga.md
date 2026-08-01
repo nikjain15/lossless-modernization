@@ -1,6 +1,6 @@
 # Pattern 04, Event-driven & saga re-architecture
 
-*Part of the [Lossless Modernization](../README.md) playbook.*
+*Part of the [Lossless Modernization](../README.md) playbook. Builds on the service decomposition from [Pattern 03](./03-taming-stored-procedures.md); record the architecture choices it forces as [ADRs](../templates/adr.md).*
 
 ---
 
@@ -27,6 +27,26 @@ A nightly batch architecture cannot deliver intraday results, gives no real-time
 
 ## The approach
 
+One intraday cycle, with a failure handled by local replay instead of global rollback:
+
+```mermaid
+sequenceDiagram
+    participant EV as Event bus
+    participant P as Pricing service
+    participant V as Valuation service
+    participant A as Accrual service
+    participant PO as Posting service
+    EV->>P: price-update event
+    P->>V: new valuation input
+    V->>A: recomputed positions
+    A->>PO: accrual results
+    PO--xPO: fails on one account<br/>transient downstream issue
+    Note over P,A: earlier steps stand,<br/>nothing is unwound
+    PO->>PO: idempotent replay,<br/>that service, that account only
+    PO->>EV: posted, cycle complete
+    Note over PO: steps that cannot replay get an<br/>explicit compensating action instead
+```
+
 1. **Model triggers as events.** The drivers of computation are events: a trade executes, a price updates, a data feed arrives. Each event flows into the services that care about it, kicking off the relevant intraday cycle rather than waiting for night.
 2. **One responsibility per service.** Decompose so that each microservice owns exactly one job (pricing, accrual, position keeping, posting, and so on). This is the same role-based decomposition that [taming stored procedures](./03-taming-stored-procedures.md) produces.
 3. **Coordinate with sagas.** A business process that spans several services is coordinated as a saga: a sequence of local steps, each in its owning service, rather than one distributed transaction. Steps proceed, and where needed, compensate.
@@ -46,6 +66,15 @@ A price update arrives for an instrument mid-morning:
 4. Suppose the posting service fails on one account due to a transient downstream issue. Rather than rolling back the pricing and valuation work, the operator (or an automated control) **replays the posting service** for that one account. Because posting is idempotent, the replay regenerates the correct posted result exactly once in effect, and the intraday cycle completes correctly.
 
 The book reflects the price change within the cycle, and the failure cost one account's re-post, not a batch rerun.
+
+## Industry grounding
+
+- The saga idea predates microservices by decades: Garcia-Molina and Salem introduced sagas in 1987 as long-lived transactions decomposed into steps with compensating actions [Sagas, SIGMOD 1987](https://www.cs.cornell.edu/andru/cs711/2002fa/reading/sagas.pdf). The modern microservices formulation is Chris Richardson's [saga pattern](https://microservices.io/patterns/data/saga.html).
+- Feeding an event-driven target from a still-live legacy system is the Thoughtworks **Event Interception** pattern: capture the flows entering legacy and route copies to the new services, so both can process the same reality during the parallel run [Patterns of Legacy Displacement](https://martinfowler.com/articles/patterns-legacy-displacement/).
+- IBM's mainframe modernization Redbook names event-driven patterns as one of its three families for hybrid-cloud targets, alongside application-centric and data-access-centric [IBM Redbook SG24-8532, 2023](https://redbooks.ibm.com/abstracts/sg248532.html).
+- A caution before decomposing: 73% of monolith-to-microservices migrations fail or produce slower, more complex systems [Fabres analysis](https://fabres.eu/blog/why-most-monolith-to-microservices-migrations-fail-part2/), and roughly 42% of adopters have consolidated back toward modular monoliths [ByteIota, 2026](https://byteiota.com/microservices-rollback-2026-42-return-to-monoliths/). Decompose because the business needs intraday event processing and local recovery, not because microservices are fashionable. If batch timing is genuinely fine, the decision framework below says stop.
+
+Each ownership boundary and each replay-vs-compensate choice is an architecture decision worth recording as an [ADR](../templates/adr.md).
 
 ## Pitfalls / anti-patterns
 
@@ -77,4 +106,4 @@ The book reflects the price change within the cycle, and the failure cost one ac
 
 ---
 
-*Previous: [Pattern 03, Taming stored procedures](./03-taming-stored-procedures.md) · Next: [Pattern 05, AI agents in workflows](./05-ai-in-workflows.md) · [Glossary](../GLOSSARY.md)*
+*Previous: [Pattern 03, Taming stored procedures](./03-taming-stored-procedures.md) · Next: [Pattern 05, AI agents in workflows](./05-ai-in-workflows.md) · Template: [ADR](../templates/adr.md) · [Glossary](../GLOSSARY.md)*

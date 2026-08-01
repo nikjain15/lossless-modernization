@@ -1,6 +1,6 @@
 # Pattern 07, Reliability with an LLM in the loop
 
-*Part of the [Lossless Modernization](../README.md) playbook. Companion to [Pattern 05: AI agents in workflows](./05-ai-in-workflows.md).*
+*Part of the [Lossless Modernization](../README.md) playbook. Companion to [Pattern 05: AI agents in workflows](./05-ai-in-workflows.md); the documented limits of LLMs on legacy code live in [AI-era modernization](../ai/README.md).*
 
 ---
 
@@ -26,6 +26,20 @@ You want the leverage of AI agents (Pattern 05) inside a system where a wrong ou
 
 ## The approach
 
+Deterministic guardrails wrap the non-deterministic step on every side: grounded inputs before it, validation and human approval after it, evals around it.
+
+```mermaid
+flowchart TD
+    SRC[(Real source data)] -->|grounding: retrieved,<br/>not recalled| AG[LLM agent step<br/>non-deterministic]
+    AG --> OUT[Agent output<br/>treated as unverified]
+    OUT --> DET{Deterministic validation<br/>schema, ranges, invariants,<br/>reconciliation to source}
+    DET -->|fail| REJ[Rejected<br/>no real effect]
+    DET -->|pass| HUM{Human approval<br/>for any real action}
+    HUM -->|reject| REJ
+    HUM -->|approve| EFF([Real effect<br/>taken by a human])
+    EV[Evals: repeatable tests<br/>against known-good cases] -.->|quantify quality,<br/>catch drift| AG
+```
+
 Four controls, layered:
 
 1. **The agent only assists; humans approve real actions.** This is the load-bearing control. The LLM drafts, classifies, investigates, and summarizes. It never holds authority over money movement, trade execution, financial-calculation changes, or parity-difference acceptance. Those are human decisions (see [Pattern 05](./05-ai-in-workflows.md)).
@@ -47,6 +61,14 @@ An anomaly-detection agent flags that a fund's exposure looks off and drafts an 
 - **Human approves:** an analyst reviews the grounded, validated draft and decides what, if anything, to change. No exposure figure or calculation is altered by the agent.
 
 The agent accelerates detection and explanation. The guarantees come from the checks and the human, not from trusting the model.
+
+## Industry grounding
+
+- The failure modes are cataloged: research taxonomies identify 3 primary and 12 specific categories of LLM code hallucination [arXiv 2404.00971](https://arxiv.org/abs/2404.00971). Confidence and correctness are formally unrelated, which is why control 2 binds on deterministic checks, never on tone.
+- Execution beats inspection: combining execution-based checking with LLM judging reaches roughly 95% accuracy at detecting semantic equivalence, far above inspection of code text alone [MatchFixAgent, arXiv 2509.16187](https://arxiv.org/pdf/2509.16187). That is the research-scale version of this pattern's rule: the binding check runs the output against reality.
+- Berkeley's analysis of LLM-driven translation concludes models need formal, compositional reasoning support to guarantee semantics; unaided generation cannot [Berkeley EECS-2025-174](https://www2.eecs.berkeley.edu/Pubs/TechRpts/2025/EECS-2025-174.pdf).
+- The contrast case proves the principle from the other side: Moderne/OpenRewrite chose deterministic rule-based transformation precisely because "same recipe, same output every time" is a promise LLMs cannot make [OpenRewrite docs](https://docs.openrewrite.org/). Where determinism is achievable, prefer it; where you want the LLM's flexibility, wrap it in the controls above.
+- Consensus, once more: **AI translates, execution-based parity evidence certifies.** In this program the certifying machinery is the [parity harness](./parity-harness-deepdive.md); tool-by-tool limits are surveyed in [AI-era modernization](../ai/README.md).
 
 ## Pitfalls / anti-patterns
 
@@ -77,4 +99,4 @@ The agent accelerates detection and explanation. The guarantees come from the ch
 
 ---
 
-*Previous: [Pattern 06, Cutover](./06-cutover.md) · Related: [Pattern 05, AI agents in workflows](./05-ai-in-workflows.md) · Closing essay: [The Myth-Buster](../MYTH-BUSTER.md) · [Glossary](../GLOSSARY.md)*
+*Previous: [Pattern 06, Cutover](./06-cutover.md) · Related: [Pattern 05, AI agents in workflows](./05-ai-in-workflows.md) · Landscape: [AI-era modernization](../ai/README.md) · Closing essay: [The Myth-Buster](../MYTH-BUSTER.md)*

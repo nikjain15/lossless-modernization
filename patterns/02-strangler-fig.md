@@ -1,6 +1,6 @@
 # Pattern 02, Strangler-fig decomposition
 
-*Part of the [Lossless Modernization](../README.md) playbook.*
+*Part of the [Lossless Modernization](../README.md) playbook. For choosing between rewrite, strangle, and wrap in the first place, see [the decision tree](../decide/rewrite-vs-strangle-vs-wrap.md); slice sequencing lives in the [wave plan](../templates/wave-plan.md).*
 
 ---
 
@@ -26,6 +26,22 @@ A large, monolithic legacy system encodes decades of business logic and cannot g
 - You have (or can build) the [parity](./01-parity.md) machinery to prove each slice before it takes over.
 
 ## The approach
+
+The traffic picture over the life of the program: everything starts on legacy, and authority moves one proven slice at a time.
+
+```mermaid
+flowchart LR
+    U[Inbound flow<br/>trades, prices, feeds] --> R{{Interception and<br/>routing layer}}
+    R -->|authoritative traffic| L[Legacy system<br/>source of truth]
+    R -.->|mirrored copy| N[New services<br/>shadow mode]
+    L <-.->|reconcile via<br/>parity harness| N
+    N --> D{Slice done?<br/>parity + time-in-parallel<br/>+ sign-off}
+    D -->|yes| C[Divert that slice's traffic<br/>old to new]
+    C --> L2[Legacy: shrinking set<br/>of remaining slices]
+    C --> N2[New: growing set<br/>of authoritative slices]
+    L2 --> RET([Legacy retired when<br/>the last slice diverts])
+    N2 --> RET
+```
 
 1. **Build the shared foundation first.** Identify the microservices whose responsibilities are *common across fund types* (or your domain's equivalent shared concerns), and build those first. They are the base every fund-specific slice will stand on.
 2. **Fan out in parallel.** With the common foundation in place, build the fund-specific logic as parallel workstreams. Because they share the foundation, they do not each reinvent it, and they can progress simultaneously across a distributed team.
@@ -53,6 +69,17 @@ A fund-accounting monolith serves several fund types (say, equity, fixed-income,
 - **Cut over incrementally:** equity funds reach all three "done" criteria first and cut over. Fixed-income, which has thornier edge cases (amortization schedules, corporate actions), stays in parallel longer. Multi-asset follows once its dependencies are proven.
 
 At every moment, some fund types are running on new and some on old, and the platform as a whole never goes down.
+
+## Industry grounding
+
+- The name and the idea come from Martin Fowler's 2004 bliki entry, inspired by strangler figs in Queensland rainforest: grow the new system around the edges of the old "until the old system is strangled" [Fowler, 2004](https://martinfowler.com/bliki/StranglerFigApplication.html).
+- The most complete modern treatment is Thoughtworks' **Patterns of Legacy Displacement** catalog [Cartwright, Horn, Lewis](https://martinfowler.com/articles/patterns-legacy-displacement/). Three of its patterns are load-bearing here: **Event Interception** (capture the flows entering the legacy system so you can mirror or divert them, the routing layer in the diagram above), **Legacy Mimic** (make the new system present legacy-shaped outputs so downstream consumers do not notice the swap), and **Transitional Architecture** (scaffolding you build knowing you will throw it away, like the interception layer and the reconciliation feeds).
+- The catalog also names **Divert the Flow** for moving traffic authority and warns, via **Feature Parity**, against blindly rebuilding every legacy feature.
+- Where new services must call into legacy semantics without absorbing them, put an **Anti-Corruption Layer** between the two models [Microsoft Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/patterns/anti-corruption-layer), a concept from Eric Evans' *Domain-Driven Design* (2003).
+- For in-place changes inside a codebase that must keep shipping, the sibling technique is **Branch by Abstraction** [Fowler bliki](https://martinfowler.com/bliki/BranchByAbstraction.html).
+- Government practice agrees: the **USDS Digital Services Playbook** tells agencies to route traffic to new systems gradually and keep a path back to legacy after launch, never a single cutover [playbook.usds.gov](https://playbook.usds.gov/).
+
+Sequence the slices deliberately: group them by dependency and risk in a [wave plan](../templates/wave-plan.md), and record each slicing decision as an [ADR](../templates/adr.md).
 
 ## Pitfalls / anti-patterns
 
@@ -84,4 +111,4 @@ At every moment, some fund types are running on new and some on old, and the pla
 
 ---
 
-*Previous: [Pattern 01, Parity](./01-parity.md) · Next: [Pattern 03, Taming stored procedures](./03-taming-stored-procedures.md) · [Glossary](../GLOSSARY.md)*
+*Previous: [Pattern 01, Parity](./01-parity.md) · Next: [Pattern 03, Taming stored procedures](./03-taming-stored-procedures.md) · Decide first: [Rewrite vs strangle vs wrap](../decide/rewrite-vs-strangle-vs-wrap.md) · Template: [Wave plan](../templates/wave-plan.md)*

@@ -1,6 +1,6 @@
 # Pattern 03, Taming stored-procedure logic
 
-*Part of the [Lossless Modernization](../README.md) playbook. Features the signature innovation, see also [Claude agents for legacy-code archaeology](./claude-agents-for-legacy-archaeology.md).*
+*Part of the [Lossless Modernization](../README.md) playbook. Features the signature innovation, see also [Claude agents for legacy-code archaeology](../ai/legacy-archaeology.md). Capture who still understands each procedure in the [legacy knowledge map](../templates/legacy-knowledge-map.md).*
 
 ---
 
@@ -27,10 +27,26 @@ Business-critical logic is trapped inside stored procedures: dense, decades-old,
 
 ## The approach
 
+The extraction pipeline, from opaque SQL to signed-off services:
+
+```mermaid
+flowchart TD
+    SP[Legacy stored procedure<br/>pricing + accrual + posting<br/>tangled in one pass] --> READ[Line-by-line read<br/>accelerated by AI extraction agents]
+    READ --> CAT[Structured rule catalog<br/>human-readable, reviewable<br/>unknowns flagged as intent unknown]
+    CAT --> VAL{Business validation<br/>rule by rule}
+    VAL -->|intent confirmed| KEEP[Preserve rule faithfully]
+    VAL -->|legacy bug| FIX[Fix, not replicate<br/>with explicit sign-off]
+    VAL -->|obsolete| RETIRE[Retire rule<br/>documented decision]
+    KEEP --> SVC[Role-based microservices<br/>pricing, accrual, posting]
+    FIX --> SVC
+    SVC --> PAR{{Dedicated parity scenarios<br/>per extracted rule}}
+    PAR --> DONE([Behavior proven equivalent<br/>or consciously changed])
+```
+
 ### Understanding it
 
 1. **Read the SQL line by line.** There is no shortcut around comprehension. Every branch, every accumulator, every special-case flag encodes a rule that some downstream number depends on.
-2. **Build AI agents to read and replicate the logic.** Rather than rely solely on manual reading, build **Claude skills/agents** that ingest a procedure, extract its logic into a structured, human-readable form, and propose a faithful replication. This is [legacy-code archaeology](./claude-agents-for-legacy-archaeology.md): AI applied to understanding the modernization's own inputs. It accelerates comprehension and, crucially, makes the extracted logic *reviewable*.
+2. **Build AI agents to read and replicate the logic.** Rather than rely solely on manual reading, build **Claude skills/agents** that ingest a procedure, extract its logic into a structured, human-readable form, and propose a faithful replication. This is [legacy-code archaeology](../ai/legacy-archaeology.md): AI applied to understanding the modernization's own inputs. It accelerates comprehension and, crucially, makes the extracted logic *reviewable*.
 3. **Validate with business stakeholders.** Every extracted rule is taken back to the business owners who understand the *intent* behind it, and signed off. The agent proposes; the business confirms. This is how forgotten historical reasons get recovered, or consciously retired.
 
 ### Where the logic goes
@@ -51,6 +67,14 @@ A single legacy procedure computes daily income for a portfolio. Reading it reve
 - **The baffling branch:** a condition that zeroes out accrual for a narrow class of positions on specific dates.
 
 Using a Claude agent, the team extracts each responsibility into a structured description and drafts a microservice per responsibility. The baffling branch is flagged as "intent unknown." Taken to the business, it turns out to encode a legitimate regulatory treatment for a specific holding type. It is documented, preserved deliberately in the accrual service, and covered by dedicated parity scenarios, rather than being silently dropped or blindly copied.
+
+## Industry grounding
+
+- The 70/30 split is real and documented: AWS reports that migration tooling auto-converts roughly 70% of Oracle PL/SQL when moving to PostgreSQL, leaving the remaining ~30%, the dense, business-critical procedures, for manual conversion and behavioral regression testing [AWS Database Blog](https://aws.amazon.com/blogs/database/challenges-when-migrating-from-oracle-to-postgresql-and-how-to-overcome-them/). The 30% is where this pattern lives.
+- Before touching any procedure, pin its current behavior with **characterization tests**, Michael Feathers' remedy for code whose behavior is its only specification [Working Effectively with Legacy Code, 2004](https://understandlegacycode.com/blog/key-points-of-working-effectively-with-legacy-code/). Feathers' **seam** concept, a place to alter behavior without editing the code there, is how you get a procedure under test at all. Plan it with the [characterization test plan template](../templates/characterization-test-plan.md).
+- Vendors converge on the same shape at mainframe scale: AWS Blu Age refactors COBOL to Java with functional-equivalence testing as the acceptance bar [AWS Mainframe Modernization](https://docs.aws.amazon.com/m2/latest/userguide/refactoring-m2.html), and AWS Transform extracts business rules from COBOL/PL1 with agentic AI before regeneration [AWS, 2025](https://aws.amazon.com/blogs/migration-and-modernization/reimagine-your-mainframe-applications-with-agentic-ai-and-aws-transform/).
+- The research consensus on AI's role matches this pattern's design: LLMs default to surface similarity over semantic preservation [arXiv 2404.00971](https://arxiv.org/abs/2404.00971), so **AI translates, execution-based parity evidence certifies**. The agent proposes the rule catalog; the business validates intent; the [parity harness](./parity-harness-deepdive.md) proves behavior.
+- The tribal-knowledge risk is quantified: only 16% of organizations say their workflows are well documented [Lucid survey via Sentra, 2025](https://www.sentra.app/articles/tribal-knowledge). Record who still understands each procedure in the [legacy knowledge map](../templates/legacy-knowledge-map.md) before those people leave.
 
 ## Pitfalls / anti-patterns
 
@@ -82,4 +106,4 @@ Using a Claude agent, the team extracts each responsibility into a structured de
 
 ---
 
-*Previous: [Pattern 02, Strangler-fig](./02-strangler-fig.md) · Next: [Pattern 04, Event-driven & saga](./04-event-driven-saga.md) · Deep-dive: [Legacy-code archaeology](./claude-agents-for-legacy-archaeology.md) · [Glossary](../GLOSSARY.md)*
+*Previous: [Pattern 02, Strangler-fig](./02-strangler-fig.md) · Next: [Pattern 04, Event-driven & saga](./04-event-driven-saga.md) · Deep-dive: [Legacy-code archaeology](../ai/legacy-archaeology.md) · Template: [Characterization test plan](../templates/characterization-test-plan.md)*
