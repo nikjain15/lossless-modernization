@@ -1,6 +1,6 @@
 # Pattern 05, AI agents in mission-critical workflows
 
-*Part of the [Lossless Modernization](../README.md) playbook. See also [Pattern 07: Reliability under an LLM](./07-reliability-under-llm.md).*
+*Part of the [Lossless Modernization](../README.md) playbook. See also [Pattern 07: Reliability under an LLM](./07-reliability-under-llm.md) and the [AI-era modernization landscape](../ai/README.md).*
 
 ---
 
@@ -28,12 +28,28 @@ It does **not** apply to any step that itself moves money, changes a trading/fin
 
 ## The approach
 
+Every candidate workflow passes through the same gates before an agent touches it:
+
+```mermaid
+flowchart TD
+    W[Candidate workflow] --> Q1{Moves money, changes a financial<br/>calculation, accepts a parity<br/>difference, or is go-live sign-off?}
+    Q1 -->|yes| HUM[Human decides.<br/>Agent may brief, never act.]
+    Q1 -->|no| Q2{Output checkable deterministically<br/>or human-reviewed before<br/>anything real happens?}
+    Q2 -->|no| NR[Not ready for an agent]
+    Q2 -->|yes| Q3{Can the agent be grounded<br/>in real source data?}
+    Q3 -->|no| NR
+    Q3 -->|yes| AG[Agent assists:<br/>draft, investigate, extract,<br/>summarize, validate]
+    AG --> CK[Deterministic checks + evals<br/>per Pattern 07]
+    CK --> RV[Human review]
+    RV --> ACT([Real action, taken by a human])
+```
+
 ### Where agents help
 
 - **Answering repetitive business-user FAQs**, grounded in real source data.
 - **Automating manual operational workflow steps** that are well-defined and checkable.
 - **Investigating why a number looks off**, gathering and correlating the relevant data to accelerate a human's diagnosis.
-- **Reading and replicating legacy stored-proc logic** (see [legacy-code archaeology](./claude-agents-for-legacy-archaeology.md)).
+- **Reading and replicating legacy stored-proc logic** (see [legacy-code archaeology](../ai/legacy-archaeology.md)).
 - **Modernizing reports and UDAs**, extracting and restating their logic.
 - **Drafting analysis and summaries** for stakeholders, for human review.
 - **Data validation and anomaly detection**, flagging for human attention.
@@ -64,6 +80,15 @@ A business user reports that a portfolio's income number "looks low" today.
 3. A **human analyst reviews** the draft. If it points to a genuine logic difference, the human decides how to proceed, and any change to the accrual calculation, or acceptance of a parity difference, is a human decision with sign-off.
 
 The agent compressed hours of manual data-gathering into minutes. It never changed a number or accepted a difference. That stayed with the human.
+
+## Industry grounding
+
+- The demand side is real: 61% of executives say generative AI is important to their mainframe modernization plans [IBM IBV, 2024](https://datastealth.io/blogs/mainframe-modernization-claude-code-cobol), and the major vendors have shipped agentic tooling, from IBM watsonx Code Assistant for Z [IBM](https://research.ibm.com/blog/cobol-java-ibm-z) to AWS Transform, whose "Reimagine" pattern extracts business rules and pairs with agentic coding tools including Claude Code [AWS, 2025](https://aws.amazon.com/blogs/migration-and-modernization/reimagine-your-mainframe-applications-with-agentic-ai-and-aws-transform/). The full tool landscape is surveyed in [AI-era modernization](../ai/README.md).
+- The research says comprehension beats conversion: LLMs help engineers *understand* legacy code more reliably than they *translate* it, with multi-agent explanation of COBOL an active research area [arXiv 2507.02182](https://arxiv.org/html/2507.02182v1); translation studies show models favor surface similarity over semantic preservation [arXiv 2404.00971](https://arxiv.org/abs/2404.00971).
+- That is exactly the boundary this pattern draws. The agent workload above is comprehension-and-toil-shaped: investigate, extract, draft, validate. The industry consensus in one line: **AI translates, execution-based parity evidence certifies**. Certification stays with the [parity harness](./parity-harness-deepdive.md) and human sign-off, never with the model.
+- The authority boundary also matches behavior-first vendors' positioning: Mechanical Orchard calls code-only LLM translation "wishful thinking" and makes captured behavior, not generated code, the source of truth [HyperFRAME Research, 2026](https://hyperframeresearch.com/2026/05/22/the-behavior-first-paradigm-moving-mainframe-modernization-past-llm-wishful-thinking/).
+
+Track each agent's failure modes and blast radius in the program [risk register](../templates/risk-register.md) like any other operational dependency.
 
 ## Pitfalls / anti-patterns
 
@@ -97,4 +122,4 @@ For any candidate workflow, ask:
 
 ---
 
-*Previous: [Pattern 04, Event-driven & saga](./04-event-driven-saga.md) · Next: [Pattern 06, Cutover](./06-cutover.md) · Related: [Pattern 07, Reliability under an LLM](./07-reliability-under-llm.md) · [Glossary](../GLOSSARY.md)*
+*Previous: [Pattern 04, Event-driven & saga](./04-event-driven-saga.md) · Next: [Pattern 06, Cutover](./06-cutover.md) · Related: [Pattern 07, Reliability under an LLM](./07-reliability-under-llm.md) · Landscape: [AI-era modernization](../ai/README.md)*
