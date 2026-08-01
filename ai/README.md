@@ -41,7 +41,7 @@ flowchart LR
 
 ## Where AI helps most, in order
 
-**1. Comprehension and archaeology first.** Explaining undocumented systems is the lowest-risk, highest-value use: a wrong explanation gets caught by a human reviewer before it costs anything, unlike a wrong translation in production. The academic literature consistently finds LLMs stronger at comprehension than conversion [arXiv 2411.14971](https://arxiv.org/abs/2411.14971); [arXiv 2508.19663](https://arxiv.org/abs/2508.19663), and multi-agent approaches to explaining COBOL are maturing fast [arXiv 2507.02182](https://arxiv.org/html/2507.02182v1). This playbook's worked method is [Claude agents for legacy archaeology](./legacy-archaeology.md): extraction into reviewable artifacts, explicit "intent unknown" flags, business sign-off. In the flagship program this class of AI workflow saved roughly 661 hours per year and reduced an estimated $4M of risk (program-reported figures, see [the flagship case study](../case-studies/flagship-program.md)).
+**1. Comprehension and archaeology first.** Explaining undocumented systems is the lowest-risk, highest-value use: a wrong explanation gets caught by a human reviewer before it costs anything, unlike a wrong translation in production. The academic literature consistently finds LLMs stronger at comprehension than conversion [arXiv 2411.14971](https://arxiv.org/abs/2411.14971); [arXiv 2508.19663](https://arxiv.org/abs/2508.19663), and multi-agent approaches to explaining COBOL are maturing fast [arXiv 2507.02182](https://arxiv.org/html/2507.02182v1). This playbook's worked method is [legacy-code archaeology](./legacy-archaeology.md): extraction into reviewable artifacts, explicit "intent unknown" flags, business sign-off. In the flagship program this class of AI workflow saved roughly 661 hours per year and reduced an estimated $4M of risk (program-reported figures, see [the flagship case study](../case-studies/flagship-program.md)).
 
 **2. Test generation second.** Generating characterization tests and scenario suites from extracted rules multiplies scarce expert time: experts review tests instead of writing them. AWS Transform generates test suites alongside documentation [AWS, 2025](https://aws.amazon.com/blogs/migration-and-modernization/reimagine-your-mainframe-applications-with-agentic-ai-and-aws-transform/). Generated tests are still verified the deterministic way: run them against the legacy system and confirm they pass before using them to judge the new one (see the [characterization test plan template](../templates/characterization-test-plan.md)).
 
@@ -60,7 +60,7 @@ Know these before scoping an AI-assisted program:
 
 Three documents turn this into practice:
 
-1. [Claude agents for legacy archaeology](./legacy-archaeology.md): the signature method. AI reads undocumented stored procedures, extracts rules into reviewable artifacts, flags unknowns, business signs off, parity harness certifies.
+1. [Legacy-code archaeology](./legacy-archaeology.md): the signature method. AI reads undocumented stored procedures, extracts rules into reviewable artifacts, flags unknowns, business signs off, parity harness certifies.
 2. [Pattern 05: AI agents in workflows](../patterns/05-ai-in-workflows.md): where AI agents sit inside modernization delivery workflows, and the human approval loops around them.
 3. [Pattern 07: Reliability under an LLM](../patterns/07-reliability-under-llm.md): how to keep deterministic guarantees when a non-deterministic component is in the loop.
 

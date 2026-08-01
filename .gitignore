@@ -1,0 +1,10 @@
+# Internal build context: research dossiers and the build brief.
+# Local working material only. Never publish.
+.build-context/
+
+# OS and editor noise
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/

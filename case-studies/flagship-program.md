@@ -1,5 +1,7 @@
 # Flagship Case Study: Modernizing a $1.6T Asset-Management Platform Without Losing a Cent
 
+*Written by [Nik Jain](https://github.com/nikjain15), modernization lead for a core module of this platform, responsible end to end from product vision and budget through team, requirements, and delivery. Full role detail in [My role](#my-role).*
+
 **Exec summary.** A $1.6 trillion asset-management platform, moving $4.5 billion in trades a day, was re-architected from 30 years of stored-procedure and overnight-batch logic into an event-driven, API-first cloud system. The binding constraint was never speed or cost. It was parity: identical outputs, to the cent, at every intermediate and final stage. The program used strangler-fig decomposition, AI-assisted legacy archaeology, a purpose-built parity harness, a 12+ week production parallel run, and 5,000+ scenario business testing to earn a formal three-way sign-off. Over 50% of the platform migrated with 95-100% on-time delivery and zero loss of trading accuracy. In an industry where 79% of modernization projects fail [vFunction/Wakefield, 2022](https://info.vfunction.com/hubfs/Download%20Assets/Wakefield-Report-2022-Why-App-Modernization-Projects-Fail.pdf), the difference was not better technology. It was better evidence.
 
 All details are sanitized and generalized: no employer names, no proprietary code, no client data. Numbers are limited to the program's shareable reference figures.
@@ -93,6 +95,27 @@ The stack is the point. A program that has only tests has opinions. A program th
 - Overnight batch replaced by event-driven intraday processing with real-time visibility.
 - **35+ applications and 70+ reports modernized**, serving **300K+ advisors**.
 - **~661 hours/year** of manual work removed and **$4M** of risk reduced via AI-assisted workflows.
+
+## My role
+
+I was the **modernization lead for a core platform module**, accountable for it end to end. The figures above are program-level. My direct remit was the full lifecycle of one of the platform's core modules, and in practice that meant owning every stage of it rather than a slice:
+
+- **Product vision and target architecture.** Defining what the modernized module should be, event-driven and API-first, and what it should deliberately not attempt.
+- **Business case and budget.** Building the case and securing the approvals, which on a parity-first program means defending spend on evidence infrastructure that produces no user-visible feature. The [business case template](../templates/business-case.md) is the shape of that argument.
+- **Building the team.** Standing up and leading the delivery organization described above: engineers, architects, QA, and design across the US, Ireland, and India.
+- **Requirements, recovered rather than collected.** There was no requirements document to gather. I ran AI agents against the legacy stored procedures myself to recover what the rules actually were, then took every recovered rule to business stakeholders to confirm it before it became a requirement. That hands-on archaeology, not a handoff to analysts, is how the specification for a 30-year-old module got written.
+- **Delivery and the schedule.** Owning execution against committed dates, and the sequencing discipline that let the program hit them without lowering the parity bar.
+
+Four things in this playbook are decisions I drove, working with SMEs, business partners, and other leads rather than alone:
+
+| What I drove | Why it mattered |
+|---|---|
+| **Parity as the contract, proven by a purpose-built harness** | Establishing that outputs had to match value by value at intermediate and final stages, that the only allowed difference was one the business signed, and that a dedicated comparison harness would be the evidence. It is the organizing idea of this entire playbook: [Pattern 01](../patterns/01-parity.md), [harness deep-dive](../patterns/parity-harness-deepdive.md) |
+| **AI-assisted legacy archaeology** | Using agents to recover intent from undocumented logic, testing every hypothesis against both the code and the live system, flagging what could not be inferred, and routing every rule through business ratification: [legacy-code archaeology](../ai/legacy-archaeology.md) |
+| **Expected answers agreed with the business up front** | Running scenario testing as an eval set rather than an end-phase QA gate, so a mismatch was a finding and never a debate |
+| **Wave sequencing and schedule discipline** | Migration by account and fund groups, heaviest and most foundational work front-loaded, archaeology pipelined against the build, risks raised early so sequence flexed while dates held |
+
+None of it was solo work. The recovered rules were only trustworthy because SMEs, business owners, and long-tenured engineers corrected them, and the evidence pipeline only held because a dedicated QA and production-parallel team ran it every day. My part was setting the bar, choosing the methods, building the team that could execute them, and refusing to move the bar when the calendar got tight.
 
 ## What made it work
 
