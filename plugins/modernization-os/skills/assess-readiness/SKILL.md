@@ -43,8 +43,8 @@ Two findings deserve their own callout because plans routinely miss them:
 
 Ask in small batches, not as a questionnaire.
 
-**Open with this one.** A practitioner who has led these programs names it as the single
-question that exposes an unready program fastest:
+**Open with this one.** It is the single question I have found exposes an unready program
+fastest:
 
 > **If your two most knowledgeable people left next month, what happens?**
 

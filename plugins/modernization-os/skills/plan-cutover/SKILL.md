@@ -44,8 +44,8 @@ Record the choice and the reason. A style decision without a recorded reason get
 
 ## Step 3: define the gate
 
-Six conditions, each written as an objective check with a named verifier. This is the gate a
-practitioner ran on a money-critical program:
+Six conditions, each written as an objective check with a named verifier. This is the gate I ran
+on a $1.6T platform moving $4.5B in trades a day:
 
 1. **Parity threshold**: what reconciles, at what grain, with which differences accepted and signed
 2. **Time in parallel**: how long, and confirmation the period covered the rare cases

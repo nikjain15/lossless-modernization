@@ -1,6 +1,6 @@
 # Cutover craft
 
-Everything here exists because a real program got it wrong at scale.
+Everything here exists because a real program got it wrong at scale, mine or someone else's.
 
 ## Choosing the style
 
@@ -15,8 +15,8 @@ Big bang is not always wrong. It is wrong when chosen for convenience rather tha
 
 ## The gate
 
-Cutover eligibility is not a date. Six conditions have to hold at once. This is the gate a
-practitioner actually ran on a money-critical program, not a generic template.
+Cutover eligibility is not a date. Six conditions have to hold at once. This is the gate I ran on
+a $1.6T platform, not a generic template.
 
 1. **Parity threshold met.** Outputs reconcile at the required grain, with only documented,
    agreed differences remaining, at intermediate stages as well as final ones.
@@ -44,8 +44,8 @@ Corollary for reporting: **raw break counts are a misleading progress metric**, 
 
 ## Rollback
 
-A rollback plan that has never been executed is a hypothesis. On the program this is drawn from,
-three things made rollback real:
+A rollback plan that has never been executed is a hypothesis. Three things made rollback real on
+my program:
 
 **Rehearsed before every cutover.** The reversal was executed on production-like data ahead of
 each real switch. Not once at the start of the program: before each one.
@@ -86,7 +86,7 @@ A good cutover is an anticlimax. If everything before it was done properly, the 
 
 ## Things that reliably go wrong
 
-Observed in practice, not inferred. Check a plan against every one of these.
+These are the ones I have watched happen. Check a plan against every one.
 
 **1. Rollback never rehearsed.** The plan exists on paper and has never been executed, so nobody
 knows whether it works or how long it takes. The most common fatal gap.

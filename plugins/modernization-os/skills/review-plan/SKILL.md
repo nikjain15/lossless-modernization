@@ -18,8 +18,8 @@ Read both reference files. Do not work from memory.
 
 ## Step 0: the three tells, checked first
 
-These come from a practitioner who has led these programs, and they are the fastest read on
-whether a plan will fail. Check them before anything else and lead your verdict with them.
+These are the three things I look at first, and they are the fastest read on whether a plan will
+fail. Check them before anything else and lead your verdict with them.
 
 **1. Did the date come before the plan?** If a go-live is already committed and the plan is
 reverse-engineered to fit it, then evidence work becomes whatever fits in the time left over.
