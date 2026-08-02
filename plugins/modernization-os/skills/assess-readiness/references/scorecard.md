@@ -29,10 +29,17 @@ two is not eighty-three percent ready. It is one bad weekend from being a case s
 
 ## Understanding the old system
 
-### 01. Knowledge of current behavior
+### 01. Knowledge of current behavior  ·  BLOCKING
 **Read from code:** count of stored procedures, functions and triggers; the largest single unit; presence and coverage of tests over domain logic; age and density of comments; whether any specification document exists in the repo.
-**Ask:** can anyone in the organization explain what the system does end to end? Is there a named person per subsystem? What happens if they leave next month?
-**Green looks like:** current behavior is captured in a form a non-engineer can review, and it has been checked against the running system.
+**Ask:** if your two most knowledgeable people left next month, what happens? Can anyone explain what the system does end to end? Is there a named person per subsystem?
+
+**Green requires all four:**
+1. **Captured in a form a non-engineer can review.** Not one engineer's mental model. A structured artifact a business stakeholder can read and confirm, because that is what makes ratification possible at all.
+2. **Checked against the running system, not just the code.** Decades-old systems routinely behave differently from what the source appears to say, because of data state, job ordering, and configuration.
+3. **Unknowns flagged explicitly rather than filled in.** Anything unexplainable is marked intent unknown and escalated, never quietly assumed. Those flags are the most valuable output, not a gap in it.
+4. **Every rule ratified by whoever owns its meaning.** Business owners for policy, operators for observed behavior, long-tenured engineers for history. Signed, not merely discussed.
+
+**Amber:** some of the above, or captured but unratified. **Red:** it lives in people's heads.
 
 ### 02. Access to the people who know
 **Read from code:** contributor history and recency; how concentrated commits are in a few hands; how long since the busiest files were touched by anyone still active.
@@ -43,15 +50,29 @@ two is not eighty-three percent ready. It is one bad weekend from being a case s
 
 ## Proving correctness
 
-### 03. Data and semantic parity
+### 03. Data and semantic parity  ·  BLOCKING
 **Read from code:** schema size and complexity; enum and flag columns that imply branching; nullable columns with business meaning; the presence of any reconciliation or comparison code.
 **Ask:** for the three most important values your system produces, who defines what correct means? Has anyone checked that a field means the same thing in the target as in the source?
-**Green looks like:** semantics are documented per critical field, differences are agreed and signed, and a comparison mechanism exists.
 
-### 04. Evidence that the new system matches
+**Green requires all four:**
+1. **Semantics documented per critical field.** What it means in the source and in the target, with any difference agreed and signed rather than discovered later. This is the Lidl failure: purchase price versus retail price, roughly $590M.
+2. **A comparison mechanism exists and runs.** Not planned. Something running that compares values between old and new at a stated grain, producing output a person actually reads.
+3. **Reconciled at every record, not sampled.** Every record at every level, including intermediate calculations, because two systems can agree on totals while disagreeing on everything underneath.
+4. **The consuming layer is in scope.** Reports, spreadsheets and user-built tools are reconciled too, not assumed to follow from matching core values, because those consumers apply logic of their own.
+
+**Amber:** a comparison exists but is sampled, core-only, or the semantics are undocumented. **Red:** validation means row counts.
+
+### 04. Evidence that the new system matches  ·  BLOCKING
 **Read from code:** any existing comparison harness, golden-master fixtures, snapshot tests, or characterization tests over the domain.
 **Ask:** what evidence will you show, and who signs it? Would that person put their name on it today?
-**Green looks like:** a comparison runs on real inputs, produces a reviewable report, and three named parties sign it.
+
+**Green requires all four:**
+1. **Three named signatures: business, architecture, engineering.** Each owns a different kind of risk. Business owns what the numbers mean, architecture owns the design, engineering owns the delivery.
+2. **Expected answers agreed with the business before running.** The scenario set and its expected answers are agreed up front, so a mismatch is a finding rather than a debate about what correct was supposed to be.
+3. **Evidence produced on real production inputs over time.** Not curated test data. Real flow, long enough to have seen period-ends and unusual days, because the rare cases never appear in a test environment.
+4. **Progress tracked as distinct unresolved root causes.** Not raw break counts: one rule difference can produce a hundred thousand breaks that all close at once. The honest number is small and hard to game.
+
+**Amber:** testing exists but proves the new system works rather than that it matches. **Red:** UAT is the correctness gate.
 
 ---
 
