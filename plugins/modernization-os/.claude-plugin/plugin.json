@@ -1,0 +1,22 @@
+{
+  "name": "modernization-os",
+  "description": "A toolkit for modernizing systems that cannot be allowed to break. Assess readiness, review a plan against twelve sourced failure categories and eight documented public failures, and produce a cutover runbook with rehearsed rollback. Works on your own repository and writes real artifacts.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Nik Jain",
+    "url": "https://github.com/nikjain15"
+  },
+  "homepage": "https://nikjain15.github.io/lossless-modernization/",
+  "repository": "https://github.com/nikjain15/lossless-modernization",
+  "license": "MIT",
+  "keywords": [
+    "legacy",
+    "modernization",
+    "migration",
+    "cutover",
+    "parity",
+    "mainframe",
+    "readiness",
+    "risk"
+  ]
+}
