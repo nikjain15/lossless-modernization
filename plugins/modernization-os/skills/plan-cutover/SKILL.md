@@ -27,6 +27,10 @@ Then establish, asking only what you cannot find:
 - **What downstream consumers exist**, whether they know, and whether they have confirmed readiness
 - **The defect position**: how many are open, at what severity, and who has accepted each one
 - **Whether the cutover and the rollback have been rehearsed**, and on what data
+- **Whether the legacy system is frozen** during the window, or changes keep landing in it
+- **Whether reconciliation continues after go-live**, or stops at the switch
+- **Who runs verification and stabilization**, and whether they are the same exhausted people
+- **When the window ends**, and who calls it if the cutover is slipping
 
 If there is no comparison evidence at all, say so before going further. A runbook for an unverified system is a schedule for an incident. Offer to help design the evidence first.
 
@@ -149,7 +153,7 @@ that data exists only in the new system>.
 
 ## Step 5: name what is missing
 
-Close with the gaps, ranked. Be specific about which of the recurring failures the current plan is exposed to, and what closes it.
+Close with the gaps, ranked. Be specific about which of the eight recurring failures in `references/cutover-craft.md` the current plan is exposed to, and what closes each one. Absence counts: a plan that says nothing about freezing the legacy system, continuing reconciliation after go-live, shift handover, or the end of the window is exposed to all four.
 
 ## Rules
 

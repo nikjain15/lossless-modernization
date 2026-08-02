@@ -86,10 +86,35 @@ A good cutover is an anticlimax. If everything before it was done properly, the 
 
 ## Things that reliably go wrong
 
-- **Rollback never rehearsed.** The single most common fatal gap.
-- **Go-live criteria that are date-based.** "Live by end of quarter" is not a criterion.
-- **Known defects accepted at go-live** without a named person accepting each one. TSB carried 4,424 open defects; Queensland Health carried 2,422.
-- **Testers with no power to block.** If nobody can stop it, the gate is decorative.
-- **Comms as an afterthought.** Downstream consumers, support teams, and clients discover the change at the worst moment.
-- **No stabilization plan.** The team disperses the morning after, and the long tail arrives in week two.
-- **The reverse-migration gap.** Nobody decided what happens to data created after the switch.
+Observed in practice, not inferred. Check a plan against every one of these.
+
+**1. Rollback never rehearsed.** The plan exists on paper and has never been executed, so nobody
+knows whether it works or how long it takes. The most common fatal gap.
+
+**2. No freeze on the legacy system.** Changes keep landing in the old system during the cutover
+window, so the thing you reconciled against is no longer the thing you are switching from. Your
+evidence silently expires while you are relying on it.
+
+**3. Reconciliation stops at go-live.** Comparison is treated as a pre-cutover activity, so the
+first divergence *after* the switch goes unnoticed because nobody is still comparing. The window
+immediately after cutover is when you most need the harness running, and it is exactly when teams
+turn it off.
+
+**4. Known defects accepted with nobody named.** A count is agreed but no individual accepted each
+one, so accountability for shipping them is diffuse. TSB went live with 4,424 of 34,671 open.
+Queensland Health went live with 2,422.
+
+**5. Downstream consumers find out late.** Reports, operations, support and clients discover the
+change at the worst possible moment. A correct system that surprises its consumers still produces
+an incident.
+
+**6. One cutover team, no fresh shift.** The same exhausted people run the window, the
+verification and the stabilization, so judgement degrades exactly when it matters most. Plan a
+handover to rested people before the verification step, not after something goes wrong.
+
+**7. The window has no defined end.** No stated time at which you stop and abort rather than
+pressing on, so a slipping cutover runs into the business day by default. The decision to
+continue past the window should be an explicit, named call, never a consequence of momentum.
+
+**8. The team disperses the morning after.** No stabilization plan, so when the long tail arrives
+in week two the people who understand it have moved on to something else.
