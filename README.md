@@ -20,14 +20,16 @@ The site is live. The chapters are being written and reviewed one at a time, and
 - [The playbook](https://nikjain15.github.io/lossless-modernization/): the four-stage sequence, the twelve sourced failure categories, and the twelve artifacts a money-critical program produces
 - [The post-mortem library](https://nikjain15.github.io/lossless-modernization/post-mortems.html): eight documented failures, costed and sourced, each mapped to the practice that would have caught it
 
-**Landing next**
+**Coming soon**
 
 - Legacy-code archaeology: recovering intent from undocumented logic with AI agents, under human sign-off
 - The parity harness: proving a modernized system matches value by value, including reports and spreadsheets
 - The flagship case study: a $1.6T asset-management platform, sanitized
-- The parity report and legacy knowledge map templates
-- The full pattern catalogue, the decision trees, and the readiness scorecard
+- The template library: parity report, legacy knowledge map, cutover runbook, wave plan and more
+- The pattern catalogue, the decision trees, and the readiness scorecard
 - Claude Skills and an MCP server, so your own agent can work the playbook
+
+Watch or star the repo if you want to know when each one lands.
 
 ## Why this exists
 
