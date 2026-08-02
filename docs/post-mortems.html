@@ -210,6 +210,28 @@
   .rd .n { font-size:16.5px; font-weight:700; letter-spacing:-.01em; margin-top:5px; }
   .rd .d { font-size:14px; color:var(--muted); margin-top:4px; line-height:1.5; }
 
+  /* RESPONSIVE FIXES */
+  .brand { white-space:nowrap; }
+  @media (max-width:560px){
+    .nav-links a { display:none; }
+    .brand { font-size:15px; }
+    .betapill { margin-left:7px; }
+  }
+  @media (max-width:720px){
+    .flowline { font-size:20px; line-height:1.4; }
+    .flowline .ar { margin:0 5px; }
+    .flowline .gov { font-size:15px; }
+    .hero h1 { letter-spacing:-.02em; }
+    .sec-title, .hero h1 { overflow-wrap:break-word; }
+    .wrap { padding:0 20px; }
+    .nav-in { padding:14px 20px; }
+  }
+  @media (max-width:420px){
+    .flowline { font-size:17.5px; }
+    .num .v, .stat .big { font-size:26px; }
+  }
+  img, svg, pre, table { max-width:100%; }
+
   footer { border-top:1px solid var(--line); padding:36px 0 60px; font-size:14px; color:var(--faint); }
   footer a { color:var(--muted); } footer a:hover { color:var(--accent); }
   footer .row { display:flex; flex-wrap:wrap; gap:8px 20px; }
