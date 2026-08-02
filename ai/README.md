@@ -54,15 +54,15 @@ Know these before scoping an AI-assisted program:
 - **Hallucination is systematic, not occasional.** Researchers have built a taxonomy of LLM code hallucinations with 3 primary and 12 specific categories [arXiv 2404.00971](https://arxiv.org/abs/2404.00971). Treat hallucination as a property of the tool to be engineered around, not an anomaly to be hoped away.
 - **Context windows cannot hold a mainframe estate.** Cross-program dependencies, JCL orchestration, and shared copybooks span far more than any context window, so per-file analysis silently misses estate-level behavior; COBOL's thin representation in training data compounds it [DataStealth, 2025](https://datastealth.io/blogs/mainframe-modernization-claude-code-cobol). Mitigation: dependency mapping and estate-level inventory before AI analysis, not after (see the [application inventory template](../templates/application-inventory.md)).
 - **"JOBOL": unidiomatic translation.** Naive COBOL-to-Java translation produces Java with COBOL's shape: procedural, untestable, and no easier to maintain than the original. Translation is not equivalence, and it is not modernization either [DataStealth, 2025](https://datastealth.io/blogs/mainframe-modernization-claude-code-cobol). The counter-pattern is behavior capture plus intentional re-architecture, the approach behind Mechanical Orchard's Imogen and Microsoft's agentic COBOL migration pipelines [Microsoft DevBlogs](https://devblogs.microsoft.com/).
-- **Confident wrongness compounds under scale.** A human reviewer can check one extraction; nobody can hand-check 10,000. The only scalable gate is deterministic: execution parity, reconciliation counts, characterization suites in CI. This is the subject of [Pattern 07: Reliability under an LLM](../patterns/07-reliability-under-llm.md).
+- **Confident wrongness compounds under scale.** A human reviewer can check one extraction; nobody can hand-check 10,000. The only scalable gate is deterministic: execution parity, reconciliation counts, characterization suites in CI. This is the subject of [Pattern 05: Reliability under an LLM](../patterns/05-reliability-under-llm.md).
 
 ## The in-repo guides
 
 Three documents turn this into practice:
 
 1. [Legacy-code archaeology](./legacy-archaeology.md): the signature method. AI reads undocumented stored procedures, extracts rules into reviewable artifacts, flags unknowns, business signs off, parity harness certifies.
-2. [Pattern 05: AI agents in workflows](../patterns/05-ai-in-workflows.md): where AI agents sit inside modernization delivery workflows, and the human approval loops around them.
-3. [Pattern 07: Reliability under an LLM](../patterns/07-reliability-under-llm.md): how to keep deterministic guarantees when a non-deterministic component is in the loop.
+2. [Pattern 04: AI agents in workflows](../patterns/04-ai-in-workflows.md): where AI agents sit inside modernization delivery workflows, and the human approval loops around them.
+3. [Pattern 05: Reliability under an LLM](../patterns/05-reliability-under-llm.md): how to keep deterministic guarantees when a non-deterministic component is in the loop.
 
 ---
 

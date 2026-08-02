@@ -89,7 +89,7 @@ Read the categories below, then score your own program against them with the [re
 - 61% of executives say generative AI is important to their mainframe modernization plans [IBM IBV, 2024](https://www.ibm.com/thought-leadership/institute-business-value/)
 - The consensus position: AI translates, execution-based parity evidence certifies [Mechanical Orchard](https://www.mechanical-orchard.com/platform)
 
-**Where this playbook addresses it:** [AI-era modernization](../ai/README.md), [the parity pattern](../patterns/01-parity.md).
+**Where this playbook addresses it:** [AI-era modernization](../ai/README.md), [the parity pattern](../patterns/06-parity.md).
 
 ## Execution failures
 
@@ -103,7 +103,7 @@ Read the categories below, then score your own program against them with the [re
 - 83% of data migrations fail or overrun (widely attributed to Gartner); Bloor Research found ~75% fail with average 30% cost overrun and only 16% on time and budget [QuerySurge](https://www.querysurge.com/resource-center/white-papers/strategic-optimization-of-enterprise-data-migration-testing)
 - TSB migrated 1.3B records for 5.2M customers in a single weekend [iceDQ](https://icedq.com/resources/case-studies/tsb-bank-data-migration-failure)
 
-**Where this playbook addresses it:** [the parity pattern](../patterns/01-parity.md), [parity report template](../templates/parity-report.md), [taming stored procedures](../patterns/03-taming-stored-procedures.md).
+**Where this playbook addresses it:** [the parity pattern](../patterns/06-parity.md), [parity report template](../templates/parity-report.md), [taming stored procedures](../patterns/01-taming-stored-procedures.md).
 
 ### 4. Testing and verification gaps
 
@@ -115,7 +115,7 @@ Read the categories below, then score your own program against them with the [re
 - TSB: 34,671 defects logged, 4,424 still open at go-live [Slaughter and May, 2019](https://www.techmonitor.ai/leadership/digital-transformation/slaughter-and-may-tsb)
 - Queensland Health went live with 2,422 known defects and generated 35,000 payroll anomalies [Commission of Inquiry, 2013](https://cabinet.qld.gov.au/documents/2013/aug/health%20payroll%20response/Attachments/Report.pdf)
 
-**Where this playbook addresses it:** [characterization test plan template](../templates/characterization-test-plan.md), [the parity pattern](../patterns/01-parity.md), [parity harness deep dive](../patterns/parity-harness-deepdive.md).
+**Where this playbook addresses it:** [characterization test plan template](../templates/characterization-test-plan.md), [the parity pattern](../patterns/06-parity.md), [parity harness deep dive](../patterns/parity-harness-deepdive.md).
 
 ### 5. Cutover and big-bang risk
 
@@ -127,7 +127,7 @@ Read the categories below, then score your own program against them with the [re
 - TSB's one-weekend cutover: £366M direct cost, £48.65M in fines, CEO resignation, roughly £1B total [Tech Monitor, 2022](https://www.techmonitor.ai/policy/privacy-and-data-protection/tsb-it-crash-migration-bank-fca)
 - Roughly 64% of migrations suffer unforeseen outages [Oracle white paper via iceDQ](https://icedq.com/resources/case-studies/tsb-bank-data-migration-failure)
 
-**Where this playbook addresses it:** [cutover strategy decision](../decide/cutover-strategy.md), [cutover pattern](../patterns/06-cutover.md), [cutover runbook template](../templates/cutover-runbook.md), [rollback plan template](../templates/rollback-plan.md).
+**Where this playbook addresses it:** [cutover strategy decision](../decide/cutover-strategy.md), [cutover pattern](../patterns/07-cutover.md), [cutover runbook template](../templates/cutover-runbook.md), [rollback plan template](../templates/rollback-plan.md).
 
 ## Organization failures
 
@@ -192,7 +192,7 @@ Read the categories below, then score your own program against them with the [re
 - Roughly 42% of adopters are consolidating back toward modular monoliths, citing 2 to 3x infrastructure cost and 35% more debugging time [ByteIota, 2026](https://byteiota.com/microservices-rollback-2026-42-return-to-monoliths/)
 - By 2026, 80% of tech debt will be architectural [Gartner, 2023, via ByteIota](https://byteiota.com/microservices-rollback-2026-42-return-to-monoliths/)
 
-**Where this playbook addresses it:** [choose your strategy](../decide/choose-your-strategy.md), [event-driven saga pattern](../patterns/04-event-driven-saga.md).
+**Where this playbook addresses it:** [choose your strategy](../decide/choose-your-strategy.md), [event-driven saga pattern](../patterns/03-event-driven-saga.md).
 
 ### 12. The cost of NOT modernizing
 

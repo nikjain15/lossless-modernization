@@ -1,6 +1,6 @@
-# Pattern 04, Event-driven & saga re-architecture
+# Pattern 03, Event-driven & saga re-architecture
 
-*Part of the [Lossless Modernization](../README.md) playbook. Builds on the service decomposition from [Pattern 03](./03-taming-stored-procedures.md); record the architecture choices it forces as [ADRs](../templates/adr.md).*
+*Part of the [Lossless Modernization](../README.md) playbook. Builds on the service decomposition from [Pattern 01](./01-taming-stored-procedures.md); record the architecture choices it forces as [ADRs](../templates/adr.md).*
 
 ---
 
@@ -48,7 +48,7 @@ sequenceDiagram
 ```
 
 1. **Model triggers as events.** The drivers of computation are events: a trade executes, a price updates, a data feed arrives. Each event flows into the services that care about it, kicking off the relevant intraday cycle rather than waiting for night.
-2. **One responsibility per service.** Decompose so that each microservice owns exactly one job (pricing, accrual, position keeping, posting, and so on). This is the same role-based decomposition that [taming stored procedures](./03-taming-stored-procedures.md) produces.
+2. **One responsibility per service.** Decompose so that each microservice owns exactly one job (pricing, accrual, position keeping, posting, and so on). This is the same role-based decomposition that [taming stored procedures](./01-taming-stored-procedures.md) produces.
 3. **Coordinate with sagas.** A business process that spans several services is coordinated as a saga: a sequence of local steps, each in its owning service, rather than one distributed transaction. Steps proceed, and where needed, compensate.
 4. **Recover by idempotent replay.** When a service fails, **replay that specific service** for the affected input to regenerate the correct output. Because each service is idempotent, replaying it any number of times yields the same correct result, with no harmful side effects. There is no need to roll back the whole workflow.
 
@@ -82,13 +82,13 @@ Each ownership boundary and each replay-vs-compensate choice is an architecture 
 - **Hidden global transactions.** Reintroducing a distributed transaction across services to "make it safe" defeats the point and reintroduces global failure modes.
 - **Services that own more than one responsibility.** Blurred ownership makes replay ambiguous: which part are you replaying, and what are its side effects?
 - **Event ordering assumptions.** Assuming events always arrive in a tidy order leads to subtle corruption; design for out-of-order and duplicate events.
-- **Losing parity discipline.** Faster and event-driven does not relax the accuracy bar. Every intraday result still has to reconcile against the legacy source of truth during the parallel run (see [Pattern 01](./01-parity.md)).
+- **Losing parity discipline.** Faster and event-driven does not relax the accuracy bar. Every intraday result still has to reconcile against the legacy source of truth during the parallel run (see [Pattern 06](./06-parity.md)).
 - **No compensation strategy.** For steps that cannot simply be replayed, define compensating actions explicitly rather than hoping failures do not happen mid-saga.
 
 ## Decision framework
 
 1. **Does the business need intraday, event-driven processing?** If batch timing is genuinely fine, do not add this complexity.
-2. **Can work be cleanly decomposed into single-responsibility services?** If not, resolve ownership first (see [Pattern 03](./03-taming-stored-procedures.md)).
+2. **Can work be cleanly decomposed into single-responsibility services?** If not, resolve ownership first (see [Pattern 01](./01-taming-stored-procedures.md)).
 3. **Is each service idempotent?** If not, make it so before relying on replay.
 4. **Rollback or replay?** Prefer localized idempotent replay; reserve compensation for steps that cannot be replayed.
 5. **How do you handle out-of-order and duplicate events?** Design it explicitly, do not assume order.
@@ -106,4 +106,4 @@ Each ownership boundary and each replay-vs-compensate choice is an architecture 
 
 ---
 
-*Previous: [Pattern 03, Taming stored procedures](./03-taming-stored-procedures.md) · Next: [Pattern 05, AI agents in workflows](./05-ai-in-workflows.md) · Template: [ADR](../templates/adr.md) · [Glossary](../GLOSSARY.md)*
+*Previous: [Pattern 01, Taming stored procedures](./01-taming-stored-procedures.md) · Next: [Pattern 04, AI agents in workflows](./04-ai-in-workflows.md) · Template: [ADR](../templates/adr.md) · [Glossary](../GLOSSARY.md)*

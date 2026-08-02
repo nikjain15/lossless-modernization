@@ -1,6 +1,6 @@
-# Pattern 05, AI agents in mission-critical workflows
+# Pattern 04, AI agents in mission-critical workflows
 
-*Part of the [Lossless Modernization](../README.md) playbook. See also [Pattern 07: Reliability under an LLM](./07-reliability-under-llm.md) and the [AI-era modernization landscape](../ai/README.md).*
+*Part of the [Lossless Modernization](../README.md) playbook. See also [Pattern 05: Reliability under an LLM](./05-reliability-under-llm.md) and the [AI-era modernization landscape](../ai/README.md).*
 
 ---
 
@@ -39,7 +39,7 @@ flowchart TD
     Q2 -->|yes| Q3{Can the agent be grounded<br/>in real source data?}
     Q3 -->|no| NR
     Q3 -->|yes| AG[Agent assists:<br/>draft, investigate, extract,<br/>summarize, validate]
-    AG --> CK[Deterministic checks + evals<br/>per Pattern 07]
+    AG --> CK[Deterministic checks + evals<br/>per Pattern 05]
     CK --> RV[Human review]
     RV --> ACT([Real action, taken by a human])
 ```
@@ -69,7 +69,7 @@ Ticket triage/routing was **not** handed to agents. Naming the things you delibe
 
 ### How agents are bounded
 
-Every assistive agent sits behind the reliability controls in [Pattern 07](./07-reliability-under-llm.md): the agent only assists while humans approve real actions, deterministic checks validate agent output, agent behavior is evaluated with evals, and answers are grounded in real source data rather than generated from memory.
+Every assistive agent sits behind the reliability controls in [Pattern 05](./05-reliability-under-llm.md): the agent only assists while humans approve real actions, deterministic checks validate agent output, agent behavior is evaluated with evals, and answers are grounded in real source data rather than generated from memory.
 
 ## A generic worked example
 
@@ -122,4 +122,4 @@ For any candidate workflow, ask:
 
 ---
 
-*Previous: [Pattern 04, Event-driven & saga](./04-event-driven-saga.md) · Next: [Pattern 06, Cutover](./06-cutover.md) · Related: [Pattern 07, Reliability under an LLM](./07-reliability-under-llm.md) · Landscape: [AI-era modernization](../ai/README.md)*
+*Previous: [Pattern 03, Event-driven & saga](./03-event-driven-saga.md) · Next: [Pattern 07, Cutover](./07-cutover.md) · Related: [Pattern 05, Reliability under an LLM](./05-reliability-under-llm.md) · Landscape: [AI-era modernization](../ai/README.md)*

@@ -60,4 +60,4 @@
 - [RetailDetail, Lidl's failed IT project cost half a billion, 2018](https://www.retaildetail.eu/news/food/lidls-failed-it-project-cost-half-billion/)
 - [Henrico Dolfing, Case study: Lidl's €500 million SAP debacle](https://www.henricodolfing.ch/en/case-study-12-lidls-e500-million-sap-debacle/)
 
-**Next:** [The parity pattern](../../patterns/01-parity.md) | [Rewrite vs strangle vs wrap](../../decide/rewrite-vs-strangle-vs-wrap.md) | [Post-mortems index](README.md)
+**Next:** [The parity pattern](../../patterns/06-parity.md) | [Rewrite vs strangle vs wrap](../../decide/rewrite-vs-strangle-vs-wrap.md) | [Post-mortems index](README.md)

@@ -101,4 +101,4 @@ The failure mode it prevents is specific: teams declare "testing complete" on sa
 - [ ] Sign-off block has all three roles, with names, against a specific version and build
 - [ ] The harness run is reproducible: tagged code, versioned rules, archived inputs
 
-Next: [characterization test plan](characterization-test-plan.md) | [cutover runbook](cutover-runbook.md) | [parity pattern deep-dive](../patterns/01-parity.md)
+Next: [characterization test plan](characterization-test-plan.md) | [cutover runbook](cutover-runbook.md) | [parity pattern deep-dive](../patterns/06-parity.md)

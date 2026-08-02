@@ -45,7 +45,7 @@
 ## What would have prevented it
 
 - **Characterization of the legacy payroll first.** Capture LATTICE's actual pay outputs across representative pay cycles as executable expectations before building. See the [characterization test plan template](../../templates/characterization-test-plan.md).
-- **A parallel pay run as the go-live gate.** Run both systems for multiple full pay cycles and reconcile every payslip; go live only when differences are explained and accepted. See [the parity pattern](../../patterns/01-parity.md) and [parity report template](../../templates/parity-report.md).
+- **A parallel pay run as the go-live gate.** Run both systems for multiple full pay cycles and reconcile every payslip; go live only when differences are explained and accepted. See [the parity pattern](../../patterns/06-parity.md) and [parity report template](../../templates/parity-report.md).
 - **An honest deadline decision.** LATTICE's end-of-life created forced-march pressure. A [cutover strategy](../../decide/cutover-strategy.md) decision made early, with the option to extend legacy support priced against the risk of premature go-live, changes the calculus.
 - **Single accountable owner.** The three-way split between agency, shared-services body, and vendor diffused responsibility. See the [RACI template](../../templates/raci.md).
 

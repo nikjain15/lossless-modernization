@@ -50,7 +50,7 @@ If you believe the truth, you will invert your priorities. You will treat **comp
 
 ## The payoff of getting it right
 
-Done this way, the technology delivers its promised gains, batch timing improving to intraday, real-time visibility, event-driven resilience with [idempotent per-service replay](./patterns/04-event-driven-saga.md), AI agents removing **~661 hours/year** of toil and reducing **$4M** of risk, **35+ UDAs and 70+ reports** modernized for **300K+ advisors**. But those gains are safe to keep only because the hard part was treated as the main event. Cutover becomes anticlimactic, a promotion of an already-proven pipeline, not a leap of faith.
+Done this way, the technology delivers its promised gains, batch timing improving to intraday, real-time visibility, event-driven resilience with [idempotent per-service replay](./patterns/03-event-driven-saga.md), AI agents removing **~661 hours/year** of toil and reducing **$4M** of risk, **35+ UDAs and 70+ reports** modernized for **300K+ advisors**. But those gains are safe to keep only because the hard part was treated as the main event. Cutover becomes anticlimactic, a promotion of an already-proven pipeline, not a leap of faith.
 
 ## The lesson, stated plainly
 
@@ -60,4 +60,4 @@ That is the myth this playbook exists to bust. Modernize the technology, yes. Bu
 
 ---
 
-*Start here: [README](./README.md) · The core pattern: [Parity](./patterns/01-parity.md) · The methodology: [The Parity Harness](./patterns/parity-harness-deepdive.md) · The method: [Legacy-code archaeology](./ai/legacy-archaeology.md) · [Glossary](./GLOSSARY.md)*
+*Start here: [README](./README.md) · The core pattern: [Parity](./patterns/06-parity.md) · The methodology: [The Parity Harness](./patterns/parity-harness-deepdive.md) · The method: [Legacy-code archaeology](./ai/legacy-archaeology.md) · [Glossary](./GLOSSARY.md)*

@@ -47,8 +47,8 @@ Dates per [Slaughter and May, 2019](https://www.slaughterandmay.com/news/slaught
 
 ## What would have prevented it
 
-- **A phased or parallel-run cutover.** Migrating cohorts of customers in waves, or running old and new in parallel with continuous reconciliation, would have capped the blast radius. See [cutover strategy](../../decide/cutover-strategy.md) and the [cutover pattern](../../patterns/06-cutover.md).
-- **Parity evidence as a go-live gate.** A parity harness producing record-level reconciliation and behavior-equivalence evidence, with explicit accepted-difference logs, turns "are we ready?" from opinion into data. See [the parity pattern](../../patterns/01-parity.md) and the [parity report template](../../templates/parity-report.md).
+- **A phased or parallel-run cutover.** Migrating cohorts of customers in waves, or running old and new in parallel with continuous reconciliation, would have capped the blast radius. See [cutover strategy](../../decide/cutover-strategy.md) and the [cutover pattern](../../patterns/07-cutover.md).
+- **Parity evidence as a go-live gate.** A parity harness producing record-level reconciliation and behavior-equivalence evidence, with explicit accepted-difference logs, turns "are we ready?" from opinion into data. See [the parity pattern](../../patterns/06-parity.md) and the [parity report template](../../templates/parity-report.md).
 - **A runbook with rollback triggers.** Pre-agreed success criteria and rollback triggers per step, signed before the weekend. See the [cutover runbook template](../../templates/cutover-runbook.md) and [rollback plan template](../../templates/rollback-plan.md).
 - **Defect-based go/no-go criteria.** A written rule such as "zero open severity 1-2 defects in money-moving paths" would have forced the conversation 12 days out.
 
@@ -69,4 +69,4 @@ Dates per [Slaughter and May, 2019](https://www.slaughterandmay.com/news/slaught
 - [iceDQ, TSB data migration failure case study](https://icedq.com/resources/case-studies/tsb-bank-data-migration-failure)
 - [Computer Weekly, TSB programme pulled apart in report, 2019](https://www.computerweekly.com/news/252474170/TSB-programme-pulled-apart-in-report-on-IT-meltdown)
 
-**Next:** [Cutover strategy](../../decide/cutover-strategy.md) | [The parity pattern](../../patterns/01-parity.md) | [Post-mortems index](README.md)
+**Next:** [Cutover strategy](../../decide/cutover-strategy.md) | [The parity pattern](../../patterns/06-parity.md) | [Post-mortems index](README.md)

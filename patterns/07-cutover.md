@@ -1,4 +1,4 @@
-# Pattern 06, Cutover / go-live
+# Pattern 07, Cutover / go-live
 
 *Part of the [Lossless Modernization](../README.md) playbook. For choosing big-bang vs parallel-run vs phased in the first place, see [cutover strategy](../decide/cutover-strategy.md). Execution artifacts: the [cutover runbook](../templates/cutover-runbook.md) and [rollback plan](../templates/rollback-plan.md).*
 
@@ -20,7 +20,7 @@ At some point the new system must actually take over. Do it too early and you ri
 
 ## When it applies
 
-- A slice has been built, run in parallel, and appears to be at [parity](./01-parity.md).
+- A slice has been built, run in parallel, and appears to be at [parity](./06-parity.md).
 - Real money, downstream systems, or reporting depend on the outputs about to change hands.
 - The transition needs to be reversible if something unexpected appears.
 
@@ -45,7 +45,7 @@ flowchart LR
 
 Cutover is gated. Verify **all** of the following before flipping any slice live:
 
-1. **Parity proven over the multi-week parallel run.** Not a spot check: sustained agreement across **12+ weeks** and many trading cycles, with only business-agreed differences remaining (see [Pattern 01](./01-parity.md) and the [Parity Harness](./parity-harness-deepdive.md)), compiled in the [parity report](../templates/parity-report.md).
+1. **Parity proven over the multi-week parallel run.** Not a spot check: sustained agreement across **12+ weeks** and many trading cycles, with only business-agreed differences remaining (see [Pattern 06](./06-parity.md) and the [Parity Harness](./parity-harness-deepdive.md)), compiled in the [parity report](../templates/parity-report.md).
 2. **Business + architecture + engineering sign-off.** All three constituencies formally agree the slice is ready. This is the same three-way sign-off that defines "done" for a strangler-fig slice ([Pattern 02](./02-strangler-fig.md)).
 3. **Rollback plan ready.** A concrete, tested path back to the legacy system as source of truth if a problem emerges after cutover, written down as a [rollback plan](../templates/rollback-plan.md) with pre-agreed trigger conditions. A rollback plan that has never been tested is a hope, not a plan.
 4. **Upstream and downstream systems tested and notified.** Every consumer that depends on the outputs has been tested against the new system's outputs and told when the change happens. No downstream system should be surprised.
@@ -108,4 +108,4 @@ The team cuts equity-fund valuation over on a low-volume day, watches the first 
 
 ---
 
-*Previous: [Pattern 05, AI agents in workflows](./05-ai-in-workflows.md) · Next: [Pattern 07, Reliability under an LLM](./07-reliability-under-llm.md) · Templates: [Cutover runbook](../templates/cutover-runbook.md), [Rollback plan](../templates/rollback-plan.md) · Cautionary tale: [TSB Bank](../why-modernizations-fail/post-mortems/tsb-bank.md)*
+*Previous: [Pattern 04, AI agents in workflows](./04-ai-in-workflows.md) · Next: [Pattern 05, Reliability under an LLM](./05-reliability-under-llm.md) · Templates: [Cutover runbook](../templates/cutover-runbook.md), [Rollback plan](../templates/rollback-plan.md) · Cautionary tale: [TSB Bank](../why-modernizations-fail/post-mortems/tsb-bank.md)*

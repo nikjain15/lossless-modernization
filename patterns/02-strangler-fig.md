@@ -23,7 +23,7 @@ A large, monolithic legacy system encodes decades of business logic and cannot g
 - The legacy system is mission-critical and must stay live throughout.
 - The system is large enough that a single cutover would be unmanageably risky.
 - Responsibilities can be carved into slices that can each be proven and cut over independently.
-- You have (or can build) the [parity](./01-parity.md) machinery to prove each slice before it takes over.
+- You have (or can build) the [parity](./06-parity.md) machinery to prove each slice before it takes over.
 
 ## The approach
 
@@ -47,13 +47,13 @@ flowchart LR
 2. **Fan out in parallel.** With the common foundation in place, build the fund-specific logic as parallel workstreams. Because they share the foundation, they do not each reinvent it, and they can progress simultaneously across a distributed team.
 3. **Keep the old system as the source of truth.** New services run **alongside** the legacy system in shadow/parallel mode. The legacy system continues to drive real-world outcomes; the new services' outputs are captured and reconciled, not yet trusted.
 4. **Prove over time.** Each slice runs in parallel for weeks, reconciled against the legacy system via the [parity harness](./parity-harness-deepdive.md), until it has been seen across enough trading cycles and edge cases.
-5. **Cut over slice by slice.** Once a slice is proven, cut it over from old to new (see [Pattern 06](./06-cutover.md)), then move on. The blast radius of any one cutover is one slice, not the whole platform.
+5. **Cut over slice by slice.** Once a slice is proven, cut it over from old to new (see [Pattern 07](./07-cutover.md)), then move on. The blast radius of any one cutover is one slice, not the whole platform.
 
 ### "Done" criteria for a slice
 
 A slice is done only when **all three** hold:
 
-- **Parity threshold** met (per [Pattern 01](./01-parity.md)): outputs reconcile, with only business-agreed differences.
+- **Parity threshold** met (per [Pattern 06](./06-parity.md)): outputs reconcile, with only business-agreed differences.
 - **Time-in-parallel** satisfied: it has run alongside the legacy system long enough to have seen the tail.
 - **Business sign-off** obtained: business, architecture, and engineering agree it is ready.
 
@@ -111,4 +111,4 @@ Sequence the slices deliberately: group them by dependency and risk in a [wave p
 
 ---
 
-*Previous: [Pattern 01, Parity](./01-parity.md) · Next: [Pattern 03, Taming stored procedures](./03-taming-stored-procedures.md) · Decide first: [Rewrite vs strangle vs wrap](../decide/rewrite-vs-strangle-vs-wrap.md) · Template: [Wave plan](../templates/wave-plan.md)*
+*Previous: [Pattern 06, Parity](./06-parity.md) · Next: [Pattern 01, Taming stored procedures](./01-taming-stored-procedures.md) · Decide first: [Rewrite vs strangle vs wrap](../decide/rewrite-vs-strangle-vs-wrap.md) · Template: [Wave plan](../templates/wave-plan.md)*

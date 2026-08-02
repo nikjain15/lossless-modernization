@@ -42,7 +42,7 @@
 
 ## What would have prevented it
 
-- **Independent reconciliation evidence.** A standing reconciliation process comparing system-reported balances against independent records, with every unexplained discrepancy logged as a system defect first and a people problem last. See [the parity pattern](../../patterns/01-parity.md) and the [parity report template](../../templates/parity-report.md), whose accepted-difference log exists precisely to force explanations.
+- **Independent reconciliation evidence.** A standing reconciliation process comparing system-reported balances against independent records, with every unexplained discrepancy logged as a system defect first and a people problem last. See [the parity pattern](../../patterns/06-parity.md) and the [parity report template](../../templates/parity-report.md), whose accepted-difference log exists precisely to force explanations.
 - **A risk register that includes "the system is wrong."** Horizon-style failure requires that nobody with power ever asks the question. A [risk register](../../templates/risk-register.md) with an explicit "system integrity" risk, owned by someone independent of the vendor relationship, changes that.
 - **Defect transparency across the org boundary.** Known-error databases shared between customer and supplier, with contractual disclosure duties. See [RACI template](../../templates/raci.md) for making that ownership explicit.
 
@@ -61,4 +61,4 @@
 - [Hansard, Post Office Horizon Inquiry Report Volume 1, 8 July 2025](https://hansard.parliament.uk/Commons/2025-07-08/debates/25070846000011/PostOfficeHorizonInquiryReportVolume1)
 - [UK Government response to Inquiry Report Volume 1, 2025](https://www.gov.uk/government/publications/government-response-to-the-post-office-horizon-it-inquiry-report-volume-1)
 
-**Next:** [The parity pattern](../../patterns/01-parity.md) | [Risk register template](../../templates/risk-register.md) | [Post-mortems index](README.md)
+**Next:** [The parity pattern](../../patterns/06-parity.md) | [Risk register template](../../templates/risk-register.md) | [Post-mortems index](README.md)

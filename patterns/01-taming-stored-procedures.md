@@ -1,4 +1,4 @@
-# Pattern 03, Taming stored-procedure logic
+# Pattern 01, Taming stored-procedure logic
 
 *Part of the [Lossless Modernization](../README.md) playbook. Features the signature method, see also [legacy-code archaeology](../ai/legacy-archaeology.md). Capture who still understands each procedure in the [legacy knowledge map](../templates/legacy-knowledge-map.md).*
 
@@ -22,7 +22,7 @@ Business-critical logic is trapped inside stored procedures: dense, decades-old,
 
 - Core business logic executes in the database rather than an application tier.
 - The procedures are old, large, and under-documented.
-- Behavior must be preserved to the grain ([parity](./01-parity.md) applies to every extracted rule).
+- Behavior must be preserved to the grain ([parity](./06-parity.md) applies to every extracted rule).
 - The target architecture is meant to scale and evolve, so a straight port of the procedures is not acceptable.
 
 ## The approach
@@ -51,7 +51,7 @@ flowchart TD
 
 ### Where the logic goes
 
-The extracted logic is **distributed into role-based microservices**, each owning a specific responsibility, rather than lifted and shifted as one block. A monolithic procedure that priced, accrued, and posted in one pass becomes (for example) a pricing service, an accrual service, and a posting service, each independently testable, scalable, and [replayable](./04-event-driven-saga.md).
+The extracted logic is **distributed into role-based microservices**, each owning a specific responsibility, rather than lifted and shifted as one block. A monolithic procedure that priced, accrued, and posted in one pass becomes (for example) a pricing service, an accrual service, and a posting service, each independently testable, scalable, and [replayable](./03-event-driven-saga.md).
 
 ### The hardest part
 
@@ -83,7 +83,7 @@ Using a Claude agent, the team extracts each responsibility into a structured de
 - **Dropping "dead-looking" branches.** The weird branch that seems like dead code is often the one encoding a rare but real regulatory case. Investigate before removing.
 - **Skipping the line-by-line read.** Summaries and assumptions miss the edge cases that live in the details, and those are precisely the expensive ones.
 - **Treating comprehension as a one-time task.** As you build, you will discover interactions between procedures; keep re-validating.
-- **Preserving known bugs by reflex.** Some extracted behavior is a genuine legacy bug. Fix or replicate is a conscious, signed-off business decision (see [Pattern 01](./01-parity.md)), not a default.
+- **Preserving known bugs by reflex.** Some extracted behavior is a genuine legacy bug. Fix or replicate is a conscious, signed-off business decision (see [Pattern 06](./06-parity.md)), not a default.
 
 ## Decision framework
 
@@ -106,4 +106,4 @@ Using a Claude agent, the team extracts each responsibility into a structured de
 
 ---
 
-*Previous: [Pattern 02, Strangler-fig](./02-strangler-fig.md) · Next: [Pattern 04, Event-driven & saga](./04-event-driven-saga.md) · Deep-dive: [Legacy-code archaeology](../ai/legacy-archaeology.md) · Template: [Characterization test plan](../templates/characterization-test-plan.md)*
+*Previous: [Pattern 02, Strangler-fig](./02-strangler-fig.md) · Next: [Pattern 03, Event-driven & saga](./03-event-driven-saga.md) · Deep-dive: [Legacy-code archaeology](../ai/legacy-archaeology.md) · Template: [Characterization test plan](../templates/characterization-test-plan.md)*

@@ -1,6 +1,6 @@
 # The Parity Harness, deep-dive
 
-*The signature methodology behind [Pattern 01: Parity](./01-parity.md). This is the machinery that turns "we think the new system is right" into "the business, architecture, and engineering have signed that it is." Its evidence is compiled in the [parity report template](../templates/parity-report.md).*
+*The signature methodology behind [Pattern 06: Parity](./06-parity.md). This is the machinery that turns "we think the new system is right" into "the business, architecture, and engineering have signed that it is." Its evidence is compiled in the [parity report template](../templates/parity-report.md).*
 
 ---
 
@@ -184,7 +184,7 @@ The triage workflow has to distinguish these, because the fix is different in ea
 
 ## The sign-off gates
 
-Parity is not declared by the harness alone; it is *ratified*. A slice becomes eligible for [cutover](./06-cutover.md) only when all of the following hold together:
+Parity is not declared by the harness alone; it is *ratified*. A slice becomes eligible for [cutover](./07-cutover.md) only when all of the following hold together:
 
 - **Parity threshold** met: outputs reconcile, with only documented, business-agreed differences remaining, at both intermediate and final levels.
 - **Time-in-parallel** satisfied: the slice has run alongside the legacy system long enough (12+ weeks in this program) to have seen the tail.
@@ -241,4 +241,4 @@ The harness has independent precedents at every layer, which is worth knowing wh
 
 **Next:** [Flagship case study](../case-studies/flagship-program.md) | [Legacy-code archaeology](../ai/legacy-archaeology.md) | [Parity report template](../templates/parity-report.md)
 
-*Back to [Pattern 01, Parity](./01-parity.md) · Related: [Cutover](./06-cutover.md) · [Cutover strategy](../decide/cutover-strategy.md) · Templates: [Characterization test plan](../templates/characterization-test-plan.md), [Wave plan](../templates/wave-plan.md)*
+*Back to [Pattern 06, Parity](./06-parity.md) · Related: [Cutover](./07-cutover.md) · [Cutover strategy](../decide/cutover-strategy.md) · Templates: [Characterization test plan](../templates/characterization-test-plan.md), [Wave plan](../templates/wave-plan.md)*

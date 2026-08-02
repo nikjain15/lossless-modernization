@@ -1,6 +1,6 @@
-# Pattern 07, Reliability with an LLM in the loop
+# Pattern 05, Reliability with an LLM in the loop
 
-*Part of the [Lossless Modernization](../README.md) playbook. Companion to [Pattern 05: AI agents in workflows](./05-ai-in-workflows.md); the documented limits of LLMs on legacy code live in [AI-era modernization](../ai/README.md).*
+*Part of the [Lossless Modernization](../README.md) playbook. Companion to [Pattern 04: AI agents in workflows](./04-ai-in-workflows.md); the documented limits of LLMs on legacy code live in [AI-era modernization](../ai/README.md).*
 
 ---
 
@@ -16,7 +16,7 @@ The leadership takeaway: you do not make an LLM reliable by making it determinis
 
 ## Problem
 
-You want the leverage of AI agents (Pattern 05) inside a system where a wrong output can move money or corrupt a financial calculation. But LLMs are non-deterministic and can be confidently wrong. How do you keep the system's guarantees intact when part of it is a language model?
+You want the leverage of AI agents (Pattern 04) inside a system where a wrong output can move money or corrupt a financial calculation. But LLMs are non-deterministic and can be confidently wrong. How do you keep the system's guarantees intact when part of it is a language model?
 
 ## When it applies
 
@@ -42,7 +42,7 @@ flowchart TD
 
 Four controls, layered:
 
-1. **The agent only assists; humans approve real actions.** This is the load-bearing control. The LLM drafts, classifies, investigates, and summarizes. It never holds authority over money movement, trade execution, financial-calculation changes, or parity-difference acceptance. Those are human decisions (see [Pattern 05](./05-ai-in-workflows.md)).
+1. **The agent only assists; humans approve real actions.** This is the load-bearing control. The LLM drafts, classifies, investigates, and summarizes. It never holds authority over money movement, trade execution, financial-calculation changes, or parity-difference acceptance. Those are human decisions (see [Pattern 04](./04-ai-in-workflows.md)).
 2. **Deterministic checks / validation on agent output.** Whatever the agent produces is validated by deterministic logic before it feeds anything: schema checks, range and reconciliation checks, invariants that must hold. If the output fails the check, it does not proceed, regardless of how confident the agent sounded.
 3. **Evals / testing of agent behavior.** The agent's behavior is measured against known-good expectations, repeatably, so quality is quantified and regressions are caught. Evals turn "it seemed fine" into evidence.
 4. **Grounding.** Answers are tied to real source data, retrieved rather than recalled. A grounded agent can be checked against its sources; an ungrounded one is guessing. Grounding is what makes both human review and deterministic validation tractable, because there is a source to check against.
@@ -99,4 +99,4 @@ The agent accelerates detection and explanation. The guarantees come from the ch
 
 ---
 
-*Previous: [Pattern 06, Cutover](./06-cutover.md) · Related: [Pattern 05, AI agents in workflows](./05-ai-in-workflows.md) · Landscape: [AI-era modernization](../ai/README.md) · Closing essay: [The Myth-Buster](../MYTH-BUSTER.md)*
+*Previous: [Pattern 07, Cutover](./07-cutover.md) · Related: [Pattern 04, AI agents in workflows](./04-ai-in-workflows.md) · Landscape: [AI-era modernization](../ai/README.md) · Closing essay: [The Myth-Buster](../MYTH-BUSTER.md)*

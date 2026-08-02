@@ -11,7 +11,7 @@ Lossless Modernization is a field playbook for modernizing money-critical legacy
 This is a documentation-only repository. Every file is Markdown, and the whole thing is meant to be read on GitHub.
 
 - `README.md`: the hub. It states the thesis, the myth the playbook busts, the signature moves, the pattern index table, the shareable reference numbers, and the pointers into every other document. Any new pattern must be linked here or it effectively does not exist.
-- `patterns/`: one Markdown file per pattern. Numbered patterns (`01-parity.md` through `07-reliability-under-llm.md`) form the ordered core sequence. The unnumbered `parity-harness-deepdive.md` is a signature deep-dive referenced from the hub and from the relevant numbered patterns. `claude-agents-for-legacy-archaeology.md` is a redirect stub only; the live chapter is `ai/legacy-archaeology.md`.
+- `patterns/`: one Markdown file per pattern. Numbered patterns (`06-parity.md` through `05-reliability-under-llm.md`) form the ordered core sequence. The unnumbered `parity-harness-deepdive.md` is a signature deep-dive referenced from the hub and from the relevant numbered patterns. `claude-agents-for-legacy-archaeology.md` is a redirect stub only; the live chapter is `ai/legacy-archaeology.md`.
 - `GLOSSARY.md`: definitions of the domain terms used across the playbook (parity harness, strangler-fig, idempotent replay, UDA, and so on). New jargon introduced in a pattern belongs here too.
 - `MYTH-BUSTER.md`: the closing essay that argues the central thesis. It is prose, not a pattern, so it does not follow the seven-section format.
 - `LICENSE`: MIT.

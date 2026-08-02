@@ -54,6 +54,10 @@
   .toggle:hover { color:var(--accent); }
   .toggle:focus-visible { outline:2px solid var(--accent); outline-offset:3px; border-radius:4px; }
 
+  .betapill { font-family:var(--mono); font-size:10px; font-weight:700; letter-spacing:.09em; text-transform:uppercase;
+    color:var(--accent); border:1px solid color-mix(in srgb, var(--accent) 45%, transparent); border-radius:4px;
+    padding:1px 5px; margin-left:9px; vertical-align:2px; }
+
   /* hero */
   .hero { padding:clamp(64px,10vw,116px) 0 clamp(44px,7vw,76px); }
   .hero h1 { font-size:clamp(34px,5.4vw,62px); font-weight:800; line-height:1.04; letter-spacing:-.03em;
@@ -118,6 +122,11 @@
   @media (max-width:860px){ .stats { grid-template-columns:1fr; } }
   .stat-note { margin-top:20px; font-size:15.5px; color:var(--muted); max-width:70ch; }
   .stat-note b { color:var(--ink); }
+  .stat-note a { color:var(--accent); font-weight:650; border-bottom:1px solid color-mix(in srgb, var(--accent) 40%, transparent); }
+  .stat-note a:hover { border-bottom-color:var(--accent); }
+  .sourceline { margin-top:30px; font-size:13.5px; line-height:1.55; color:var(--faint); max-width:none; }
+  .sourceline a { color:var(--muted); border-bottom:1px solid var(--line-2); transition:color .15s, border-color .15s; }
+  .sourceline a:hover { color:var(--accent); border-color:var(--accent); }
 
   /* thesis */
   .thesis-quote { margin-top:40px; border-left:3px solid var(--accent); padding:6px 0 6px 24px; }
@@ -139,15 +148,21 @@
   .flowline { margin-top:38px; font-size:clamp(21px,2.7vw,32px); font-weight:800; letter-spacing:-.02em; line-height:1.3; }
   .flowline .ar { color:var(--accent); margin:0 9px; }
   .flowline .gov { display:block; font-size:16px; font-weight:400; color:var(--muted); letter-spacing:0; margin-top:12px; max-width:70ch; }
-  .acts { margin-top:36px; }
-  .act { display:grid; grid-template-columns:200px 1fr; gap:30px; padding:26px 0; border-top:1px solid var(--line); }
-  .act:first-child { border-top:0; padding-top:6px; }
-  @media (max-width:800px){ .act { grid-template-columns:1fr; gap:14px; } }
-  .act .st { font-family:var(--mono); font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--accent); }
-  .act .q { font-size:18px; font-weight:750; letter-spacing:-.015em; margin-top:6px; line-height:1.3; }
-  .act .n { font-size:13.5px; color:var(--faint); margin-top:6px; }
-  .act .items { display:grid; grid-template-columns:1fr 1fr; gap:18px 30px; }
-  @media (max-width:620px){ .act .items { grid-template-columns:1fr; } }
+  .colkeys { margin-top:34px; display:grid; grid-template-columns:210px 1fr 1fr; gap:34px;
+    padding-bottom:9px; border-bottom:1px solid var(--line-2); }
+  .colkeys .ck { font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--faint); }
+  @media (max-width:900px){ .colkeys { display:none; } }
+  .acts { margin-top:0; }
+  .act { display:grid; grid-template-columns:210px 1fr 1fr; gap:34px; padding:30px 0;
+    border-bottom:1px solid var(--line); align-items:start; }
+  @media (max-width:900px){ .act { grid-template-columns:1fr; gap:20px; } }
+  .stagehd .sicon { width:32px; height:32px; border-radius:9px; display:flex; align-items:center; justify-content:center;
+    background:color-mix(in srgb, var(--accent) 12%, transparent); margin-bottom:12px; flex:none; }
+  .stagehd .sicon svg { width:17px; height:17px; color:var(--accent); flex:none; }
+  .act .st { font-family:var(--mono); font-size:11.5px; letter-spacing:.09em; text-transform:uppercase; color:var(--accent); }
+  .act .q { font-size:17.5px; font-weight:750; letter-spacing:-.015em; margin-top:5px; line-height:1.28; }
+  .act .n { font-size:13.5px; color:var(--faint); margin-top:5px; }
+  .col { display:flex; flex-direction:column; gap:20px; }
 
   /* clustered inventory */
   .cl { margin-top:38px; }
@@ -163,13 +178,7 @@
   .it .nm { font-size:18px; font-weight:700; letter-spacing:-.015em; margin-top:4px; line-height:1.25; }
   .it .ds { font-size:14.5px; color:var(--muted); margin-top:5px; line-height:1.5; }
   .it:hover .nm { color:var(--accent); }
-  .it.soon .nm { color:var(--muted); }
   .it.soon { cursor:default; }
-  .soonbadge { display:inline-block; font-family:var(--mono); font-size:10px; letter-spacing:.06em;
-    text-transform:uppercase; color:var(--faint); border:1px solid var(--line-2); border-radius:4px;
-    padding:1px 5px; margin-left:7px; vertical-align:1.5px; }
-  .it.soon .soonbadge { margin-left:0; margin-top:7px; }
-  .soontext { color:var(--muted); }
   .it .mt { display:block; font-family:var(--mono); font-size:12px; color:var(--accent); margin-top:6px; }
 
   /* role paths */
@@ -215,20 +224,32 @@
   .rd .n { font-size:16.5px; font-weight:700; letter-spacing:-.01em; margin-top:5px; }
   .rd .d { font-size:14px; color:var(--muted); margin-top:4px; line-height:1.5; }
 
+  .uses { margin-top:44px; display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+  @media (max-width:900px){ .uses { grid-template-columns:1fr; } }
+  .use { display:block; border:1px solid var(--line); border-radius:12px; padding:22px 24px; background:var(--panel);
+    transition:border-color .2s; }
+  .use:hover { border-color:color-mix(in srgb, var(--accent) 50%, var(--line)); }
+  .uicon { width:34px; height:34px; border-radius:9px; display:flex; align-items:center; justify-content:center;
+    background:color-mix(in srgb, var(--accent) 12%, transparent); margin-bottom:14px; }
+  .uicon svg { width:18px; height:18px; color:var(--accent); }
+  .ut { font-size:18px; font-weight:750; letter-spacing:-.015em; }
+  .ud { font-size:14.5px; color:var(--muted); margin-top:7px; line-height:1.55; }
+  .ugo { font-size:14px; font-weight:700; color:var(--accent); margin-top:14px; }
+
   footer { border-top:1px solid var(--line); padding:36px 0 60px; font-size:14px; color:var(--faint); }
   footer a { color:var(--muted); } footer a:hover { color:var(--accent); }
   footer .row { display:flex; flex-wrap:wrap; gap:8px 20px; }
+  footer .footnav { padding-bottom:16px; margin-bottom:16px; border-bottom:1px solid var(--line); }
+  footer .footnav a { color:var(--ink); font-weight:600; font-size:14.5px; }
+  footer .footnav a:hover { color:var(--accent); }
   footer .disclaim { margin-top:14px; max-width:76ch; line-height:1.6; }
 </style>
 </head>
 <body>
 <nav><div class="nav-in">
-  <a class="brand" href="#"><span class="sq"></span>Lossless Modernization</a>
+  <a class="brand" href="#"><span class="sq"></span>Lossless Modernization<span class="betapill">beta</span></a>
   <div class="nav-links">
-    <a class="hide-sm" href="#journey">The journey</a>
     <a class="hide-sm" href="#how">How to do it</a>
-    <a class="hide-sm" href="#fail">Why it fails</a>
-    <a class="hide-sm" href="#produce">Templates</a>
     <a class="hide-sm" href="#start">Start here</a>
     <a href="https://github.com/nikjain15/lossless-modernization">GitHub</a>
     <button class="toggle" id="themeToggle" aria-label="Toggle theme">◐</button>
@@ -240,10 +261,10 @@
   <h1>From thirty-year-old legacy to an <span class="o">AI-native platform.</span></h1>
   <p class="sub1">Without dropping a cent. The playbook for modernizing systems that cannot be allowed to break.</p>
   <div class="facts">
-    <div class="fact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/></svg><div><b>12 failure categories</b><span>the sourced taxonomy of why programs die</span></div></div>
-    <div class="fact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 20V10M18 20V4M6 20v-4"/></svg><div><b>8 public post-mortems</b><span>named, costed, each mapped to the fix</span></div></div>
-    <div class="fact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 8-8M21 12v7H3V5h13"/></svg><div><b>7 patterns, 12 templates</b><span>what a program actually has to produce</span></div></div>
-    <div class="fact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg><div><b>Agents in the workflow</b><span>an AI-native target, proven value by value</span></div></div>
+    <div class="fact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 9h16M4 15h16"/></svg><div><b>Parity, proven value by value</b><span>every record reconciled at intermediate and final stages, nothing sampled</span></div></div>
+    <div class="fact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20.5 20.5L16 16"/></svg><div><b>AI recovers the lost intent</b><span>agents read undocumented logic, humans ratify every rule</span></div></div>
+    <div class="fact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg><div><b>Agents in the workflow</b><span>the target is AI-native and event-driven, not merely cloud-hosted</span></div></div>
+    <div class="fact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 10l2.5 2.5L8 15M13.5 15H16"/></svg><div><b>Built to be run, not just read</b><span>skills and an MCP server so your own agent can work the playbook</span></div></div>
   </div>
   <div class="cta-row">
     <a class="btn btn-primary" href="https://github.com/nikjain15/lossless-modernization">Read the playbook on GitHub →</a>
@@ -283,8 +304,7 @@
         <li><b>Shadow rules brought inside</b> and governed like the code they always were</li>
         <li><b>Agents in the workflow</b>, removing manual toil under guardrails that survive an audit</li>
       </ul>
-    </div>
-  </div>
+    </div></div>
 </div></section>
 
 <!-- ===== THESIS ===== -->
@@ -304,10 +324,9 @@
     </div>
     <div class="claim">
       <div class="h">AI translates. Evidence certifies.</div>
-      <div class="b">Agents are genuinely good at recovering what undocumented code does, and that is where they belong. What proves the new system is right is running both and comparing every value, not a model's confidence.</div>
-    </div>
+      <div class="b">Agents are genuinely good at recovering what undocumented code does, and that is where they belong. What proves the new system is right is running both and comparing every value, not a model's confidence.</div></div>
   </div>
-  <p class="stat-note">Independent confirmation, from four directions: <a href="https://cloud.google.com/blog/products/infrastructure-modernization/dual-run-by-google-cloud-helps-mitigate-mainframe-migration-risks">Google built Dual Run</a> to certify mainframe parity on live traffic, <a href="https://www.gov.uk/service-manual/technology/moving-away-from-legacy-systems">UK GDS mandates</a> dark-launch comparison testing, <a href="https://www.mechanical-orchard.com/platform">Mechanical Orchard</a> sells behavior-first equivalence proof, and <a href="https://understandlegacycode.com/blog/key-points-of-working-effectively-with-legacy-code/">Michael Feathers</a> taught us to pin behavior with characterization tests two decades ago.</p>
+  <p class="sourceline">Independent confirmation, from four directions: <a href="https://cloud.google.com/blog/products/infrastructure-modernization/dual-run-by-google-cloud-helps-mitigate-mainframe-migration-risks">Google built Dual Run</a> to certify mainframe parity on live traffic, <a href="https://www.gov.uk/service-manual/technology/moving-away-from-legacy-systems">UK GDS mandates</a> dark-launch comparison testing, <a href="https://www.mechanical-orchard.com/platform">Mechanical Orchard</a> sells behavior-first equivalence proof, and <a href="https://understandlegacycode.com/blog/key-points-of-working-effectively-with-legacy-code/">Michael Feathers</a> taught us to pin behavior with characterization tests two decades ago.</p>
 </div></section>
 
 <!-- ===== HOW TO DO IT ===== -->
@@ -321,51 +340,48 @@
     Understand<span class="ar">&rarr;</span>Rebuild<span class="ar">&rarr;</span>Prove<span class="ar">&rarr;</span>Switch
     <span class="gov">Parity is numbered 01 in the repo because it governs all four stages, not because it happens first.</span>
   </div>
+  <div class="colkeys"><div></div><div class="ck">The pattern</div><div class="ck">Supporting material</div></div>
   <div class="acts">
     <div class="act">
-      <div>
-        <div class="st">Stage 01</div>
-        <div class="q">Understand what you actually have</div>
-        <div class="n">Nothing downstream is safe until this is done</div>
+      <div class="stagehd"><div class="sicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20.5 20.5L16 16"/></svg></div><div class="st">Stage 01</div><div class="q">Understand what you have</div><div class="n">nothing downstream is safe first</div></div>
+      <div class="col">
+        <div class="it soon"><div class="ix">Pattern 01</div><div class="nm">Get the rules out of the database</div><div class="ds">Logic executing in the data layer for decades</div></div>
       </div>
-      <div class="items">
-        <div class="it soon"><div class="ix">Pattern 03</div><div class="nm">Get the rules out of the database</div><div class="ds">Thirty years of business logic executing in the data layer</div><span class="soonbadge">soon</span></div>
-        <a class="it" href="https://github.com/nikjain15/lossless-modernization/blob/main/ai/legacy-archaeology.md"><div class="ix">Deep-dive</div><div class="nm">Legacy-code archaeology</div><div class="ds">AI agents recover intent nobody alive can explain, humans hold every sign-off</div></a>
-      </div>
-    </div>
-    <div class="act">
-      <div>
-        <div class="st">Stage 02</div>
-        <div class="q">Rebuild it as something modern</div>
-        <div class="n">Where the destination gets built</div>
-      </div>
-      <div class="items">
-        <div class="it soon"><div class="ix">Pattern 02</div><div class="nm">Replace it piece by piece</div><div class="ds">Strangler-fig, so there is never one irreversible moment</div><span class="soonbadge">soon</span></div>
-        <div class="it soon"><div class="ix">Pattern 04</div><div class="nm">Move off overnight batch</div><div class="ds">Events and sagas where global rollback used to be</div><span class="soonbadge">soon</span></div>
-        <div class="it soon"><div class="ix">Pattern 05</div><div class="nm">Put agents on real money</div><div class="ds">Agentic workflows with guardrails that hold up in an audit</div><span class="soonbadge">soon</span></div>
-        <div class="it soon"><div class="ix">Pattern 07</div><div class="nm">Make non-determinism safe</div><div class="ds">Reliability when part of your system is an LLM</div><span class="soonbadge">soon</span></div>
+      <div class="col">
+        <a class="it" href="https://github.com/nikjain15/lossless-modernization/blob/main/ai/legacy-archaeology.md"><div class="ix">Deep-dive</div><div class="nm">Legacy-code archaeology</div><div class="ds">Agents recover intent, humans ratify it</div></a>
+        <div class="it soon"><div class="ix">Decision tree</div><div class="nm">Choose your strategy per app</div><div class="ds">The 7Rs and TIME, as a walkable tree</div></div>
       </div>
     </div>
     <div class="act">
-      <div>
-        <div class="st">Stage 03</div>
-        <div class="q">Prove it is right</div>
-        <div class="n">The stage everyone underestimates</div>
+      <div class="stagehd"><div class="sicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l3-7 4 14 3-7h4"/></svg></div><div class="st">Stage 02</div><div class="q">Rebuild it as something modern</div><div class="n">where the destination gets built</div></div>
+      <div class="col">
+        <div class="it soon"><div class="ix">Pattern 02</div><div class="nm">Replace it piece by piece</div><div class="ds">Never one irreversible moment</div></div>
+        <div class="it soon"><div class="ix">Pattern 03</div><div class="nm">Move off overnight batch</div><div class="ds">Events and sagas, intraday</div></div>
+        <div class="it soon"><div class="ix">Pattern 04</div><div class="nm">Put agents on real money</div><div class="ds">Guardrails that survive an audit</div></div>
+        <div class="it soon"><div class="ix">Pattern 05</div><div class="nm">Make non-determinism safe</div><div class="ds">When part of the system is an LLM</div></div>
       </div>
-      <div class="items">
-        <div class="it soon"><div class="ix">Pattern 01</div><div class="nm">Prove the numbers match</div><div class="ds">Parity as a contract nobody is allowed to renegotiate</div><span class="soonbadge">soon</span></div>
-        <a class="it" href="https://github.com/nikjain15/lossless-modernization/blob/main/patterns/parity-harness-deepdive.md"><div class="ix">Deep-dive</div><div class="nm">The parity harness</div><div class="ds">Value by value at every level, including the reports and spreadsheets</div></a>
+      <div class="col">
+        <div class="it soon"><div class="ix">Decision tree</div><div class="nm">Rewrite, strangle, or wrap?</div><div class="ds">The core decision, with tradeoffs</div></div>
       </div>
     </div>
     <div class="act">
-      <div>
-        <div class="st">Stage 04</div>
-        <div class="q">Switch over</div>
-        <div class="n">Anticlimactic, if the first three were done</div>
+      <div class="stagehd"><div class="sicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 9h16M4 15h16"/></svg></div><div class="st">Stage 03</div><div class="q">Prove it is right</div><div class="n">the stage everyone underestimates</div></div>
+      <div class="col">
+        <div class="it soon"><div class="ix">Pattern 06</div><div class="nm">Prove the numbers match</div><div class="ds">A contract nobody may renegotiate</div></div>
       </div>
-      <div class="items">
-        <div class="it soon"><div class="ix">Pattern 06</div><div class="nm">Switch over without drama</div><div class="ds">A promotion of evidence, not a leap of faith</div><span class="soonbadge">soon</span></div>
-        <div class="it soon"><div class="ix">Decision tree</div><div class="nm">Choose your cutover style</div><div class="ds">Big-bang, parallel run, or phased, with TSB as the cautionary anchor</div><span class="soonbadge">soon</span></div>
+      <div class="col">
+        <a class="it" href="https://github.com/nikjain15/lossless-modernization/blob/main/patterns/parity-harness-deepdive.md"><div class="ix">Deep-dive</div><div class="nm">The parity harness</div><div class="ds">Every value, including reports and spreadsheets</div></a>
+        <div class="it soon"><div class="ix">Template</div><div class="nm">Parity report</div><div class="ds">Evidence plus the accepted-difference log</div></div>
+      </div>
+    </div>
+    <div class="act">
+      <div class="stagehd"><div class="sicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg></div><div class="st">Stage 04</div><div class="q">Switch over</div><div class="n">anticlimactic, if the first three were done</div></div>
+      <div class="col">
+        <div class="it soon"><div class="ix">Pattern 07</div><div class="nm">Switch over without drama</div><div class="ds">A promotion of evidence, not a leap</div></div>
+      </div>
+      <div class="col">
+        <div class="it soon"><div class="ix">Decision tree</div><div class="nm">Choose your cutover style</div><div class="ds">Big-bang, parallel run, or phased</div></div>
+        <div class="it soon"><div class="ix">Template</div><div class="nm">Cutover runbook</div><div class="ds">Owned steps, a rollback trigger on each</div></div>
       </div>
     </div>
   </div>
@@ -386,87 +402,50 @@
       <div class="src">vFunction/Wakefield, 2022 →</div>
     </a>
     <a class="stat" href="https://www.techmonitor.ai/leadership/digital-transformation/slaughter-and-may-tsb">
-      <div class="big">~£1B</div>
+      <div class="big">~$1.3B</div>
       <div class="t">TSB's big-bang migration</div>
-      <div class="d">The core banking cutover cost roughly £1B, and the CEO's job.</div>
+      <div class="d">The core banking cutover cost roughly £1B, about $1.3B, and the CEO's job.</div>
       <div class="src">Slaughter and May review, 2019 →</div>
     </a>
     <a class="stat" href="https://cabinet.qld.gov.au/documents/2013/aug/health%20payroll%20response/Attachments/Report.pdf">
       <div class="big">~200x</div>
       <div class="t">Queensland Health overrun</div>
-      <div class="d">A payroll replacement planned at AU$6.2M ran to AU$1.2B+.</div>
+      <div class="d">A payroll replacement planned at about $4M ran past $900M (AU$6.2M to AU$1.2B+).</div>
       <div class="src">Commission of Inquiry, 2013 →</div>
     </a>
   </div>
-  <p class="stat-note">These are not failures of technology. They are failures of <b>understanding, verification, and cutover discipline</b>, which is what the twelve categories below are organized around.</p>
+  <p class="stat-note">These are not failures of technology. They are failures of <b>understanding, verification, and cutover discipline</b>, which is what the twelve categories below are organized around. Eight of them are written up in full: <a href="post-mortems.html">read the post-mortem library →</a></p>
 
   <div class="cl"><div class="cl-hd"><span class="st">Understanding the old system</span><span class="gl">the comprehension bottleneck</span></div>
     <div class="items">
-      <div class="it soon"><div class="ix">01</div><div class="nm">Nobody knows how it works</div><div class="ds">Decades of undocumented logic, and the authors are long gone</div><span class="soonbadge">soon</span></div>
-      <div class="it soon"><div class="ix">02</div><div class="nm">The people who knew have left</div><div class="ds">A skills cliff, and the survivors are already fully booked</div><span class="soonbadge">soon</span></div>
+      <div class="it soon"><div class="ix">01</div><div class="nm">Nobody knows how it works</div><div class="ds">Decades of undocumented logic, and the authors are long gone</div></div>
+      <div class="it soon"><div class="ix">02</div><div class="nm">The people who knew have left</div><div class="ds">A skills cliff, and the survivors are already fully booked</div></div>
     </div>
   </div>
   <div class="cl"><div class="cl-hd"><span class="st">Proving correctness</span><span class="gl">where money-critical programs actually die</span></div>
     <div class="items">
-      <div class="it soon"><div class="ix">03</div><div class="nm">The numbers do not match</div><div class="ds">Data moved cleanly and quietly stopped meaning the same thing</div><span class="soonbadge">soon</span></div>
-      <div class="it soon"><div class="ix">04</div><div class="nm">We cannot prove it is right</div><div class="ds">Plenty of testing, no evidence anyone will sign</div><span class="soonbadge">soon</span></div>
+      <div class="it soon"><div class="ix">03</div><div class="nm">The numbers do not match</div><div class="ds">Data moved cleanly and quietly stopped meaning the same thing</div></div>
+      <div class="it soon"><div class="ix">04</div><div class="nm">We cannot prove it is right</div><div class="ds">Plenty of testing, no evidence anyone will sign</div></div>
     </div>
   </div>
   <div class="cl"><div class="cl-hd"><span class="st">Execution and architecture</span><span class="gl">self-inflicted damage</span></div>
     <div class="items">
-      <div class="it soon"><div class="ix">05</div><div class="nm">One weekend, no way back</div><div class="ds">Big-bang switching, with a rollback nobody rehearsed</div><span class="soonbadge">soon</span></div>
-      <div class="it soon"><div class="ix">07</div><div class="nm">Starting over never finishes</div><div class="ds">The rewrite trap, and why it always feels like the rational choice</div><span class="soonbadge">soon</span></div>
-      <div class="it soon"><div class="ix">10</div><div class="nm">Microservices you did not need</div><div class="ds">Over-modernization, and the quiet retreat back to a monolith</div><span class="soonbadge">soon</span></div>
+      <div class="it soon"><div class="ix">05</div><div class="nm">One weekend, no way back</div><div class="ds">Big-bang switching, with a rollback nobody rehearsed</div></div>
+      <div class="it soon"><div class="ix">07</div><div class="nm">Starting over never finishes</div><div class="ds">The rewrite trap, and why it always feels like the rational choice</div></div>
+      <div class="it soon"><div class="ix">10</div><div class="nm">Microservices you did not need</div><div class="ds">Over-modernization, and the quiet retreat back to a monolith</div></div>
     </div>
   </div>
   <div class="cl"><div class="cl-hd"><span class="st">Money, politics and people</span><span class="gl">not technology problems at all</span></div>
     <div class="items">
-      <div class="it soon"><div class="ix">06</div><div class="nm">It costs many times the estimate</div><div class="ds">Escalation by an order of magnitude, and the structural reasons</div><span class="soonbadge">soon</span></div>
-      <div class="it soon"><div class="ix">08</div><div class="nm">Nobody owns the outcome</div><div class="ds">Accountability spread thin enough that no one can be wrong</div><span class="soonbadge">soon</span></div>
-      <div class="it soon"><div class="ix">09</div><div class="nm">A vendor ends up owning your core</div><div class="ds">Handing away the one capability you cannot buy back</div><span class="soonbadge">soon</span></div>
+      <div class="it soon"><div class="ix">06</div><div class="nm">It costs many times the estimate</div><div class="ds">Escalation by an order of magnitude, and the structural reasons</div></div>
+      <div class="it soon"><div class="ix">08</div><div class="nm">Nobody owns the outcome</div><div class="ds">Accountability spread thin enough that no one can be wrong</div></div>
+      <div class="it soon"><div class="ix">09</div><div class="nm">A vendor ends up owning your core</div><div class="ds">Handing away the one capability you cannot buy back</div></div>
     </div>
   </div>
   <div class="cl"><div class="cl-hd"><span class="st">The modern era</span><span class="gl">new answers, new ways to be wrong</span></div>
     <div class="items">
-      <div class="it soon"><div class="ix">11</div><div class="nm">What AI genuinely cannot do</div><div class="ds">Documented limits, and the tasks agents quietly fail at</div><span class="soonbadge">soon</span></div>
-      <div class="it soon"><div class="ix">12</div><div class="nm">Doing nothing is a decision too</div><div class="ds">Deferral has a bill, and it arrives without warning</div><span class="soonbadge">soon</span></div>
-    </div>
-  </div>
-</div></section>
-
-<!-- ===== POST-MORTEMS ===== -->
-<section id="public"><div class="wrap">
-  <div class="sechead">
-    <div><div class="eyebrow">What went wrong, in public</div>
-    <h2 class="sec-title">Eight failures. <span class="o">Named, costed, sourced.</span></h2></div>
-    <p class="sec-lede">Grouped by the mistake, so the pattern is visible before you read a single case. Every figure links to a primary source.</p>
-  </div>
-  <div class="cl"><div class="cl-hd"><span class="st">Went live before it was proven</span><span class="gl">three of the eight</span></div>
-    <div class="items">
-      <div class="it soon"><div class="nm">TSB Bank</div><div class="ds">5.2 million customers moved in one weekend, with no tested way back</div><span class="mt">~£1B · UK · 2018</span><span class="soonbadge">soon</span></div>
-      <div class="it soon"><div class="nm">Queensland Health</div><div class="ds">Ten aborted attempts, then go-live carrying 2,422 known defects</div><span class="mt">AU$6.2M → $1.2B · 2010</span><span class="soonbadge">soon</span></div>
-      <div class="it soon"><div class="nm">HealthCare.gov</div><div class="ds">End-to-end testing compressed from months into weeks by a fixed date</div><span class="mt">$464M → $824M · 2013</span><span class="soonbadge">soon</span></div>
-    </div>
-  </div>
-  <div class="cl"><div class="cl-hd"><span class="st">Rebuilt from scratch</span><span class="gl">the rewrite trap, at federal scale</span></div>
-    <div class="items">
-      <div class="it soon"><div class="nm">FBI Virtual Case File</div><div class="ds">Requirements churned for five years and nothing ever deployed</div><span class="mt">$170M scrapped · 2005</span><span class="soonbadge">soon</span></div>
-    </div>
-  </div>
-  <div class="cl"><div class="cl-hd"><span class="st">Assumed the data meant the same thing</span><span class="gl">a semantic mismatch, not a technical one</span></div>
-    <div class="items">
-      <div class="it soon"><div class="nm">Lidl SAP</div><div class="ds">One system keyed on purchase price, the other on retail price</div><span class="mt">~€500M written off · 2018</span><span class="soonbadge">soon</span></div>
-    </div>
-  </div>
-  <div class="cl"><div class="cl-hd"><span class="st">Governance failed the system</span><span class="gl">the humans, not the software</span></div>
-    <div class="items">
-      <div class="it soon"><div class="nm">Post Office Horizon</div><div class="ds">An institution prosecuted its own staff rather than doubt its software</div><span class="mt">~900 wrongful prosecutions</span><span class="soonbadge">soon</span></div>
-      <div class="it soon"><div class="nm">Birmingham City Council</div><div class="ds">Customisation broke core accounting and helped bankrupt a city</div><span class="mt">£19M → £144M+ · 2022</span><span class="soonbadge">soon</span></div>
-    </div>
-  </div>
-  <div class="cl"><div class="cl-hd"><span class="st">Waited too long</span><span class="gl">the cost of not acting</span></div>
-    <div class="items">
-      <div class="it soon"><div class="nm">California EDD</div><div class="ds">A deferred COBOL estate met a once-in-a-century load spike</div><span class="mt">~$20B fraud · 2020</span><span class="soonbadge">soon</span></div>
+      <div class="it soon"><div class="ix">11</div><div class="nm">What AI genuinely cannot do</div><div class="ds">Documented limits, and the tasks agents quietly fail at</div></div>
+      <div class="it soon"><div class="ix">12</div><div class="nm">Doing nothing is a decision too</div><div class="ds">Deferral has a bill, and it arrives without warning</div></div>
     </div>
   </div>
 </div></section>
@@ -480,34 +459,34 @@
   </div>
   <div class="cl"><div class="cl-hd"><span class="st">Inventory and assess</span><span class="gl">before any decision is defensible</span></div>
     <div class="items">
-      <div class="it soon"><div class="ix">01</div><div class="nm">Application inventory</div><div class="ds">Every app, its disposition, and the person accountable for it</div><span class="soonbadge">soon</span></div>
-      <div class="it soon"><div class="ix">02</div><div class="nm">Legacy knowledge map</div><div class="ds">The people who hold what nobody ever wrote down</div><span class="soonbadge">soon</span></div>
-      <div class="it soon"><div class="ix">03</div><div class="nm">Risk register</div><div class="ds">Scored and owned, rather than remembered in a meeting</div><span class="soonbadge">soon</span></div>
-      <div class="it soon"><div class="ix">04</div><div class="nm">Dependency map</div><div class="ds">What breaks the moment this thing moves</div><span class="soonbadge">soon</span></div>
+      <div class="it soon"><div class="ix">01</div><div class="nm">Application inventory</div><div class="ds">Every app, its disposition, and the person accountable for it</div></div>
+      <div class="it soon"><div class="ix">02</div><div class="nm">Legacy knowledge map</div><div class="ds">The people who hold what nobody ever wrote down</div></div>
+      <div class="it soon"><div class="ix">03</div><div class="nm">Risk register</div><div class="ds">Scored and owned, rather than remembered in a meeting</div></div>
+      <div class="it soon"><div class="ix">04</div><div class="nm">Dependency map</div><div class="ds">What breaks the moment this thing moves</div></div>
     </div>
   </div>
   <div class="cl"><div class="cl-hd"><span class="st">Decide</span><span class="gl">and leave a trace of why</span></div>
     <div class="items">
-      <div class="it soon"><div class="ix">05</div><div class="nm">Business case</div><div class="ds">The money argument, directional first and detailed later</div><span class="soonbadge">soon</span></div>
-      <div class="it soon"><div class="ix">06</div><div class="nm">ADR</div><div class="ds">One decision, one page, still findable in two years</div><span class="soonbadge">soon</span></div>
+      <div class="it soon"><div class="ix">05</div><div class="nm">Business case</div><div class="ds">The money argument, directional first and detailed later</div></div>
+      <div class="it soon"><div class="ix">06</div><div class="nm">ADR</div><div class="ds">One decision, one page, still findable in two years</div></div>
     </div>
   </div>
   <div class="cl"><div class="cl-hd"><span class="st">Plan the waves</span><span class="gl">nothing moves without criteria</span></div>
     <div class="items">
-      <div class="it soon"><div class="ix">07</div><div class="nm">Wave plan</div><div class="ds">Which populations move when, and what must be true first</div><span class="soonbadge">soon</span></div>
-      <div class="it soon"><div class="ix">08</div><div class="nm">RACI</div><div class="ds">One accountable name per workstream, not a committee</div><span class="soonbadge">soon</span></div>
+      <div class="it soon"><div class="ix">07</div><div class="nm">Wave plan</div><div class="ds">Which populations move when, and what must be true first</div></div>
+      <div class="it soon"><div class="ix">08</div><div class="nm">RACI</div><div class="ds">One accountable name per workstream, not a committee</div></div>
     </div>
   </div>
   <div class="cl"><div class="cl-hd"><span class="st">Prove parity</span><span class="gl">the evidence three people will sign</span></div>
     <div class="items">
-      <div class="it soon"><div class="ix">09</div><div class="nm">Characterization test plan</div><div class="ds">Pin what the old system does today, before touching it</div><span class="soonbadge">soon</span></div>
-      <div class="it soon"><div class="ix">10</div><div class="nm">Parity report</div><div class="ds">Match rates, open discrepancies, and every signed exception</div><span class="soonbadge">soon</span></div>
+      <div class="it soon"><div class="ix">09</div><div class="nm">Characterization test plan</div><div class="ds">Pin what the old system does today, before touching it</div></div>
+      <div class="it soon"><div class="ix">10</div><div class="nm">Parity report</div><div class="ds">Match rates, open discrepancies, and every signed exception</div></div>
     </div>
   </div>
   <div class="cl"><div class="cl-hd"><span class="st">Cut over</span><span class="gl">rehearsed, reversible, owned</span></div>
     <div class="items">
-      <div class="it soon"><div class="ix">11</div><div class="nm">Cutover runbook</div><div class="ds">Minute by minute, with a rollback trigger on every step</div><span class="soonbadge">soon</span></div>
-      <div class="it soon"><div class="ix">12</div><div class="nm">Rollback plan</div><div class="ds">Abort criteria agreed before anyone is under pressure</div><span class="soonbadge">soon</span></div>
+      <div class="it soon"><div class="ix">11</div><div class="nm">Cutover runbook</div><div class="ds">Minute by minute, with a rollback trigger on every step</div></div>
+      <div class="it soon"><div class="ix">12</div><div class="nm">Rollback plan</div><div class="ds">Abort criteria agreed before anyone is under pressure</div></div>
     </div>
   </div>
 </div></section>
@@ -521,34 +500,34 @@
   </div>
   <div class="roles">
     <div class="role">
-      <div class="who">CTO / engineering leader</div>
+      <div class="who">Program / product leader</div>
       <div class="hr">1 hour</div>
       <ol>
-        <li>Start with <span class="soontext">Why programs fail <span class="soonbadge">soon</span></span></li>
-        <li>Then <span class="soontext">Cutover strategy <span class="soonbadge">soon</span></span></li>
-        <li>Go deeper with <span class="soontext">Learning paths <span class="soonbadge">soon</span></span></li>
+        <li>Start with <a href="post-mortems.html">what went wrong in public</a>, so you know the shapes to avoid</li>
+        <li>Then the business case and the wave plan: what you are funding, and what moves when</li>
+        <li>Score yourself against the readiness scorecard before committing a date</li>
       </ol>
     </div>
     <div class="role">
-      <div class="who">Architect</div>
+      <div class="who">CTO / executive sponsor</div>
       <div class="hr">1 hour</div>
       <ol>
-        <li>Start with <span class="soontext">Rewrite vs strangle vs wrap <span class="soonbadge">soon</span></span></li>
-        <li>Then <span class="soontext">The program lifecycle <span class="soonbadge">soon</span></span></li>
-        <li>Go deeper with <span class="soontext">Learning paths <span class="soonbadge">soon</span></span></li>
+        <li>Start with why programs fail, the twelve sourced categories</li>
+        <li>Then cutover strategy, which is where the money is lost in a weekend</li>
+        <li>Read the <a href="https://github.com/nikjain15/lossless-modernization/blob/main/case-studies/flagship-program.md">flagship case study</a> for what a defensible program looks like</li>
       </ol>
     </div>
     <div class="role">
-      <div class="who">Hands-on engineer</div>
+      <div class="who">Engineering and hands-on leader</div>
       <div class="hr">1 hour</div>
       <ol>
-        <li>Start with <span class="soontext">Parity <span class="soonbadge">soon</span></span></li>
-        <li>Then <a href="https://github.com/nikjain15/lossless-modernization/blob/main/patterns/parity-harness-deepdive.md">The parity harness</a></li>
-        <li>Go deeper with <span class="soontext">Learning paths <span class="soonbadge">soon</span></span></li>
+        <li>Start with <a href="https://github.com/nikjain15/lossless-modernization/blob/main/ai/legacy-archaeology.md">legacy-code archaeology</a>: recover the rules before you touch anything</li>
+        <li>Then <a href="https://github.com/nikjain15/lossless-modernization/blob/main/patterns/parity-harness-deepdive.md">the parity harness</a>, the machinery that proves you got it right</li>
+        <li>Then the templates you will actually fill: characterization tests, parity report, runbook</li>
       </ol>
     </div>
   </div>
-  <p class="mirror">Any role, honest look in the mirror: the <span class="soontext">readiness scorecard <span class="soonbadge">soon</span></span>. One hour, 12 categories, no mercy.</p>
+  <p class="mirror">Any role, honest look in the mirror: the readiness scorecard. One hour, 12 categories, no mercy.</p>
 </div></section>
 
 <!-- ===== AUTHORITY ===== -->
@@ -577,7 +556,46 @@
   <p class="stat-note">Driven with SMEs, business partners, and other leads, never alone. The recovered rules were only trustworthy because the people who remembered corrected them.</p>
 </div></section>
 
+<!-- ===== TAKE IT ===== -->
+<section id="use"><div class="wrap">
+  <div class="sechead">
+    <div><div class="eyebrow">Take it</div>
+    <h2 class="sec-title">MIT licensed. <span class="o">Use it, improve it.</span></h2></div>
+    <p class="sec-lede">This is meant to become a standard, and a standard is something people use and correct, not something they admire. Three ways to be part of it.</p>
+  </div>
+  <div class="uses">
+    <a class="use" href="https://github.com/nikjain15/lossless-modernization">
+      <div class="uicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5-5.8-3-5.8 3 1.1-6.5L2.6 9.8l6.5-.9z"/></svg></div>
+      <div class="ut">Use it on your own program</div>
+      <div class="ud">Copy the templates, run the scorecard, follow the sequence. Star the repo if it earns it, which is also what makes it findable for the next person in your position.</div>
+      <div class="ugo">Star and follow on GitHub &rarr;</div>
+    </a>
+    <a class="use" href="https://github.com/nikjain15/lossless-modernization/blob/main/CONTRIBUTING.md">
+      <div class="uicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg></div>
+      <div class="ut">Contribute a case or a correction</div>
+      <div class="ud">Post-mortems, sourced statistics, a pattern that worked, or a claim here that is wrong. Corrections are more valuable than additions, and every one of them makes the reference harder to argue with.</div>
+      <div class="ugo">Read the contribution guide &rarr;</div>
+    </a>
+    <a class="use" href="https://www.linkedin.com/in/niktechnologist/">
+      <div class="uicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 11a5 5 0 0 1 5 5v5h-4v-5a1 1 0 0 0-2 0v5h-4v-5a5 5 0 0 1 5-5zM3 9h4v12H3zM5 3a2 2 0 1 1 0 4 2 2 0 0 1 0-4z"/></svg></div>
+      <div class="ut">Compare notes</div>
+      <div class="ud">If you are in the middle of one of these programs, or about to start one, I am interested in what you are hitting. The failure modes repeat, and the cases nobody writes up are the ones worth hearing.</div>
+      <div class="ugo">Connect on LinkedIn &rarr;</div>
+    </a>
+  </div>
+</div></section>
+
 <footer><div class="wrap">
+  <div class="row footnav">
+    <a href="#journey">The journey</a>
+    <a href="#how">How to do it</a>
+    <a href="#fail">Why it fails</a>
+    <a href="post-mortems.html">Post-mortems</a>
+    <a href="#produce">Templates</a>
+    <a href="#start">Start here</a>
+    <a href="#who">Who wrote this</a>
+    <a href="#use">Take it</a>
+  </div>
   <div class="row">
     <span><a href="https://github.com/nikjain15/lossless-modernization/blob/main/LICENSE">MIT License</a></span>
     <span>Built by <a href="https://github.com/nikjain15">Nik Jain</a></span>

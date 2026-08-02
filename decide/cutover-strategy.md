@@ -80,4 +80,4 @@ The styles compose. A strong money-critical sequence is: dark launch to shake ou
 - [ ] Legacy revert path preserved for a defined post-launch period (USDS play)
 - [ ] Parallel-run exit criteria defined before the run starts
 
-**Next:** [../playbook/README.md](../playbook/README.md) | [../why-modernizations-fail/post-mortems/tsb-bank.md](../why-modernizations-fail/post-mortems/tsb-bank.md) | [../patterns/06-cutover.md](../patterns/06-cutover.md)
+**Next:** [../playbook/README.md](../playbook/README.md) | [../why-modernizations-fail/post-mortems/tsb-bank.md](../why-modernizations-fail/post-mortems/tsb-bank.md) | [../patterns/07-cutover.md](../patterns/07-cutover.md)

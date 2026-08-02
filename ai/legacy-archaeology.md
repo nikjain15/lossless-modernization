@@ -1,6 +1,6 @@
 # Legacy-Code Archaeology: Recovering Intent from Undocumented Logic
 
-*The comprehension method at the front of the [Lossless Modernization](../README.md) playbook. Closely tied to [Pattern 03: Taming stored-procedure logic](../patterns/03-taming-stored-procedures.md). Worked at scale on the [flagship program](../case-studies/flagship-program.md), where it was implemented with Claude agents and skills.*
+*The comprehension method at the front of the [Lossless Modernization](../README.md) playbook. Closely tied to [Pattern 01: Taming stored-procedure logic](../patterns/01-taming-stored-procedures.md). Worked at scale on the [flagship program](../case-studies/flagship-program.md), where it was implemented with Claude agents and skills.*
 
 ---
 
@@ -143,7 +143,7 @@ The agent proposes; **humans confirm.** But "the business" is too coarse a descr
 
 Keeping that last distinction explicit matters. An engineer remembering why a branch exists is enormously valuable and is not the same as the business agreeing it should continue to exist. Route the memory to the decision, not around it.
 
-This sits squarely inside the reliability model of [Pattern 05](../patterns/05-ai-in-workflows.md) and [Pattern 07](../patterns/07-reliability-under-llm.md): the agent assists, deterministic parity testing validates the replicated behavior, and humans approve. An extracted rule is not trusted because the agent produced it. It is trusted because its intent was ratified and the [parity harness](../patterns/parity-harness-deepdive.md) proves the replication matches legacy behavior exactly.
+This sits squarely inside the reliability model of [Pattern 04](../patterns/04-ai-in-workflows.md) and [Pattern 05](../patterns/05-reliability-under-llm.md): the agent assists, deterministic parity testing validates the replicated behavior, and humans approve. An extracted rule is not trusted because the agent produced it. It is trusted because its intent was ratified and the [parity harness](../patterns/parity-harness-deepdive.md) proves the replication matches legacy behavior exactly.
 
 ## Evals and test-driven understanding: why this is genuinely hard
 
@@ -315,4 +315,4 @@ Notice that none of the three could have been caught by reading the procedure mo
 
 **Next:** [AI in legacy modernization](./README.md) | [The Parity Harness deep-dive](../patterns/parity-harness-deepdive.md) | [Flagship case study](../case-studies/flagship-program.md)
 
-*Related: [Pattern 03, Taming stored procedures](../patterns/03-taming-stored-procedures.md) · [Pattern 05, AI agents in workflows](../patterns/05-ai-in-workflows.md) · [Pattern 07, Reliability under an LLM](../patterns/07-reliability-under-llm.md) · [Legacy knowledge map](../templates/legacy-knowledge-map.md) · [Characterization test plan](../templates/characterization-test-plan.md) · [Glossary](../GLOSSARY.md)*
+*Related: [Pattern 01, Taming stored procedures](../patterns/01-taming-stored-procedures.md) · [Pattern 04, AI agents in workflows](../patterns/04-ai-in-workflows.md) · [Pattern 05, Reliability under an LLM](../patterns/05-reliability-under-llm.md) · [Legacy knowledge map](../templates/legacy-knowledge-map.md) · [Characterization test plan](../templates/characterization-test-plan.md) · [Glossary](../GLOSSARY.md)*

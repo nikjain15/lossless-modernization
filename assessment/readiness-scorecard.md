@@ -83,7 +83,7 @@ Only 16% of organizations say their workflows are well documented [Lucid survey 
 | 2-3 | Profiling done on core tables; mapping cataloged but unreconciled; sample-size trials only |
 | 4-5 | Full profiling with issue log; record-for-record reconciliation working; full-volume trial completed with signed results |
 
-**If you scored 2 or less:** read [Pattern 01: Parity](../patterns/01-parity.md), the [parity report template](../templates/parity-report.md), and the [TSB post-mortem](../why-modernizations-fail/post-mortems/tsb-bank.md).
+**If you scored 2 or less:** read [Pattern 06: Parity](../patterns/06-parity.md), the [parity report template](../templates/parity-report.md), and the [TSB post-mortem](../why-modernizations-fail/post-mortems/tsb-bank.md).
 
 ### 4. Testing and verification
 
@@ -211,7 +211,7 @@ LLM context windows cannot hold a mainframe estate, and cross-program dependenci
 | 2-3 | Verification exists for some outputs; comprehension use growing; limits acknowledged informally |
 | 4-5 | Archaeology-first AI workflow; every AI artifact gated by execution parity or business sign-off; limits documented in the plan |
 
-**If you scored 2 or less:** read [AI in legacy modernization](../ai/README.md) and [Pattern 07: Reliability under an LLM](../patterns/07-reliability-under-llm.md).
+**If you scored 2 or less:** read [AI in legacy modernization](../ai/README.md) and [Pattern 05: Reliability under an LLM](../patterns/05-reliability-under-llm.md).
 
 ### 12. Cost of not modernizing
 

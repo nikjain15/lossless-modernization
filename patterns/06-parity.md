@@ -1,6 +1,6 @@
-# Pattern 01, Parity
+# Pattern 06, Parity
 
-*The core, signature pattern of [Lossless Modernization](../README.md). For the full methodology, see the [Parity Harness deep-dive](./parity-harness-deepdive.md). Where this fits in the lifecycle: the "build parity evidence" phase of the [playbook](../playbook/README.md), producing the [parity report](../templates/parity-report.md) that gates [cutover](./06-cutover.md).*
+*The core, signature pattern of [Lossless Modernization](../README.md). For the full methodology, see the [Parity Harness deep-dive](./parity-harness-deepdive.md). Where this fits in the lifecycle: the "build parity evidence" phase of the [playbook](../playbook/README.md), producing the [parity report](../templates/parity-report.md) that gates [cutover](./07-cutover.md).*
 
 ---
 
@@ -51,7 +51,7 @@ flowchart TD
 Parity is established through a layered regime, each layer catching what the previous one misses:
 
 1. **Side-by-side functional testing.** For defined inputs, run old and new and compare outputs directly. Catches the obvious and the structural.
-2. **Stored-procedure and logic analysis.** Read the legacy logic line by line to understand *why* it produces what it produces, so you can distinguish a genuine difference from an intended one. See [Pattern 03](./03-taming-stored-procedures.md).
+2. **Stored-procedure and logic analysis.** Read the legacy logic line by line to understand *why* it produces what it produces, so you can distinguish a genuine difference from an intended one. See [Pattern 01](./01-taming-stored-procedures.md).
 3. **Multi-week production parallel run.** Run the new system alongside the live legacy system on real production inputs for **12+ weeks**, with the legacy system remaining the source of truth. This surfaces the edge cases and timing behaviors that only real data across many trading cycles produces.
 4. **5,000+ scenario business testing.** Business stakeholders exercise the new system across thousands of distinct scenarios, because it took hundreds of distinct scenarios to be confident no edge case was missed.
 5. **Intermediate *and* final parity.** Reconcile not only the terminal outputs but the intermediate calculation stages, so two systems cannot agree on the answer by accident while disagreeing on the method.
