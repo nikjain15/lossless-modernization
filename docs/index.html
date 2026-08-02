@@ -70,8 +70,6 @@
   .fact svg { width:22px; height:22px; color:var(--accent); flex:none; margin-top:3px; }
   .fact b { display:block; font-size:16.5px; letter-spacing:-.01em; }
   .fact span { display:block; font-size:14px; color:var(--muted); margin-top:2px; }
-  a.fact:hover b { color:var(--accent); }
-  a.fact:hover span { color:var(--accent); }
   @media (max-width:640px){ .facts { grid-template-columns:1fr; } }
   .cta-row { margin-top:36px; display:flex; gap:14px; flex-wrap:wrap; align-items:center; }
   .btn { display:inline-block; padding:13px 22px; border-radius:9px; font-size:16px; font-weight:700; letter-spacing:-.01em; }
@@ -165,13 +163,6 @@
   .act .q { font-size:17.5px; font-weight:750; letter-spacing:-.015em; margin-top:5px; line-height:1.28; }
   .act .n { font-size:13.5px; color:var(--faint); margin-top:5px; }
   .col { display:flex; flex-direction:column; gap:20px; }
-
-  .install { margin-top:34px; display:grid; grid-template-columns:1fr 1fr; gap:14px; }
-  @media (max-width:860px){ .install { grid-template-columns:1fr; } }
-  .ins { border:1px solid var(--line); border-radius:12px; padding:18px 20px; background:var(--panel); }
-  .ik { font-family:var(--mono); font-size:11.5px; letter-spacing:.07em; text-transform:uppercase; color:var(--accent); }
-  .ins pre { margin-top:11px; font-family:var(--mono); font-size:12.5px; line-height:1.65; color:var(--ink);
-    white-space:pre-wrap; word-break:break-word; }
 
   /* clustered inventory */
   .cl { margin-top:38px; }
@@ -293,7 +284,6 @@
   <div class="nav-links">
     <a class="hide-sm" href="#how">How to do it</a>
     <a class="hide-sm" href="#produce">What to produce</a>
-    <a class="hide-sm" href="#toolkit">The toolkit</a>
     <a href="#start">Start here</a>
     <button class="toggle" id="themeToggle" aria-label="Toggle theme">◐</button>
   </div>
@@ -307,11 +297,11 @@
     <div class="fact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 9h16M4 15h16"/></svg><div><b>Parity, proven value by value</b><span>every record reconciled at intermediate and final stages, nothing sampled</span></div></div>
     <div class="fact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20.5 20.5L16 16"/></svg><div><b>AI recovers the lost intent</b><span>agents read undocumented logic, humans ratify every rule</span></div></div>
     <div class="fact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg><div><b>Agents in the workflow</b><span>the target is AI-native and event-driven, not merely cloud-hosted</span></div></div>
-    <a class="fact" href="#toolkit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 10l2.5 2.5L8 15M13.5 15H16"/></svg><div><b>Built to be run, not just read</b><span>Modernization OS: install it and your agent works the playbook →</span></div></a>
+    <div class="fact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 10l2.5 2.5L8 15M13.5 15H16"/></svg><div><b>Built to be run, not just read</b><span>skills and an MCP server so your own agent can work the playbook</span></div></div>
   </div>
   <div class="cta-row">
     <a class="btn btn-primary" href="https://github.com/nikjain15/lossless-modernization">Read the playbook on GitHub →</a>
-    <a class="btn btn-ghost" href="#toolkit">Install the toolkit</a>
+    <a class="btn btn-ghost" href="#start">Find your entry point</a>
   </div>
   <p class="author">By <b>Nik Jain</b>. I architect money-critical legacy platforms into AI-native ones.
     <span class="dot">·</span><a href="https://www.linkedin.com/in/niktechnologist/">LinkedIn</a>
@@ -428,54 +418,6 @@
       </div>
     </div>
   </div>
-</div></section>
-
-<!-- ===== TOOLKIT ===== -->
-<section id="toolkit"><div class="wrap">
-  <div class="sechead">
-    <div><div class="eyebrow">Modernization OS</div>
-    <h2 class="sec-title">The playbook, <span class="o">as something you run.</span></h2></div>
-    <p class="sec-lede">A toolkit that installs into your own repository, reads your actual code, and writes real artifacts. It keeps a state file, so it works across a program lasting months rather than a single conversation.</p>
-  </div>
-
-  <div class="colkeys"><div></div><div class="ck">The skill</div><div class="ck">What it writes</div></div>
-  <div class="acts">
-    <div class="act">
-      <div class="stagehd"><div class="sicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v6 M12 9l-6 5 M12 9l6 5 M6 14v5 M18 14v5"/><circle cx="12" cy="4" r="1.5"/></svg></div><div class="st">Start</div><div class="q">Where am I, and what is next?</div><div class="n">the entry point</div></div>
-      <div class="col"><a class="it" href="https://github.com/nikjain15/lossless-modernization/blob/main/plugins/modernization-os/skills/modernize/SKILL.md"><div class="ix">modernize</div><div class="nm">Works out where the program stands</div><div class="ds">Reads your state, establishes the basics, routes to the right skill</div></a></div>
-      <div class="col"><div class="it soon"><div class="ix">Artifact</div><div class="nm">modernization/STATE.md</div><div class="ds">Decisions, open questions, risks, sign-offs, history</div></div></div>
-    </div>
-    <div class="act">
-      <div class="stagehd"><div class="sicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 11l3 3 8-8M21 12v7H3V5h13"/></svg></div><div class="st">Before a date</div><div class="q">Are we actually ready?</div><div class="n">five categories block a date</div></div>
-      <div class="col"><a class="it" href="https://github.com/nikjain15/lossless-modernization/blob/main/plugins/modernization-os/skills/assess-readiness/SKILL.md"><div class="ix">assess-readiness</div><div class="nm">Scores twelve categories red, amber, green</div><div class="ds">Reads the estate, then interviews for what code cannot show</div></a></div>
-      <div class="col"><div class="it soon"><div class="ix">Artifact</div><div class="nm">modernization/readiness.md</div><div class="ds">A profile, not an average, with an owned action for every red</div></div></div>
-    </div>
-    <div class="act">
-      <div class="stagehd"><div class="sicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20.5 20.5L16 16"/></svg></div><div class="st">Before you commit</div><div class="q">Which failure does my plan resemble?</div><div class="n">29 warning signs, 8 documented cases</div></div>
-      <div class="col"><a class="it" href="https://github.com/nikjain15/lossless-modernization/blob/main/plugins/modernization-os/skills/review-plan/SKILL.md"><div class="ix">review-plan</div><div class="nm">Names the historical failure yours looks like</div><div class="ds">And quotes the line in your plan that creates the resemblance</div></a></div>
-      <div class="col"><div class="it soon"><div class="ix">Artifact</div><div class="nm">modernization/plan-review.md</div><div class="ds">Verdict, resemblances, twelve scored categories, three fixes</div></div></div>
-    </div>
-    <div class="act">
-      <div class="stagehd"><div class="sicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg></div><div class="st">Before go-live</div><div class="q">Can we switch, and can we get back?</div><div class="n">a six-condition gate</div></div>
-      <div class="col"><a class="it" href="https://github.com/nikjain15/lossless-modernization/blob/main/plugins/modernization-os/skills/plan-cutover/SKILL.md"><div class="ix">plan-cutover</div><div class="nm">Runbook and rollback, behind a real gate</div><div class="ds">Refuses to write a runbook for an unverified system</div></a></div>
-      <div class="col"><div class="it soon"><div class="ix">Artifacts</div><div class="nm">cutover-runbook.md · rollback-plan.md</div><div class="ds">Owned steps, objective triggers, rehearsal recorded</div></div></div>
-    </div>
-  </div>
-
-  <div class="install">
-    <div class="ins">
-      <div class="ik">Install as a plugin</div>
-      <pre>/plugin marketplace add nikjain15/lossless-modernization
-/plugin install modernization-os</pre>
-    </div>
-    <div class="ins">
-      <div class="ik">Or copy the skills</div>
-      <pre>git clone https://github.com/nikjain15/lossless-modernization.git
-cp -r lossless-modernization/plugins/modernization-os/skills/* \
-  your-project/.claude/skills/</pre>
-    </div>
-  </div>
-  <p class="sourceline" style="margin-top:22px;">MIT licensed. <a href="https://github.com/nikjain15/lossless-modernization/blob/main/plugins/modernization-os/README.md">Read the toolkit documentation</a> for what each skill asks, what it writes, and where the judgment comes from. An MCP server is next, so the same skills work outside Claude Code.</p>
 </div></section>
 
 <!-- ===== WHY PROGRAMS FAIL ===== -->
@@ -693,7 +635,6 @@ cp -r lossless-modernization/plugins/modernization-os/skills/* \
     <a href="#fail">Why it fails</a>
     <a href="post-mortems.html">Post-mortems</a>
     <a href="#produce">Templates</a>
-    <a href="#toolkit">The toolkit</a>
     <a href="#start">Start here</a>
     <a href="#who">Who wrote this</a>
     <a href="#use">Take it</a>

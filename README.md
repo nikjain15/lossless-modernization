@@ -20,15 +20,6 @@ The site is live. The chapters are being written and reviewed one at a time, and
 - [The playbook](https://nikjain15.github.io/lossless-modernization/): the four-stage sequence, the twelve sourced failure categories, and the twelve artifacts a money-critical program produces
 - [The post-mortem library](https://nikjain15.github.io/lossless-modernization/post-mortems.html): eight documented failures, costed and sourced, each mapped to the practice that would have caught it
 
-**Also live: [Modernization OS](./plugins/modernization-os/README.md)**
-
-The playbook as something you run. A toolkit that installs into your own repository, reads your actual code, and writes real artifacts into a `modernization/` folder. Four skills: work out where you are, score readiness across twelve categories, review a plan against the failure library, and produce a cutover runbook behind a six-condition gate.
-
-```
-/plugin marketplace add nikjain15/lossless-modernization
-/plugin install modernization-os
-```
-
 **Coming soon**
 
 - Legacy-code archaeology: recovering intent from undocumented logic with AI agents, under human sign-off
@@ -36,8 +27,7 @@ The playbook as something you run. A toolkit that installs into your own reposit
 - The flagship case study: a $1.6T asset-management platform, sanitized
 - The template library: parity report, legacy knowledge map, cutover runbook, wave plan and more
 - The pattern catalogue, the decision trees, and the readiness scorecard
-- An MCP server, so the same skills work outside Claude Code
-- More skills: estate mapping, strategy selection, archaeology, parity design, eval building
+- Modernization OS: an agent toolkit that installs into your repository, scores readiness, reviews a plan against the failure library, and produces a cutover runbook
 
 Watch or star the repo if you want to know when each one lands.
 
