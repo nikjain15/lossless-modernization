@@ -1,11 +1,11 @@
 ---
 name: assess-readiness
-description: Score a legacy modernization program's readiness 0 to 5 across twelve categories, combining evidence read from the codebase with a guided interview for what code cannot reveal. Use when the user is starting or considering a modernization, asks whether they are ready, wants a readiness assessment or maturity score, wants to know what is missing before committing to a date, or needs a baseline to show a steering committee.
+description: Score a legacy modernization program's readiness red, amber or green across twelve categories, combining evidence read from the codebase with a guided interview for what code cannot reveal. Use when the user is starting or considering a modernization, asks whether they are ready, wants a readiness assessment or maturity score, wants to know what is missing before committing to a date, or needs a baseline to show a steering committee.
 ---
 
 # Assess modernization readiness
 
-Score a program's readiness to modernize a system that cannot be allowed to break. The output is a scored baseline plus an owned action per weak category, written into their repository.
+Score a program's readiness to modernize a system that cannot be allowed to break. The output is a red, amber, green baseline plus an owned action for every red, written into their repository.
 
 Two sources of truth, and they are not interchangeable:
 
@@ -16,7 +16,7 @@ The categories that most often kill programs are the second kind, and they canno
 
 ## Before you start
 
-Read `references/scorecard.md`. It defines the 0 to 5 scale, and per category what is readable from code versus what must be asked. Do not work from memory.
+Read `references/scorecard.md`. It defines the red, amber, green levels, the five categories that hard-block a date, and per category what is readable from code versus what must be asked. Do not work from memory.
 
 ## Step 1: read the estate
 
@@ -70,7 +70,7 @@ If the user cannot answer one, that is data. Score it accordingly and record it 
 
 ## Step 3: score and write
 
-Score all twelve, 0 to 5, each with the evidence behind it. Write to `modernization/readiness.md` and update `modernization/STATE.md` with the date, the red categories, and the open questions. Create both if absent.
+Score all twelve as red, amber or green, each with the evidence behind it. Write to `modernization/readiness.md` and update `modernization/STATE.md` with the date, the red categories, and the open questions. Create both if absent.
 
 ```markdown
 # Readiness assessment: <program name>
@@ -89,11 +89,12 @@ Score all twelve, 0 to 5, each with the evidence behind it. Write to `modernizat
 
 ## Can you commit to a date?
 
-<Direct answer. Any red in correctness (03, 04) or cutover (05) means no, whatever the total.>
+<Direct answer. Any red in 01, 03, 04, 05 or 08 means no, whatever the rest of the profile
+looks like. Name which one blocks and what would clear it.>
 
 ## Scores
 
-| # | Category | Score | Evidence | Smallest next action | Owner |
+| # | Category | R/A/G | Evidence | Smallest next action | Owner |
 |---|---|---|---|---|---|
 
 ## What the estate showed
@@ -114,10 +115,11 @@ surface. What could not be inspected.>
 
 ## Rules
 
-- **Never average the twelve.** Report the profile. One zero in correctness outweighs ten fives.
+- **Never average the twelve.** Report the profile. One red in a blocking category outweighs ten greens.
 - **Every score cites evidence.** A finding from the code, or a direct answer from the interview. Never inference.
-- **Never score 08 or 09 from the code.** Accountability and retained ownership are unreadable from a repository. Ask or leave unscored.
-- **Every red gets an owned action**, not a reading recommendation.
+- **Never score 08 or 09 from the code.** Accountability and retained ownership are unreadable from a repository. Ask, or leave unscored and say why. 08 is a blocking category, so an unscored 08 must be flagged, never quietly skipped.
+- **Every red gets an owned action** with a name and a date, not a reading recommendation.
+- **Blocking reds are stated first.** Categories 01, 03, 04, 05 and 08 block a committed date when red. Say so before anything else.
 - **Report what you could not check.** Distinguish "they have no tests" from "I could not find tests".
 - **Do not flatter.** The point of a baseline is that it is uncomfortable and true.
 - **No dashes in prose.** Use colons, commas, or periods.
