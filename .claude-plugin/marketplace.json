@@ -1,0 +1,23 @@
+{
+  "name": "nikjain15",
+  "owner": {
+    "name": "Nik Jain",
+    "url": "https://github.com/nikjain15"
+  },
+  "plugins": [
+    {
+      "name": "modernization-os",
+      "source": "./plugins/modernization-os",
+      "description": "Writes a readiness scorecard, a plan review, a cutover runbook and a rollback plan into your repo, from your actual code. Twelve readiness categories with five that block a date, twelve failure categories, and eight documented public failures with costs and sources.",
+      "version": "0.1.0",
+      "category": "engineering",
+      "keywords": [
+        "legacy",
+        "modernization",
+        "migration",
+        "cutover",
+        "parity"
+      ]
+    }
+  ]
+}

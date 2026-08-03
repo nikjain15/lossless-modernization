@@ -1,0 +1,499 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Modernization OS: four skills that install into your repository, read your code, and write a readiness scorecard, a plan review, a cutover runbook and a rollback plan. Twelve readiness categories, five of which block a go-live date.">
+<title>Modernization OS &middot; Lossless Modernization</title>
+<link rel="canonical" href="https://nikjain15.github.io/lossless-modernization/modernization-os.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Lossless Modernization">
+<meta property="og:url" content="https://nikjain15.github.io/lossless-modernization/modernization-os.html">
+<meta property="og:title" content="Modernization OS: the playbook, as something you run.">
+<meta property="og:description" content="Four skills that read your actual code and write real artifacts. Twelve readiness categories, five of which block a date. It can tell you no.">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:creator" content="@NIkJain1510">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg:#FFFFFF; --panel:#FAFBFA; --ink:#161A18; --muted:#66706C; --faint:#8C948F;
+    --line:#E7EAE8; --line-2:#DBDFDC; --accent:#0E8A6A; --accent-ink:#0B7156; --sel:rgba(14,138,106,0.14);
+    --sans:"Helvetica Neue", Helvetica, system-ui, -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+    --mono:"SF Mono", ui-monospace, "JetBrains Mono", Menlo, Consolas, monospace;
+    --maxw:1140px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#131715; --panel:#191E1B; --ink:#EFF2F0; --muted:#9FA8A3; --faint:#767E79;
+      --line:#272D2A; --line-2:#313835; --accent:#2BC29A; --accent-ink:#4FD4B0; --sel:rgba(43,194,154,0.20); }
+  }
+  :root[data-theme="light"] { --bg:#FFFFFF; --panel:#FAFBFA; --ink:#161A18; --muted:#66706C; --faint:#8C948F;
+    --line:#E7EAE8; --line-2:#DBDFDC; --accent:#0E8A6A; --accent-ink:#0B7156; --sel:rgba(14,138,106,0.14); }
+  :root[data-theme="dark"]  { --bg:#131715; --panel:#191E1B; --ink:#EFF2F0; --muted:#9FA8A3; --faint:#767E79;
+    --line:#272D2A; --line-2:#313835; --accent:#2BC29A; --accent-ink:#4FD4B0; --sel:rgba(43,194,154,0.20); }
+  html { scroll-behavior: smooth; }
+  body { background:var(--bg); color:var(--ink); font-family:var(--sans); font-size:18px; line-height:1.6;
+    -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; }
+  ::selection { background: var(--sel); }
+  .wrap { max-width:var(--maxw); margin:0 auto; padding:0 32px; }
+  a { color:inherit; text-decoration:none; }
+  .eyebrow { font-size:13px; font-weight:700; letter-spacing:.08em; color:var(--accent); text-transform:uppercase; }
+
+  /* nav */
+  nav { position:sticky; top:0; z-index:50; background:color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter:blur(8px); border-bottom:1px solid var(--line); }
+  .nav-in { max-width:var(--maxw); margin:0 auto; padding:16px 32px; display:flex; align-items:center; justify-content:space-between; gap:20px; }
+  .brand { font-weight:800; font-size:16px; letter-spacing:-.01em; display:flex; align-items:center; gap:9px; }
+  .brand .sq { width:12px; height:12px; background:var(--accent); border-radius:50%; flex:none; }
+  .nav-links { display:flex; gap:22px; align-items:center; }
+  .nav-links a { font-size:15px; color:var(--muted); transition:color .15s; }
+  .nav-links a:hover { color:var(--ink); }
+  @media (max-width:900px){ .nav-links a.hide-sm { display:none; } }
+  .toggle { font-size:14px; color:var(--muted); background:transparent; border:0; cursor:pointer; padding:4px; }
+  .toggle:hover { color:var(--accent); }
+  .toggle:focus-visible { outline:2px solid var(--accent); outline-offset:3px; border-radius:4px; }
+
+  /* hero */
+  .hero { padding:clamp(64px,10vw,116px) 0 clamp(44px,7vw,76px); }
+  .hero h1 { font-size:clamp(34px,5.4vw,62px); font-weight:800; line-height:1.04; letter-spacing:-.03em;
+    max-width:22ch; text-wrap:balance; margin-top:22px; }
+  .hero h1 .o { color:var(--accent); }
+  .hero .sub1 { margin-top:24px; max-width:54ch; font-size:22px; font-weight:600; line-height:1.4; letter-spacing:-.01em; }
+  .hero .sub2 { margin-top:14px; max-width:62ch; font-size:17.5px; color:var(--muted); }
+  .facts { margin-top:34px; display:grid; grid-template-columns:repeat(2,minmax(0,420px)); gap:16px 40px; }
+  .fact { display:flex; gap:14px; align-items:flex-start; }
+  .fact svg { width:22px; height:22px; color:var(--accent); flex:none; margin-top:3px; }
+  .fact b { display:block; font-size:16.5px; letter-spacing:-.01em; }
+  .fact span { display:block; font-size:14px; color:var(--muted); margin-top:2px; }
+  @media (max-width:640px){ .facts { grid-template-columns:1fr; } }
+  .cta-row { margin-top:36px; display:flex; gap:14px; flex-wrap:wrap; align-items:center; }
+  .btn { display:inline-block; padding:13px 22px; border-radius:9px; font-size:16px; font-weight:700; letter-spacing:-.01em; }
+  .btn-primary { background:var(--accent); color:#fff; }
+  .btn-primary:hover { background:var(--accent-ink); }
+  :root[data-theme="dark"] .btn-primary, :root[data-theme="dark"] .btn-primary:hover { color:#0B1512; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .btn-primary { color:#0B1512; } }
+  .btn-ghost { border:1px solid var(--line-2); color:var(--ink); }
+  .btn-ghost:hover { border-color:var(--accent); color:var(--accent); }
+  .author { margin-top:22px; font-size:15px; color:var(--muted); }
+  .author b { color:var(--ink); font-weight:700; }
+  .author a { color:var(--muted); border-bottom:1px solid var(--line-2); transition:color .15s, border-color .15s; }
+  .author a:hover { color:var(--accent); border-color:var(--accent); }
+  .author .dot { margin:0 7px; color:var(--faint); }
+
+  /* sections */
+  section { padding:clamp(54px,7.5vw,92px) 0; border-top:1px solid var(--line); }
+  .sechead { display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:end; }
+  .sec-title { font-size:clamp(27px,4.2vw,43px); font-weight:800; letter-spacing:-.025em; line-height:1.09;
+    margin-top:15px; max-width:28ch; text-wrap:balance; }
+  .sec-title .o { color:var(--accent); }
+  .sec-lede { font-size:19px; color:var(--muted); max-width:58ch; }
+  @media (max-width:860px){ .sechead { grid-template-columns:1fr; gap:14px; align-items:start; } }
+
+  /* where you are -> where you land */
+  .journey { margin-top:42px; display:grid; grid-template-columns:1fr auto 1fr; gap:24px; }
+  @media (max-width:860px){ .journey { grid-template-columns:1fr; } .arrowcol { display:none; } }
+  .side { border:1px solid var(--line); border-radius:12px; padding:22px 24px; background:var(--panel); }
+  .side.to { border-color:color-mix(in srgb, var(--accent) 40%, var(--line)); }
+  .side .k { font-family:var(--mono); font-size:11.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--faint); }
+  .side.to .k { color:var(--accent); }
+  .side .ttl { font-size:21px; font-weight:800; letter-spacing:-.015em; margin-top:7px; }
+  .side ul { list-style:none; margin-top:15px; display:flex; flex-direction:column; gap:11px; }
+  .side li { font-size:15.5px; color:var(--muted); padding-left:19px; position:relative; line-height:1.45; }
+  .side li::before { content:""; position:absolute; left:0; top:9px; width:7px; height:7px; border-radius:50%; background:var(--line-2); }
+  .side.to li::before { background:var(--accent); }
+  .side li b { color:var(--ink); font-weight:650; }
+  .arrowcol { display:flex; align-items:center; justify-content:center; }
+  .arrowcol .a { font-size:30px; color:var(--accent); font-weight:800; }
+
+  /* stats */
+  .stats { margin-top:44px; display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+  .stat { display:block; border:1px solid var(--line); border-radius:11px; padding:22px; background:var(--panel); transition:border-color .2s; }
+  .stat:hover { border-color:color-mix(in srgb, var(--accent) 45%, var(--line)); }
+  .stat .big { font-size:clamp(30px,4vw,44px); font-weight:800; letter-spacing:-.02em; color:var(--accent); line-height:1.05; }
+  .stat .t { margin-top:10px; font-size:16px; font-weight:700; letter-spacing:-.01em; }
+  .stat .d { margin-top:6px; font-size:14px; color:var(--muted); line-height:1.5; }
+  .stat .src { margin-top:12px; font-family:var(--mono); font-size:12px; color:var(--faint); }
+  .stat:hover .src { color:var(--accent); }
+  @media (max-width:860px){ .stats { grid-template-columns:1fr; } }
+  .stat-note { margin-top:20px; font-size:15.5px; color:var(--muted); max-width:70ch; }
+  .stat-note b { color:var(--ink); }
+  .sourceline { margin-top:30px; font-size:13.5px; line-height:1.55; color:var(--faint); max-width:none; }
+  .sourceline a { color:var(--muted); border-bottom:1px solid var(--line-2); transition:color .15s, border-color .15s; }
+  .sourceline a:hover { color:var(--accent); border-color:var(--accent); }
+
+  /* thesis */
+  .thesis-quote { margin-top:40px; border-left:3px solid var(--accent); padding:6px 0 6px 24px; }
+  .thesis-quote .q { font-size:clamp(22px,3vw,30px); font-weight:800; letter-spacing:-.02em; line-height:1.3; max-width:34ch; }
+  .thesis-quote .q em { font-style:normal; color:var(--accent); }
+  .claims { margin-top:30px; display:grid; grid-template-columns:1fr 1fr; gap:26px 36px; }
+  @media (max-width:800px){ .claims { grid-template-columns:1fr; } }
+  .claim .h { font-size:18.5px; font-weight:750; letter-spacing:-.015em; }
+  .claim .b { font-size:15.5px; color:var(--muted); margin-top:6px; line-height:1.55; }
+  .converge { margin-top:34px; display:grid; grid-template-columns:repeat(4,1fr); gap:14px; }
+  .cv { border:1px solid var(--line); border-radius:11px; padding:16px 18px; background:var(--panel); transition:border-color .2s; display:block; }
+  .cv:hover { border-color:color-mix(in srgb, var(--accent) 45%, var(--line)); }
+  .cv .who { font-size:15px; font-weight:700; letter-spacing:-.01em; }
+  .cv .what { margin-top:5px; font-size:13.5px; color:var(--muted); line-height:1.5; }
+  @media (max-width:900px){ .converge { grid-template-columns:1fr 1fr; } }
+  @media (max-width:560px){ .converge { grid-template-columns:1fr; } }
+
+  /* the four-stage flow */
+  .flowline { margin-top:38px; font-size:clamp(21px,2.7vw,32px); font-weight:800; letter-spacing:-.02em; line-height:1.3; }
+  .flowline .ar { color:var(--accent); margin:0 9px; }
+  .flowline .gov { display:block; font-size:16px; font-weight:400; color:var(--muted); letter-spacing:0; margin-top:12px; max-width:70ch; }
+  .acts { margin-top:36px; }
+  .act { display:grid; grid-template-columns:200px 1fr; gap:30px; padding:26px 0; border-top:1px solid var(--line); }
+  .act:first-child { border-top:0; padding-top:6px; }
+  @media (max-width:800px){ .act { grid-template-columns:1fr; gap:14px; } }
+  .act .st { font-family:var(--mono); font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--accent); }
+  .act .q { font-size:18px; font-weight:750; letter-spacing:-.015em; margin-top:6px; line-height:1.3; }
+  .act .n { font-size:13.5px; color:var(--faint); margin-top:6px; }
+  .act .items { display:grid; grid-template-columns:1fr 1fr; gap:18px 30px; }
+  @media (max-width:620px){ .act .items { grid-template-columns:1fr; } }
+
+  /* clustered inventory */
+  .cl { margin-top:38px; }
+  .cl-hd { display:flex; align-items:baseline; gap:12px; flex-wrap:wrap; padding-bottom:9px;
+    border-bottom:1px solid var(--line); margin-bottom:16px; }
+  .cl-hd .st { font-family:var(--mono); font-size:12px; letter-spacing:.09em; text-transform:uppercase; color:var(--accent); }
+  .cl-hd .gl { font-size:14.5px; color:var(--faint); }
+  .items { display:grid; grid-template-columns:repeat(3,1fr); gap:22px 34px; }
+  @media (max-width:940px){ .items { grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:640px){ .items { grid-template-columns:1fr; } }
+  .it { display:block; }
+  .it .ix { font-family:var(--mono); font-size:11.5px; color:var(--faint); }
+  .it .nm { font-size:18px; font-weight:700; letter-spacing:-.015em; margin-top:4px; line-height:1.25; }
+  .it .ds { font-size:14.5px; color:var(--muted); margin-top:5px; line-height:1.5; }
+  .it:hover .nm { color:var(--accent); }
+  .it.soon { cursor:default; }
+  .it .mt { display:block; font-family:var(--mono); font-size:12px; color:var(--accent); margin-top:6px; }
+
+  /* role paths */
+  .roles { margin-top:44px; display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+  .role { border:1px solid var(--line); border-radius:11px; padding:22px; background:var(--panel); transition:border-color .2s; }
+  .role:hover { border-color:color-mix(in srgb, var(--accent) 45%, var(--line)); }
+  .role .who { font-size:18px; font-weight:800; letter-spacing:-.01em; }
+  .role .hr { margin-top:4px; font-family:var(--mono); font-size:12px; color:var(--faint); }
+  .role ol { margin-top:14px; list-style:none; counter-reset:step; display:flex; flex-direction:column; gap:10px; }
+  .role li { counter-increment:step; position:relative; padding-left:30px; font-size:14.5px; color:var(--muted); line-height:1.5; }
+  .role li::before { content:counter(step); position:absolute; left:0; top:1px; width:20px; height:20px; border-radius:50%;
+    background:color-mix(in srgb, var(--accent) 12%, transparent); color:var(--accent);
+    font-family:var(--mono); font-size:11px; font-weight:700; display:flex; align-items:center; justify-content:center; }
+  .role a { color:var(--ink); font-weight:600; border-bottom:1px solid var(--line-2); transition:color .15s, border-color .15s; }
+  .role a:hover { color:var(--accent); border-color:var(--accent); }
+  @media (max-width:860px){ .roles { grid-template-columns:1fr; } }
+  .mirror { margin-top:20px; font-size:15.5px; color:var(--muted); }
+  .mirror a { color:var(--ink); font-weight:600; border-bottom:1px solid var(--line-2); }
+  .mirror a:hover { color:var(--accent); border-color:var(--accent); }
+
+  /* authority */
+  .numbers { margin-top:38px; display:grid; grid-template-columns:repeat(4,1fr); gap:14px; }
+  @media (max-width:860px){ .numbers { grid-template-columns:1fr 1fr; } }
+  .num { border:1px solid var(--line); border-radius:11px; padding:18px 20px; background:var(--panel); }
+  .num .v { font-size:clamp(22px,2.6vw,30px); font-weight:800; letter-spacing:-.02em; color:var(--accent); line-height:1.1; }
+  .num .l { font-size:14px; color:var(--muted); margin-top:6px; line-height:1.45; }
+  .rolebody { margin-top:30px; max-width:76ch; font-size:17px; color:var(--muted); line-height:1.7; }
+  .rolebody b { color:var(--ink); }
+  .rolebody a { color:var(--ink); border-bottom:1px solid var(--line-2); }
+  .rolebody a:hover { color:var(--accent); border-color:var(--accent); }
+  .rolebody p + p { margin-top:14px; }
+  .drove { margin-top:28px; display:grid; grid-template-columns:1fr 1fr; gap:18px 34px; }
+  @media (max-width:800px){ .drove { grid-template-columns:1fr; } }
+  .drove .d1 { font-size:16.5px; font-weight:700; letter-spacing:-.01em; }
+  .drove .d2 { font-size:14.5px; color:var(--muted); margin-top:4px; line-height:1.5; }
+
+  /* roadmap */
+  .road { margin-top:38px; display:grid; grid-template-columns:repeat(3,1fr); gap:20px 34px; }
+  @media (max-width:860px){ .road { grid-template-columns:1fr 1fr; } }
+  @media (max-width:560px){ .road { grid-template-columns:1fr; } }
+  .rd .s { font-family:var(--mono); font-size:11.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--faint); }
+  .rd .s.live { color:var(--accent); }
+  .rd .n { font-size:16.5px; font-weight:700; letter-spacing:-.01em; margin-top:5px; }
+  .rd .d { font-size:14px; color:var(--muted); margin-top:4px; line-height:1.5; }
+
+  /* RESPONSIVE FIXES */
+  .brand { white-space:nowrap; }
+  @media (max-width:560px){
+    .nav-links a { display:none; }
+    .brand { font-size:15px; }
+    .betapill { margin-left:7px; }
+  }
+  @media (max-width:720px){
+    .flowline { font-size:20px; line-height:1.4; }
+    .flowline .ar { margin:0 5px; }
+    .flowline .gov { font-size:15px; }
+    .hero h1 { letter-spacing:-.02em; }
+    .sec-title, .hero h1 { overflow-wrap:break-word; }
+    .wrap { padding:0 20px; }
+    .nav-in { padding:14px 20px; }
+  }
+  @media (max-width:420px){
+    .flowline { font-size:17.5px; }
+    .num .v, .stat .big { font-size:26px; }
+  }
+  img, svg, pre, table { max-width:100%; }
+
+  footer { border-top:1px solid var(--line); padding:36px 0 60px; font-size:14px; color:var(--faint); }
+  footer a { color:var(--muted); } footer a:hover { color:var(--accent); }
+  footer .row { display:flex; flex-wrap:wrap; gap:8px 20px; }
+  footer .disclaim { margin-top:14px; max-width:76ch; line-height:1.6; }
+</style>
+<style>:root { --danger:#C4453B; --warn:#B07B1E; }
+@media (prefers-color-scheme:dark){ :root { --danger:#E36B60; --warn:#D9A441; } }
+:root[data-theme="dark"] { --danger:#E36B60; --warn:#D9A441; }
+:root[data-theme="light"] { --danger:#C4453B; --warn:#B07B1E; }
+.hfacts { margin-top:36px; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:26px; max-width:940px; }
+.hfact { display:flex; gap:13px; align-items:flex-start; }
+.hfact svg { width:24px; height:24px; color:var(--accent); flex:none; margin-top:2px; }
+.hfact b { display:block; font-size:16.5px; letter-spacing:-.015em; line-height:1.3; }
+.hfact span { display:block; font-size:14px; color:var(--muted); margin-top:4px; line-height:1.5; }
+.flow { margin-top:40px; display:grid; grid-template-columns:1fr 22px 1fr 22px 1fr 22px 1fr; align-items:stretch; }
+.fa { display:flex; align-items:center; justify-content:center; color:var(--faint); font-size:16px; }
+.fs { border:1px solid var(--line); border-radius:13px; padding:18px; background:var(--panel);
+  border-top:3px solid var(--line-2); transition:transform .2s; }
+.fs:hover { transform:translateY(-2px); }
+.fs-h { display:flex; align-items:center; justify-content:space-between; gap:8px; }
+.fs-i { width:32px; height:32px; border-radius:9px; display:flex; align-items:center; justify-content:center; }
+.fs-i svg { width:16px; height:16px; }
+.fs-st { font-family:var(--mono); font-size:10px; letter-spacing:.09em; text-transform:uppercase;
+  font-weight:700; border-radius:20px; padding:3px 9px; }
+.fs-k { margin-top:14px; font-family:var(--mono); font-size:12.5px; font-weight:700; }
+.fs-q { margin-top:7px; font-size:16px; font-weight:750; letter-spacing:-.015em; line-height:1.3; color:var(--ink); }
+.fs-w { margin-top:12px; padding-top:10px; border-top:1px solid var(--line); font-family:var(--mono);
+  font-size:11px; color:var(--muted); line-height:1.6; }
+.s1 { border-top-color:#5B8DEF; } .s1 .fs-i,.s1 .fs-st { background:rgba(91,141,239,.14); }
+.s1 .fs-i svg,.s1 .fs-st,.s1 .fs-k { color:#5B8DEF; }
+.s2 { border-top-color:var(--accent); } .s2 .fs-i,.s2 .fs-st { background:color-mix(in srgb,var(--accent) 13%,transparent); }
+.s2 .fs-i svg,.s2 .fs-st,.s2 .fs-k { color:var(--accent); }
+.s3 { border-top-color:var(--warn); } .s3 .fs-i,.s3 .fs-st { background:color-mix(in srgb,var(--warn) 16%,transparent); }
+.s3 .fs-i svg,.s3 .fs-st,.s3 .fs-k { color:var(--warn); }
+.s4 { border-top-color:#9B6DD6; } .s4 .fs-i,.s4 .fs-st { background:rgba(155,109,214,.15); }
+.s4 .fs-i svg,.s4 .fs-st,.s4 .fs-k { color:#9B6DD6; }
+.dfacts { margin-top:44px; padding-top:36px; border-top:1px solid var(--line);
+  display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px 44px; }
+.dfact { display:flex; gap:14px; align-items:flex-start; }
+.dfact svg { width:23px; height:23px; color:var(--accent); flex:none; margin-top:3px; }
+.dfact b { display:block; font-size:17px; letter-spacing:-.015em; }
+.dfact span { display:block; font-size:14.5px; color:var(--muted); margin-top:4px; line-height:1.5; }
+.tl { display:flex; align-items:center; gap:10px; font-family:var(--mono); font-size:11.5px;
+  letter-spacing:.09em; text-transform:uppercase; font-weight:700; }
+.tdot { width:9px; height:9px; border-radius:50%; }
+.tl.danger { color:var(--danger); } .tl.danger .tdot { background:var(--danger); }
+.tl.good { color:var(--accent); } .tl.good .tdot { background:var(--accent); }
+.bcs { margin-top:15px; display:grid; grid-template-columns:repeat(5,1fr); gap:12px; }
+.bc { border:1px solid var(--line); border-radius:12px; padding:16px; }
+.bc-h { display:flex; align-items:center; justify-content:space-between; }
+.bc-i { width:30px; height:30px; border-radius:9px; display:flex; align-items:center; justify-content:center; }
+.bc-i svg { width:15px; height:15px; }
+.bc-n { font-family:var(--mono); font-size:14px; font-weight:800; }
+.bc-t { margin-top:12px; font-size:15px; font-weight:700; letter-spacing:-.012em; line-height:1.3; color:var(--ink); }
+.bc-w { margin-top:9px; font-size:12.5px; color:var(--muted); line-height:1.45; }
+.bc.danger { border-color:color-mix(in srgb,var(--danger) 40%,var(--line)); background:color-mix(in srgb,var(--danger) 5%,transparent); }
+.bc.danger .bc-i { background:color-mix(in srgb,var(--danger) 13%,transparent); }
+.bc.danger .bc-i svg,.bc.danger .bc-n { color:var(--danger); }
+.scs { margin-top:15px; display:grid; grid-template-columns:repeat(4,1fr); gap:10px; }
+.sc { display:flex; align-items:center; gap:11px; border:1px solid var(--line); border-radius:11px;
+  padding:12px 15px; background:var(--panel); }
+.sc-i { width:26px; height:26px; border-radius:8px; flex:none; display:flex; align-items:center; justify-content:center; }
+.sc-i svg { width:14px; height:14px; }
+.sc-n { font-family:var(--mono); font-size:11.5px; }
+.sc-t { font-size:14px; font-weight:650; letter-spacing:-.01em; line-height:1.3; }
+.sc.good { border-color:color-mix(in srgb,var(--accent) 28%,var(--line)); }
+.sc.good .sc-i { background:color-mix(in srgb,var(--accent) 12%,transparent); }
+.sc.good .sc-i svg,.sc.good .sc-n { color:var(--accent); }
+.art { margin-top:38px; border:1px solid var(--line); border-radius:14px; overflow:hidden; }
+.art-bar { background:var(--panel); border-bottom:1px solid var(--line); padding:13px 22px;
+  font-family:var(--mono); font-size:12px; color:var(--faint); display:flex;
+  justify-content:space-between; gap:14px; flex-wrap:wrap; }
+.art-bar b { color:var(--accent); font-weight:700; }
+.art-in { padding:26px; }
+.ragbar { display:flex; gap:3px; height:9px; border-radius:20px; overflow:hidden; }
+.seg { display:block; border-radius:20px; }
+.seg.r { background:var(--danger); } .seg.a { background:var(--warn); } .seg.g { background:var(--accent); }
+.ragkey { margin-top:13px; display:flex; gap:20px; align-items:center; flex-wrap:wrap;
+  font-family:var(--mono); font-size:12px; color:var(--muted); }
+.ragkey .d { width:9px; height:9px; border-radius:50%; display:inline-block; margin-right:7px; }
+.d.r { background:var(--danger); } .d.a { background:var(--warn); } .d.g { background:var(--accent); }
+.ragv { margin-left:auto; color:var(--danger); font-weight:700; text-transform:uppercase;
+  letter-spacing:.07em; font-size:11px; }
+.verdict { margin-top:22px; font-size:16px; line-height:1.6; color:var(--ink);
+  border-left:3px solid var(--accent); padding-left:18px; }
+.rrs { margin-top:24px; display:grid; gap:10px; }
+.rr { display:grid; grid-template-columns:132px 1fr; gap:18px; border:1px solid var(--line);
+  border-left:3px solid var(--line-2); border-radius:11px; padding:15px 18px; background:var(--panel); }
+.rr.r { border-left-color:var(--danger); } .rr.a { border-left-color:var(--warn); }
+.rr.g { border-left-color:var(--accent); }
+.rr-l { display:flex; flex-direction:column; gap:8px; align-items:flex-start; }
+.rr-n { font-family:var(--mono); font-size:12.5px; color:var(--faint); }
+.rr-t { font-size:16px; font-weight:700; letter-spacing:-.012em; }
+.rr-e { margin-top:5px; font-size:14px; color:var(--muted); line-height:1.55; }
+.rag { font-family:var(--mono); font-size:10.5px; letter-spacing:.07em; text-transform:uppercase;
+  font-weight:700; border-radius:20px; padding:3px 10px; white-space:nowrap; }
+.rag.r { color:var(--danger); background:color-mix(in srgb,var(--danger) 14%,transparent); }
+.rag.a { color:var(--warn); background:color-mix(in srgb,var(--warn) 16%,transparent); }
+.rag.g { color:var(--accent); background:color-mix(in srgb,var(--accent) 14%,transparent); }
+.terms { margin-top:38px; display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+.term { border:1px solid var(--line-2); border-radius:13px; overflow:hidden; background:var(--panel); }
+.term-bar { display:flex; align-items:center; gap:8px; padding:11px 15px;
+  border-bottom:1px solid var(--line); background:var(--bg); }
+.dot { width:10px; height:10px; border-radius:50%; background:var(--line-2); }
+.term-t { margin-left:9px; font-family:var(--mono); font-size:11.5px; color:var(--faint); }
+.term-b { padding:18px 20px; font-family:var(--mono); font-size:12.5px; line-height:1.9; overflow-x:auto; }
+.tl2 { white-space:pre-wrap; color:var(--ink); }
+.tl2.sp { margin-top:14px; }
+.tl2.ind { padding-left:22px; }
+.tl2 .p { color:var(--accent); font-weight:700; margin-right:8px; }
+.tl2.c { color:var(--faint); }
+.tl2.ok { color:var(--accent); }
+@media (max-width:980px){ .flow { grid-template-columns:1fr; } .fa { transform:rotate(90deg); padding:8px 0; }
+  .bcs,.scs,.terms,.dfacts,.hfacts { grid-template-columns:1fr; gap:16px; }
+  .rr { grid-template-columns:1fr; gap:10px; }
+  .rr-l { flex-direction:row; align-items:center; gap:12px; } }
+.closing { margin-top:28px; font-size:17px; line-height:1.65; color:var(--muted); max-width:none; }
+.closing b { color:var(--ink); }
+.morelink { display:inline-flex; align-items:center; gap:9px; margin-top:16px;
+  font-size:15.5px; font-weight:700; letter-spacing:-.01em; color:var(--accent);
+  border:1px solid color-mix(in srgb,var(--accent) 40%,transparent); border-radius:24px;
+  padding:9px 18px; transition:background .18s, border-color .18s, gap .18s; }
+.morelink span { font-size:16px; transition:transform .18s; }
+.morelink:hover { background:color-mix(in srgb,var(--accent) 10%,transparent);
+  border-color:var(--accent); }
+.morelink:hover span { transform:translateX(3px); }
+.vocab { margin-top:38px; display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+.vc { border:1px solid var(--line); border-radius:14px; padding:26px; background:var(--panel);
+  border-top:3px solid var(--accent); }
+.vc-t { font-size:21px; font-weight:800; letter-spacing:-.022em; line-height:1.2; }
+.vc-vs { margin-top:9px; font-family:var(--mono); font-size:12px; letter-spacing:.05em;
+  text-transform:uppercase; color:var(--faint); }
+.vc-vs b { color:var(--danger); font-weight:700; }
+.vc-d { margin-top:15px; font-size:15.5px; color:var(--muted); line-height:1.6; }
+@media (max-width:860px){ .vocab { grid-template-columns:1fr; } }
+</style>
+</head><body>
+<nav><div class="nav-in">
+  <a class="brand" href="index.html"><span class="sq"></span>Lossless Modernization<span class="betapill">beta</span></a>
+  <div class="nav-links">
+    <a class="hide-sm" href="index.html#how">How to do it</a>
+    <a class="hide-sm" href="index.html#produce">What to produce</a>
+    <a class="hide-sm" href="modernization-os.html">Modernization OS</a>
+    <a href="index.html#start">Start here</a>
+    <button class="toggle" id="themeToggle" aria-label="Toggle theme">&#9689;</button>
+  </div>
+</div></nav>
+<header class="hero" style="padding:clamp(52px,8vw,88px) 0 0;"><div class="wrap">
+  <div class="eyebrow">Modernization OS</div>
+  <h1 style="max-width:24ch;">The playbook, <span class="o">as something you run.</span></h1>
+  <div class="hfacts"><div class="hfact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 10l2.5 2.5L8 15M13.5 15H16"/></svg><div><b>Runs in your repo</b><span>reads your actual code, not a description of it</span></div></div><div class="hfact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5a2 2 0 0 1 2-2h9l5 5v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><path d="M14 3v6h6"/></svg><div><b>Writes real artifacts</b><span>a scorecard, a plan review, a runbook, a rollback plan</span></div></div><div class="hfact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><path d="M8 3v6h8M8 17h8"/></svg><div><b>Remembers for months</b><span>a state file that outlives the team that started</span></div></div></div>
+  <p class="sourceline" style="margin-top:30px;">Version 0.1.0, beta. MIT licensed. &nbsp;$1.6T platform &middot; $4.5B a day &middot; 36-month program &middot; 12+ weeks in production parallel.</p>
+</div></header>
+
+<section><div class="wrap">
+  <div class="sechead">
+    <div><div class="eyebrow">What it contains</div>
+    <h2 class="sec-title">Four skills. <span class="o">Five artifacts.</span></h2></div>
+    <p class="sec-lede">Each asks one question and leaves you holding a document. Run them in order, or jump to the one you need.</p>
+  </div>
+  <div class="flow"><div class="fs s1"><div class="fs-h"><span class="fs-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8.7 5v10L12 22l-8.7-5V7z"/></svg></span><span class="fs-st">Orient</span></div><div class="fs-k">modernize</div><div class="fs-q">Where does this program stand?</div><div class="fs-w">STATE.md</div></div><div class="fa">&rarr;</div><div class="fs s2"><div class="fs-h"><span class="fs-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 8-8M21 12v7H3V5h13"/></svg></span><span class="fs-st">Understand</span></div><div class="fs-k">readiness</div><div class="fs-q">Can we defend a date?</div><div class="fs-w">readiness.md</div></div><div class="fa">&rarr;</div><div class="fs s3"><div class="fs-h"><span class="fs-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20.5 20.5L16 16"/></svg></span><span class="fs-st">Challenge</span></div><div class="fs-k">plan-review</div><div class="fs-q">What kills this plan?</div><div class="fs-w">plan-review.md</div></div><div class="fa">&rarr;</div><div class="fs s4"><div class="fs-h"><span class="fs-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7M3 4v6h6"/></svg></span><span class="fs-st">Execute</span></div><div class="fs-k">cutover</div><div class="fs-q">Is this go-live survivable?</div><div class="fs-w">cutover-runbook.md<br>rollback-plan.md</div></div></div>
+  <div class="dfacts"><div class="dfact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/></svg><div><b>It can say no</b><span>Ask for a runbook with nothing proving the new system matches, and it declines</span></div></div><div class="dfact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5a2 2 0 0 1 2-2h9l5 5v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><path d="M14 3v6h6"/></svg><div><b>It arrives having read the autopsies</b><span>Eight public failures with costs and sources, matched to the line in your plan</span></div></div><div class="dfact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20.5 20.5L16 16"/></svg><div><b>It checks the story against the system</b><span>Hunts the rules hiding in spreadsheets and the components nothing can observe</span></div></div><div class="dfact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><path d="M8 3v6h8M8 17h8"/></svg><div><b>It outlives the people who start it</b><span>A record of what was decided, by whom, and what is still open</span></div></div></div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="sechead">
+    <div><div class="eyebrow">The criteria</div>
+    <h2 class="sec-title">Twelve categories. <span class="o">Five block a date.</span></h2></div>
+    <p class="sec-lede">Scored red, amber or green, never averaged into one number. Green on ten and red on two is one bad weekend from being a case study.</p>
+  </div>
+  <div class="tl danger" style="margin-top:38px;"><span class="tdot"></span>Five that stop a date</div>
+  <div class="bcs"><div class="bc danger"><div class="bc-h"><span class="bc-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20.5 20.5L16 16"/></svg></span><span class="bc-n">01</span></div><div class="bc-t">Knowledge of current behavior</div><div class="bc-w">Nothing to be correct against when this is red</div></div><div class="bc danger"><div class="bc-h"><span class="bc-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h16M4 15h16"/></svg></span><span class="bc-n">03</span></div><div class="bc-t">Data and semantic parity</div><div class="bc-w">Matching values prove nothing when this is red</div></div><div class="bc danger"><div class="bc-h"><span class="bc-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 8-8M21 12v7H3V5h13"/></svg></span><span class="bc-n">04</span></div><div class="bc-t">Evidence that the new system matches</div><div class="bc-w">No date is defensible when this is red</div></div><div class="bc danger"><div class="bc-h"><span class="bc-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7M3 4v6h6"/></svg></span><span class="bc-n">05</span></div><div class="bc-t">Cutover and reversibility</div><div class="bc-w">Being wrong becomes unbounded when this is red</div></div><div class="bc danger"><div class="bc-h"><span class="bc-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/></svg></span><span class="bc-n">08</span></div><div class="bc-t">Accountability</div><div class="bc-w">The gate is decorative when this is red</div></div></div>
+  <div class="tl good" style="margin-top:34px;"><span class="tdot"></span>Seven that shape the profile</div>
+  <div class="scs"><div class="sc good"><span class="sc-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 11a4 4 0 1 0-4-4 4 4 0 0 0 4 4zM2 21v-2a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v2"/></svg></span><span class="sc-n">02</span><span class="sc-t">Access to the people who know</span></div><div class="sc good"><span class="sc-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 6H9.5a2.5 2.5 0 0 0 0 5h5a2.5 2.5 0 0 1 0 5H6"/></svg></span><span class="sc-n">06</span><span class="sc-t">Cost realism</span></div><div class="sc good"><span class="sc-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg></span><span class="sc-n">07</span><span class="sc-t">Scope discipline</span></div><div class="sc good"><span class="sc-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><path d="M8 3v6h8M8 17h8"/></svg></span><span class="sc-n">09</span><span class="sc-t">Retained ownership</span></div><div class="sc good"><span class="sc-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l9 5-9 5-9-5 9-5zM3 12l9 5 9-5M3 17l9 5 9-5"/></svg></span><span class="sc-n">10</span><span class="sc-t">Target architecture justification</span></div><div class="sc good"><span class="sc-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg></span><span class="sc-n">11</span><span class="sc-t">Discipline around AI use</span></div><div class="sc good"><span class="sc-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><span class="sc-n">12</span><span class="sc-t">Cost of not acting</span></div></div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="sechead">
+    <div><div class="eyebrow">What you end up holding</div>
+    <h2 class="sec-title">A real assessment, <span class="o">of a real program.</span></h2></div>
+    <p class="sec-lede">Day one of the flagship platform, before any work began. My judgment of a program I led, not output from the tool.</p>
+  </div>
+  <div class="art">
+    <div class="art-bar"><span><b>docs/modernization/readiness.md</b></span>
+      <span>$1.6T asset-management platform &middot; day one</span></div>
+    <div class="art-in">
+      <div class="ragbar"><span class="seg r" style="flex:3"></span><span class="seg a" style="flex:1"></span><span class="seg g" style="flex:1"></span></div>
+      <div class="ragkey"><span><i class="d r"></i>3 red</span><span><i class="d a"></i>1 amber</span>
+        <span><i class="d g"></i>1 green</span><span class="ragv">no defensible date</span></div>
+      <p class="verdict">A date exists and it predates the scope. What this program has is the two things that cannot be bought later: one named person accountable for correctness, and a book that can be split by account and fund group. Either the date moves or the bar does.</p>
+      <div class="rrs"><div class="rr r"><div class="rr-l"><span class="rr-n">01</span><span class="rag r">Red</span></div><div><div class="rr-t">Knowledge of current behavior</div><div class="rr-e">No living person fully understood the legacy logic, and no documentation described it. Thirty years of rules in stored procedures and overnight batch.</div></div></div><div class="rr r"><div class="rr-l"><span class="rr-n">03</span><span class="rag r">Red</span></div><div><div class="rr-t">Data and semantic parity</div><div class="rr-e">Field-level meaning was undocumented across the core and the 35+ user-developed applications hanging off it.</div></div></div><div class="rr r"><div class="rr-l"><span class="rr-n">04</span><span class="rag r">Red</span></div><div><div class="rr-t">Evidence that the new system matches</div><div class="rr-e">The parity harness did not exist. It had to be purpose-built before any claim of correctness could be made.</div></div></div><div class="rr a"><div class="rr-l"><span class="rr-n">05</span><span class="rag a">Amber</span></div><div><div class="rr-t">Cutover and reversibility</div><div class="rr-e">Traffic could be split by account and fund group, so incremental was genuinely available. Rollback was not yet designed.</div></div></div><div class="rr g"><div class="rr-l"><span class="rr-n">08</span><span class="rag g">Green</span></div><div><div class="rr-t">Accountability</div><div class="rr-e">One named person accountable end to end for the module, distinct from the people rewarded for shipping.</div></div></div></div>
+    </div>
+  </div>
+  <p class="closing">Every red above was cleared: over 50% of the platform migrated, zero loss of trading accuracy. Archaeology with every rule ratified by a human, a parity harness reconciling every record, 12+ weeks in production parallel.</p>
+  <a class="morelink" href="index.html#who">How it was done <span>&rarr;</span></a>
+</div></section>
+
+<section><div class="wrap">
+  <div class="sechead">
+    <div><div class="eyebrow">The vocabulary</div>
+    <h2 class="sec-title">Two things the industry <span class="o">has not named.</span></h2></div>
+    <p class="sec-lede">Both came out of running the work rather than writing about it. Both replace a metric or a practice that is standard and quietly misleading.</p>
+  </div>
+  <div class="vocab">
+    <div class="vc">
+      <div class="vc-t">Distinct unresolved root causes</div>
+      <div class="vc-vs">instead of <b>break counts</b></div>
+      <div class="vc-d">One rule difference can produce a hundred thousand breaks that all close at once, so a falling break count looks like progress and is not. Counting distinct unresolved causes gives a number that is small, honest, and hard to game. A program tracking breaks will declare victory around week three of a parallel run and be wrong.</div>
+    </div>
+    <div class="vc">
+      <div class="vc-t">Structural reversibility</div>
+      <div class="vc-vs">instead of a <b>rollback procedure</b></div>
+      <div class="vc-d">If migration moves populations incrementally, going back is a routing change on one group, using the mechanism you already use daily. That can be rehearsed before every cutover. A documented restore-from-backup cannot be rehearsed at realistic scale, which is why big-bang rollback plans stay hypothetical until the night they are needed.</div>
+    </div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="sechead">
+    <div><div class="eyebrow">Install</div>
+    <h2 class="sec-title">Two ways in.</h2></div>
+    <p class="sec-lede">Both give you the same thing. Copying lets you read the instructions first, which is reasonable for something about to review your architecture.</p>
+  </div>
+  <div class="terms">
+    <div class="term"><div class="term-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+      <span class="term-t">install as a plugin</span></div>
+      <div class="term-b">
+<div class="tl2 c"># add the marketplace, then install by name</div>
+<div class="tl2"><span class="p">&gt;</span> /plugin marketplace add nikjain15/lossless-modernization</div>
+<div class="tl2"><span class="p">&gt;</span> /plugin install modernization-os</div>
+<div class="tl2 ok">&#10003; modernization-os v0.1.0 &middot; 4 skills ready</div>
+<div class="tl2 sp c"># then just ask</div>
+<div class="tl2"><span class="p">&gt;</span> where do I start with this modernization?</div>
+      </div></div>
+    <div class="term"><div class="term-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+      <span class="term-t">or read it first, then copy</span></div>
+      <div class="term-b">
+<div class="tl2 c"># reasonable, for something about to review your architecture</div>
+<div class="tl2"><span class="p">$</span> git clone https://github.com/nikjain15/\</div>
+<div class="tl2 ind">lossless-modernization.git</div>
+<div class="tl2"><span class="p">$</span> cp -r lossless-modernization/plugins/\</div>
+<div class="tl2 ind">modernization-os/skills/* .claude/skills/</div>
+<div class="tl2 ok">&#10003; 4 skills copied &middot; yours to fork</div>
+      </div></div>
+  </div>
+  <p class="stat-note" style="margin-top:26px;">Corrections are worth more than additions: if a criterion here is wrong, <a href="https://github.com/nikjain15/lossless-modernization">say so on GitHub</a>.</p>
+</div></section>
+
+<footer><div class="wrap">
+  <div class="row">
+    <span><a href="index.html">Home</a></span>
+    <span><a href="https://github.com/nikjain15/lossless-modernization/blob/main/LICENSE">MIT License</a></span>
+    <span>Built by <a href="https://github.com/nikjain15">Nik Jain</a></span>
+    <a href="https://www.linkedin.com/in/niktechnologist/">LinkedIn</a>
+    <a href="https://github.com/nikjain15/lossless-modernization">Source on GitHub</a>
+  </div>
+  <p class="disclaim">Modernization OS is beta. The readiness assessment on this page is my own judgment of a program I led, scored as it stood before the work began, not output generated by the tool.</p>
+</div></footer>
+<script>
+  const root=document.documentElement, KEY='theme';
+  const saved=localStorage.getItem(KEY); if(saved) root.setAttribute('data-theme',saved);
+  document.getElementById('themeToggle').addEventListener('click',()=>{
+    const cur=root.getAttribute('data-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+    const next=cur==='dark'?'light':'dark';
+    root.setAttribute('data-theme',next); localStorage.setItem(KEY,next);
+  });
+</script></body></html>

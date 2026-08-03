@@ -19,6 +19,7 @@ The site is live. The chapters are being written and reviewed one at a time, and
 
 - [The playbook](https://nikjain15.github.io/lossless-modernization/): the four-stage sequence, the twelve sourced failure categories, and the twelve artifacts a money-critical program produces
 - [The post-mortem library](https://nikjain15.github.io/lossless-modernization/post-mortems.html): eight documented failures, costed and sourced, each mapped to the practice that would have caught it
+- [Modernization OS](https://nikjain15.github.io/lossless-modernization/modernization-os.html): four skills that install into your repository, read your actual code, and write a readiness scorecard, a plan review, a cutover runbook and a rollback plan. Twelve categories scored, five of which block a date
 
 **Coming soon**
 
@@ -27,7 +28,6 @@ The site is live. The chapters are being written and reviewed one at a time, and
 - The flagship case study: a $1.6T asset-management platform, sanitized
 - The template library: parity report, legacy knowledge map, cutover runbook, wave plan and more
 - The pattern catalogue, the decision trees, and the readiness scorecard
-- Modernization OS: an agent toolkit that installs into your repository, scores readiness, reviews a plan against the failure library, and produces a cutover runbook
 
 Watch or star the repo if you want to know when each one lands.
 

@@ -276,6 +276,25 @@
   footer .footnav a { color:var(--ink); font-weight:600; font-size:14.5px; }
   footer .footnav a:hover { color:var(--accent); }
   footer .disclaim { margin-top:14px; max-width:76ch; line-height:1.6; }
+
+  .mos-row { margin-top:38px; display:grid; grid-template-columns:repeat(4,1fr); gap:14px; }
+  .mos-c { display:block; border:1px solid var(--line); border-radius:13px; padding:20px;
+    background:var(--panel); border-top:3px solid var(--line-2); transition:transform .2s, border-color .2s; }
+  .mos-c:hover { transform:translateY(-2px); }
+  .mos-i { width:32px; height:32px; border-radius:9px; display:flex; align-items:center; justify-content:center; }
+  .mos-i svg { width:16px; height:16px; }
+  .mos-n { display:block; margin-top:14px; font-family:var(--mono); font-size:12.5px; font-weight:700; }
+  .mos-q { display:block; margin-top:7px; font-size:16px; font-weight:750; letter-spacing:-.015em;
+    line-height:1.3; color:var(--ink); }
+  .mos-c.s1 { border-top-color:#5B8DEF; } .mos-c.s1 .mos-i { background:rgba(91,141,239,.14); }
+  .mos-c.s1 .mos-i svg, .mos-c.s1 .mos-n { color:#5B8DEF; }
+  .mos-c.s2 { border-top-color:var(--accent); } .mos-c.s2 .mos-i { background:color-mix(in srgb,var(--accent) 13%,transparent); }
+  .mos-c.s2 .mos-i svg, .mos-c.s2 .mos-n { color:var(--accent); }
+  .mos-c.s3 { border-top-color:#B07B1E; } .mos-c.s3 .mos-i { background:rgba(176,123,30,.16); }
+  .mos-c.s3 .mos-i svg, .mos-c.s3 .mos-n { color:#B07B1E; }
+  .mos-c.s4 { border-top-color:#9B6DD6; } .mos-c.s4 .mos-i { background:rgba(155,109,214,.15); }
+  .mos-c.s4 .mos-i svg, .mos-c.s4 .mos-n { color:#9B6DD6; }
+  @media (max-width:900px){ .mos-row { grid-template-columns:1fr; } }
 </style>
 </head>
 <body>
@@ -284,6 +303,7 @@
   <div class="nav-links">
     <a class="hide-sm" href="#how">How to do it</a>
     <a class="hide-sm" href="#produce">What to produce</a>
+    <a class="hide-sm" href="modernization-os.html">Modernization OS</a>
     <a href="#start">Start here</a>
     <button class="toggle" id="themeToggle" aria-label="Toggle theme">◐</button>
   </div>
@@ -297,11 +317,11 @@
     <div class="fact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 9h16M4 15h16"/></svg><div><b>Parity, proven value by value</b><span>every record reconciled at intermediate and final stages, nothing sampled</span></div></div>
     <div class="fact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20.5 20.5L16 16"/></svg><div><b>AI recovers the lost intent</b><span>agents read undocumented logic, humans ratify every rule</span></div></div>
     <div class="fact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg><div><b>Agents in the workflow</b><span>the target is AI-native and event-driven, not merely cloud-hosted</span></div></div>
-    <div class="fact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 10l2.5 2.5L8 15M13.5 15H16"/></svg><div><b>Built to be run, not just read</b><span>skills and an MCP server so your own agent can work the playbook</span></div></div>
+    <a class="fact" href="modernization-os.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 10l2.5 2.5L8 15M13.5 15H16"/></svg><div><b>Built to be run, not just read</b><span>Modernization OS: four skills that read your own repo &rarr;</span></div></a>
   </div>
   <div class="cta-row">
-    <a class="btn btn-primary" href="https://github.com/nikjain15/lossless-modernization">Read the playbook on GitHub →</a>
-    <a class="btn btn-ghost" href="#start">Find your entry point</a>
+    <a class="btn btn-primary" href="modernization-os.html">Install Modernization OS →</a>
+    <a class="btn btn-ghost" href="https://github.com/nikjain15/lossless-modernization">Read the playbook on GitHub</a>
   </div>
   <p class="author">By <b>Nik Jain</b>. I architect money-critical legacy platforms into AI-native ones.
     <span class="dot">·</span><a href="https://www.linkedin.com/in/niktechnologist/">LinkedIn</a>
@@ -418,6 +438,17 @@
       </div>
     </div>
   </div>
+</div></section>
+
+<!-- ===== MODERNIZATION OS ===== -->
+<section id="modernization-os"><div class="wrap">
+  <div class="sechead">
+    <div><div class="eyebrow">Modernization OS</div>
+    <h2 class="sec-title">The playbook, <span class="o">as something you run.</span></h2></div>
+    <p class="sec-lede">Four skills that install into your own repository, read your actual code, and write a readiness scorecard, a plan review, a cutover runbook and a rollback plan. Twelve categories scored, five of which block a date.</p>
+  </div>
+  <div class="mos-row"><a class="mos-c s1" href="modernization-os.html"><span class="mos-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8.7 5v10L12 22l-8.7-5V7z"/></svg></span><span class="mos-n">modernize</span><span class="mos-q">Where does this program stand?</span></a><a class="mos-c s2" href="modernization-os.html"><span class="mos-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 8-8M21 12v7H3V5h13"/></svg></span><span class="mos-n">readiness</span><span class="mos-q">Can we defend a date?</span></a><a class="mos-c s3" href="modernization-os.html"><span class="mos-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20.5 20.5L16 16"/></svg></span><span class="mos-n">plan-review</span><span class="mos-q">What kills this plan?</span></a><a class="mos-c s4" href="modernization-os.html"><span class="mos-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7M3 4v6h6"/></svg></span><span class="mos-n">cutover</span><span class="mos-q">Is this go-live survivable?</span></a></div>
+  <p class="stat-note" style="margin-top:26px;"><a href="modernization-os.html">See what it writes, and install it &rarr;</a></p>
 </div></section>
 
 <!-- ===== WHY PROGRAMS FAIL ===== -->
@@ -635,6 +666,7 @@
     <a href="#fail">Why it fails</a>
     <a href="post-mortems.html">Post-mortems</a>
     <a href="#produce">Templates</a>
+    <a href="modernization-os.html">Modernization OS</a>
     <a href="#start">Start here</a>
     <a href="#who">Who wrote this</a>
     <a href="#use">Take it</a>
