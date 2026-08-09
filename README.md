@@ -61,7 +61,7 @@ Corrections are worth more than additions. If a claim here is wrong, a source is
 
 ## Author
 
-By [Nik Jain](https://www.linkedin.com/in/niktechnologist/). Twelve years modernizing platforms across asset management, auto-tech and ed-tech, organizations up to 450+ people, and Forbes 30 Under 30 Asia. A hands-on leader across product, program and technical delivery, architecture included, through to the agentic AI-native platform itself.
+By [Nik Jain](https://www.linkedin.com/in/niktechnologist/). 14+ years in product and technology across asset management, auto-tech and ed-tech, including co-founding and scaling a company to 450+ people, and Forbes 30 Under 30 Asia. A hands-on leader across product, program and technical delivery, architecture included, through to the agentic AI-native platform itself.
 
 ## License
 
